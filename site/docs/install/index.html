@@ -168,12 +168,12 @@ npx @preplabsai/rovara-code init --env &lt;name&gt;</code>
 <h2>3. Give it a first task<a class="doc-heading-link" href="#first-task" aria-label="Link to section 3. Give it a first task">#</a>
 </h2>
 <p>In the channel bound during setup, select the installed bot through Slack’s mention picker. Its default name still uses <code>AgentX</code>.</p>
-<p>In the published v0.3.1 release, a mention goes to the chat agent:</p>
+<p>Up to v0.3.1, a mention went straight to the chat agent:</p>
 <pre>
 <code>@AgentX inspect the project and implement the navigation fix. Run the relevant tests.
 @AgentX create a pull request for the personal-website repository titled &quot;Improve navigation&quot;.</code>
 </pre>
-<p>On current mainline (the next release), a plain mention is routed first. A question is answered in the thread. A change gets a card suggesting <strong>Quick</strong> or <strong>Full</strong>, and nothing changes code until you press <strong>Start</strong>. Start with <code>chat:</code> to reach the chat agent as before:</p>
+<p>From v0.3.2, a plain mention is routed first. A question is answered in the thread. A change gets a card suggesting <strong>Quick</strong> or <strong>Full</strong>, and nothing changes code until you press <strong>Start</strong>. Start with <code>chat:</code> to reach the chat agent as before:</p>
 <pre>
 <code>@AgentX Add password reset to the account page
 @AgentX chat: inspect the project and implement the navigation fix. Run the relevant tests.</code>
