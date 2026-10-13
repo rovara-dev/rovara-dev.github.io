@@ -1,10 +1,10 @@
 {
   "source": {
     "repository": "PrepLabsAI/Rovara",
-    "ref": "origin/mainline",
-    "commit": "b18fe4ebde93dc4c872e84ef65bc723367d79b2f",
+    "ref": "v0.3.4",
+    "commit": "a0984e3d26b15618505ac37a53dd55de594c38a4",
     "checkedAt": "2026-10-13",
-    "note": "Reviewed against product mainline after the native workflow, plan review page, Sign in with ChatGPT and Rovara loop merges. Mainline is ahead of the latest published release (v0.3.1); the source pin does not prove live installation or runtime acceptance."
+    "note": "Reviewed against the published v0.3.4 release tag. Product mainline has moved past it (spec 059 serial phase), which these docs mark as unreleased. The source pin does not prove live installation or runtime acceptance."
   },
   "claims": [
     {
@@ -153,7 +153,7 @@
     },
     {
       "id": "slack-routing",
-      "claim": "On mainline, a plain top-level Slack mention is routed: a question is answered, and a change gets a card suggesting Quick or Full. Nothing that changes code starts without a click.",
+      "claim": "From v0.3.2, a plain top-level Slack mention is routed: a question is answered, and a change gets a card suggesting Quick or Full. Nothing that changes code starts without a click.",
       "evidence": [
         {
           "file": "README.md",
@@ -167,7 +167,7 @@
     },
     {
       "id": "automatic-review-and-pr",
-      "claim": "On mainline, after the coding plan is approved, checks run, then code and security reviews start automatically, and a draft PR of exactly the checked code opens when they pass.",
+      "claim": "From v0.3.2, after the coding plan is approved, checks run, then code and security reviews start automatically, and a draft PR of exactly the checked code opens when they pass.",
       "evidence": [
         {
           "file": "docs/project-configuration.md",
@@ -181,7 +181,7 @@
     },
     {
       "id": "task-page",
-      "claim": "On mainline, the task owner can decide and teammates can comment on the task page; one decision is recorded however many places it is pressed.",
+      "claim": "From v0.3.2, the task owner can decide and teammates can comment on the task page; one decision is recorded however many places it is pressed.",
       "evidence": [
         {
           "file": "docs/slack.md",
@@ -195,7 +195,7 @@
     },
     {
       "id": "chatgpt",
-      "claim": "On mainline, admins can let developers run their own tasks on their own ChatGPT Plus or Pro plan; it is off by default.",
+      "claim": "From v0.3.2, admins can let developers run their own tasks on their own ChatGPT Plus or Pro plan; it is off by default.",
       "evidence": [
         {
           "file": "docs/chatgpt.md",
@@ -209,7 +209,7 @@
     },
     {
       "id": "rovara-loop",
-      "claim": "On mainline, rovara loop runs Do, Quick, Full, Review and Contribute loops locally from GitHub issue comments, with no Rovara install or AWS account.",
+      "claim": "From v0.3.2, rovara loop runs Do, Quick, Full, Review and Contribute loops locally from GitHub issue comments, with no Rovara install or AWS account.",
       "evidence": [
         {
           "file": "docs/loop.md",
@@ -223,11 +223,29 @@
     },
     {
       "id": "task-dependencies-design",
-      "claim": "Task dependencies remain a design draft.",
+      "claim": "Task dependencies are a design draft in v0.3.4 and not in a release.",
       "evidence": [
         {
           "file": "specs/059-task-dependencies/spec.md",
           "contains": "**Status**: Design draft for owner review"
+        }
+      ]
+    },
+    {
+      "id": "loop-robustness",
+      "claim": "In v0.3.4, rovara loop reports an unreadable .rovara/loop.yaml on each running loop's issue, holds replies while the agent shows a prompt, and runs Codex items in a clone whose git directory sits beside it.",
+      "evidence": [
+        {
+          "file": "docs/loop.md",
+          "contains": "The loop reads `.rovara/loop.yaml` from your checkout each time it polls."
+        },
+        {
+          "file": "docs/loop.md",
+          "contains": "a reply for it is held, and given once the screen is clear"
+        },
+        {
+          "file": "docs/loop.md",
+          "contains": "a Codex item works in a local clone of your checkout whose git directory sits beside it"
         }
       ]
     }

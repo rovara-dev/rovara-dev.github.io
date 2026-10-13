@@ -107,8 +107,8 @@
 <p>
 <code>rovara loop</code> turns collaborators’ comments on your GitHub issues into work for your own Claude Code or Codex, and drives that work through plan approval, checks, reviews and a pull request. It needs no Rovara install and no AWS account: only the Rovara CLI, the GitHub CLI (<code>gh</code>, signed in), <code>tmux</code>, <code>git</code>, and Claude Code or Codex.</p>
 <div class="doc-callout">
-<strong>On mainline, not yet released</strong>
-<p>This describes product mainline as of 13 October 2026. The latest published release, v0.3.1, does not include it. Use a deployment and CLI built from mainline, or the next release. <a href="../release/index.html#availability">Release status →</a>
+<strong>Needs v0.3.2 or newer</strong>
+<p>Released 13 October 2026; the current release is v0.3.4. A deployment or CLI on v0.3.1 or earlier does not have this. <a href="../install/index.html#day-two">Upgrade</a> · <a href="../release/index.html#availability">Release status →</a>
 </p>
 </div>
 <p>Available today: the Do, Quick, Full, Review and Contribute loops. Webhooks, Slack approvals and Jira come later. The idea is inspired by <a href="https://github.com/MadaraUchiha-314/the-loop">the-loop</a> by Rohith Ramakrishnan; Rovara loop is Rovara’s own implementation.</p>
@@ -143,6 +143,7 @@ reviews:
   maxRounds: 3</code>
 </pre>
 <p>Comments from anyone else are never read as instructions. A repository is read from the moment it is added; older comments are never replayed.</p>
+<p>The loop rereads <code>.rovara/loop.yaml</code> on every poll. If it can’t be read (a typo, an unknown field), each running loop’s issue says so once, with the reason, and the loop pauses that repository until the file is fixed. Nothing needs restarting. Each <code>harness.args</code> entry may be up to 2,000 characters, so a whole <code>--allowedTools</code> list fits.</p>
 </section>
 <section id="loops">
 <h2>Choose a loop<a class="doc-heading-link" href="#loops" aria-label="Link to section Choose a loop">#</a>
@@ -207,16 +208,17 @@ reviews:
 <li>
 <strong>The agent’s own review</strong>, written to <code>evidence/self-review.md</code>. A claim without it is refused.</li>
 <li>
-<strong>A code review and a security review</strong>, run headless and read-only: Claude Code in plan mode, or Codex in its read-only sandbox with <code>reviews.harness: codex</code>.</li>
+<strong>A code review and a security review</strong>, run headless and read-only: Claude Code in plan mode, or Codex in its read-only sandbox with <code>reviews.harness: codex</code>. Each sees the approved plan and what collaborators asked for since, so a requested change isn’t treated as a deviation from the plan.</li>
 <li>
 <strong>The blocking rule.</strong> A finding blocks when the change introduced it; a security finding is never advisory.</li>
 </ol>
 <p>A blocking finding goes back to the agent. After <code>maxRounds</code> rounds that still block, or a review that could not run, a person decides. A review that could not run never counts as a pass.</p>
+<p>The Review loop reads the PR’s title and description, the issue and collaborators’ comments as well as the code. A finding still present in a later round keeps its number; only new findings are numbered on.</p>
 </section>
 <section id="pull-requests">
 <h2>Pull requests and several repositories<a class="doc-heading-link" href="#pull-requests" aria-label="Link to section Pull requests and several repositories">#</a>
 </h2>
-<p>Once the loop opens a PR, collaborators’ comments, inline review comments and change-requesting reviews reach the agent like replies on the issue. The loop reruns checks and reviews and pushes to the same PR. Merging closes the issue, which ends the loop.</p>
+<p>Once the loop opens a PR, collaborators’ comments, inline review comments and change-requesting reviews reach the agent like replies on the issue. The loop reruns checks and reviews, pushes to the same PR and rewrites its description to match the latest checks and reviews. Merging closes the issue, which ends the loop.</p>
 <p>When the plan lists a <code>## Repositories</code> section, the loop starts one per-PR loop for each repository, each with its own agent, worktree, branch, checks and reviews under that repository’s <code>.rovara/loop.yaml</code>. Each PR is approved on itself. When every PR is approved, the issue lists them and waits for you to merge.</p>
 </section>
 <section id="watch">
@@ -225,9 +227,10 @@ reviews:
 <p>The agent runs interactively in tmux. <code>tmux attach -t =rovara-&lt;owner&gt;_&lt;repo&gt;-&lt;issue&gt;</code> shows it; detach with <code>Ctrl-b d</code>.</p>
 <ul>
 <li>Claude Code starts in its default permission mode and asks before edits or commands. Pass a permission mode in <code>harness.args</code> to change that.</li>
-<li>Codex starts in its workspace-write sandbox, without network access.</li>
+<li>Codex starts in its workspace-write sandbox, without network access. Because that sandbox refuses every <code>.git</code> directory, a Codex item works in a local clone whose git directory sits beside it, so it can commit without asking. The loop’s own tools never ask for approval.</li>
+<li>A repository Claude Code hasn’t opened before asks whether you trust the folder. The loop counts that as waiting for you and never answers it; answer it in tmux, or open the repository with <code>claude</code> once beforehand.</li>
 </ul>
-<p>When the agent has waited on a permission prompt for a minute, the loop says so on the issue. A session that ends while working is resumed up to three times in a row.</p>
+<p>When the agent has waited on a permission prompt for a minute, the loop says so on the issue. While the agent shows a prompt or dialog, a reply for it is held until the screen is clear, so nothing typed answers a prompt by accident. A session that ends while working is resumed up to three times in a row; one that ended before it saved a conversation is started again with its assignment.</p>
 </section>
 <section id="commands">
 <h2>Commands<a class="doc-heading-link" href="#commands" aria-label="Link to section Commands">#</a>
