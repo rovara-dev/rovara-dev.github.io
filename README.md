@@ -18,9 +18,9 @@ Open `http://127.0.0.1:8766/`. Choose another port with `npm run dev -- --port 8
 - `site/how-it-works/index.html`: four connected native-workflow diagrams: journey, candidate evidence, workspace/task lifecycle and architecture.
 - `site/deployment/index.html`: Launch in AWS and terminal installation options.
 - `site/docs/install/index.html`: prerequisites, setup, first Slack task, recovery, upgrades and teardown, reconciled with the public Rovara README.
-- `site/docs/index.html`: documentation hub with sixteen pages, persistent navigation, local full-text search, copyable examples and page contents.
+- `site/docs/index.html`: documentation hub with nineteen pages, persistent navigation, local full-text search, copyable examples and page contents.
 
-The revised walkthrough shows request → plan approval → coding → check/review evidence → draft PR → feedback decision → refreshed evidence. The installation guide follows the public README and uses the published `@preplabsai/rovara-code` package. The native workflow is distinct from existing direct tasks; the expanded guides are release-qualified preview documentation.
+The revised walkthrough shows request → plan approval → coding → check/review evidence → draft PR → feedback decision → refreshed evidence. The installation guide follows the public README and uses the published `@preplabsai/rovara-code` package. The native workflow is distinct from existing direct tasks. It is merged into product mainline but not in published v0.3.1, so its guides carry an "On mainline, not yet released" callout.
 
 All pages use relative links. Evidence controls open an accessible native dialog; without JavaScript they lead to expandable explanations. Mobile navigation remains available without JavaScript. Reduced motion is respected.
 
@@ -28,11 +28,11 @@ All pages use relative links. Evidence controls open an accessible native dialog
 
 ```sh
 npm run check
-AGENTX_SOURCE=/path/to/current/AgentX AGENTX_WORKFLOW_SOURCE=/path/to/native-workflow npm run check:claims
+AGENTX_SOURCE=/path/to/current/Rovara npm run check:claims
 npm run build
 ```
 
-`check` first checks that generated documentation and its search index match their authoring source, then inspects local routes, anchors, assets and required copy. It also checks artifact hashes/test counts and that both homepage regex excerpts match the preserved patch. `check:claims` checks pinned mainline source references against the authorized Rovara clone, verifies that its fetched mainline has not advanced, reconciles the combined mainline and native-workflow MCP names against both pinned sources, and recomputes the illustrative cost. It is a drift guard, not proof of runtime behavior. The native workflow MCP tools have a separate inspected branch pin in site/data/workflow-preview.json. Fresh code review and runtime evidence still qualify product claims.
+`check` first checks that generated documentation and its search index match their authoring source, then inspects local routes, anchors, assets and required copy. It also checks artifact hashes/test counts and that both homepage regex excerpts match the preserved patch. `check:claims` checks pinned mainline source references against the authorized Rovara clone, verifies that its fetched mainline has not advanced, reconciles the MCP tool reference against the pinned source's tool definitions, and recomputes the illustrative cost. It is a drift guard, not proof of runtime behavior. `site/data/workflow-preview.json` records the workflow source; it now equals the mainline pin. Set `AGENTX_WORKFLOW_SOURCE` only if that record points at a separate branch again. Fresh code review and runtime evidence still qualify product claims.
 
 `build` copies the static artifact to `dist/`. GitHub Pages currently uploads `site/` directly; no framework or runtime backend is needed.
 
@@ -58,7 +58,7 @@ The Copy-button walkthrough is a constructed explanation, not real run evidence.
 
 Edit `docs/content/pages.json` and run `npm run docs:generate`. The generator writes all documentation pages, the search index and `site/agent-guide.md` from the same content. Do not edit those generated files directly. `npm run check` refuses stale generated output.
 
-The reading order is overview → concepts → first Quick task → Full planning → coding-tool connection → evidence → PR feedback → dependencies/linked PRs → workspaces → configuration → architecture → MCP reference → recorded benchmarks → troubleshooting → release and licence. Tutorials state their prerequisites, user action, expected result and next step. Installation is now the primary destination, following the owner's instruction on 6 October 2026.
+The reading order is overview → install → concepts → first Quick task → Full planning → task page → coding-tool connection → evidence → PR feedback → linked PRs → Rovara loop → workspaces → configuration → Sign in with ChatGPT → architecture → MCP reference → recorded benchmarks → troubleshooting → release and licence. Tutorials state their prerequisites, user action, expected result and next step. Installation is now the primary destination, following the owner's instruction on 6 October 2026.
 
 `site/assets/docs.css` and `site/assets/docs.js` provide the docs shell, responsive navigation, native search dialog, keyboard controls and copy buttons. Docs retain native links and disclosures without JavaScript. Search is hidden without JavaScript.
 
@@ -79,3 +79,7 @@ Pull requests and review branches run the static website checks and build in Git
 Product repository: https://github.com/PrepLabsAI/Rovara. `site/data/installation.json` pins the reviewed README/guides, current package, release and AWS launch link separately from historical architecture/workflow evidence. Update the installation authoring page, deployment options, coding-tool commands, release status and generated search/agent guide together. The npm CLI declares Node >=22.19.0; recommend Node 22 LTS. Preserve `agentx` compatibility commands, MCP IDs, configuration paths and historical evidence.
 
 Installation was checked against mainline `a03326359542ff3934838566d464cd188624c15e`; published v0.2.0 has its own source commit in the installation record. This update checked published artifact availability, not a new AWS deployment. Native workflow material remains qualified as preview.
+
+## Mainline docs sync (13 October 2026)
+
+Docs were reconciled with product mainline `b18fe4ebde93dc4c872e84ef65bc723367d79b2f`, which is ahead of the latest published release (v0.3.1, still current on npm). Added pages: task page decisions and comments, Rovara loop, and Sign in with ChatGPT. Quick, Full, evidence, feedback, coding-tool, configuration, architecture, MCP (25 tools), troubleshooting and release pages now describe Slack request routing, saved thread replies, automatic reviews and draft PRs, and the feedback decisions. Task dependencies remain a design draft. Pages describing unreleased behavior carry an "On mainline, not yet released" callout; remove it, and repin, once a release includes them. Sources: `site/data/claims.json` and `site/data/workflow-preview.json`. No live AWS installation or workflow run was performed.

@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#f8f5ef">
-<title>Dependencies and linked PRs — Rovara Code</title>
-<meta name="description" content="Understand what can proceed, what is blocked, and which PRs still need your team’s decision.">
+<title>Linked PRs and dependencies — Rovara Code</title>
+<meta name="description" content="Understand what the task is waiting for, which PRs still need your team’s decision, and what is not built yet.">
 <link rel="canonical" href="https://rovara-dev.github.io/docs/coordination/">
 <link rel="icon" href="../../assets/icons/git-pull-request.svg">
 <link rel="preload" href="../../assets/fonts/inter-600.woff2" as="font" type="font/woff2" crossorigin>
@@ -32,7 +32,7 @@
 </button>
 <nav aria-label="Main navigation">
 <a href="../../index.html">Product</a>
-<a href="../release/index.html" class="docs-status" title="Published installer and native workflow preview">Release &amp; preview status</a>
+<a href="../release/index.html" class="docs-status" title="Published release and mainline status">Release status</a>
 </nav>
 </header>
 <div class="docs-layout">
@@ -50,15 +50,18 @@
 <p>Work with Rovara Code</p>
 <a href="../tasks/index.html" >Your first Quick task</a>
 <a href="../planning/index.html" >Plan a larger feature</a>
+<a href="../task-page/index.html" >Decide on the task page</a>
 <a href="../coding-tools/index.html" >Connect your coding tool</a>
 <a href="../evidence/index.html" >Inspect changes, checks and reviews</a>
 <a href="../feedback/index.html" >Respond to PR feedback</a>
-<a href="index.html" aria-current="page">Dependencies and linked PRs</a>
+<a href="index.html" aria-current="page">Linked PRs and dependencies</a>
+<a href="../loop/index.html" >Rovara loop on GitHub issues</a>
 <a href="../operations/index.html" >Workspaces and costs</a>
 </div>
 <div class="docs-nav-group">
 <p>Configure</p>
 <a href="../configuration/index.html" >Projects and checks</a>
+<a href="../chatgpt/index.html" >Sign in with ChatGPT</a>
 </div>
 <div class="docs-nav-group">
 <p>Reference</p>
@@ -80,13 +83,13 @@
 <span>/</span>Work with Rovara Code</div>
 <header class="docs-title">
 <p class="docs-kind">Guide</p>
-<h1>Dependencies and linked PRs</h1>
-<p>Understand what can proceed, what is blocked, and which PRs still need your team’s decision.</p>
+<h1>Linked PRs and dependencies</h1>
+<p>Understand what the task is waiting for, which PRs still need your team’s decision, and what is not built yet.</p>
 </header>
 <details class="docs-mobile-toc">
 <summary>On this page</summary>
 <nav aria-label="Page sections">
-<a href="#dependencies">Read dependency order</a>
+<a href="#dependencies">Task dependencies are not built yet</a>
 <a href="#blocked">When work is blocked</a>
 <a href="#linked-prs">Track the complete PR set</a>
 <a href="#merges">Understand partial merges</a>
@@ -96,30 +99,26 @@
 </details>
 <article class="docs-article">
 <section id="dependencies">
-<h2>Read dependency order<a class="doc-heading-link" href="#dependencies" aria-label="Link to section Read dependency order">#</a>
+<h2>Task dependencies are not built yet<a class="doc-heading-link" href="#dependencies" aria-label="Link to section Task dependencies are not built yet">#</a>
 </h2>
-<p>A larger task can have work that depends on an earlier step. Inspect the prerequisite and blocker before retrying a downstream step. The initial workflow sequences dependent work; this guide does not assume concurrent agent execution.</p>
-<ol class="doc-flow">
-<li>Prerequisite work</li>
-<li>Dependent work</li>
-<li>Checks + reviews</li>
-<li>Required PRs</li>
-</ol>
+<p>Splitting one task into dependent items, with a visible order and blockers, is a design draft (<a href="https://github.com/PrepLabsAI/Rovara/tree/mainline/specs/059-task-dependencies">spec 059</a>), not current behavior. Today, Full’s requirements → design → coding plan order is the sequencing a workflow task has.</p>
+<p>For a change across several repositories, <a href="../loop/index.html#pull-requests">Rovara loop</a> runs one loop per pull request on your computer.</p>
 </section>
 <section id="blocked">
 <h2>When work is blocked<a class="doc-heading-link" href="#blocked" aria-label="Link to section When work is blocked">#</a>
 </h2>
-<p>Inspect the stage, reason and responsible next action. A failed prerequisite prevents its dependent steps from proceeding. Correct the prerequisite or revise the plan through the task’s decision controls.</p>
+<p>A blocked step says why and offers the owner’s options: retry planning, send back to coding, retry reviews, retry opening the PR, or close the task. Inspect the reason before retrying. <a href="../operations/index.html#workflow-status">What to do at each step →</a>
+</p>
 </section>
 <section id="linked-prs">
 <h2>Track the complete PR set<a class="doc-heading-link" href="#linked-prs" aria-label="Link to section Track the complete PR set">#</a>
 </h2>
-<p>Rovara Code registers PRs against the task and candidate repositories. Unrelated PR events do not advance this task. If the candidate requires several PRs, a successful PR creation in one repository does not mean the rest were created.</p>
+<p>Rovara Code registers the PRs it opens against the task. GitHub events arrive signed, and missed deliveries are recovered; unrelated PR events do not advance this task. GitHub’s API remains the authority on PR state.</p>
 </section>
 <section id="merges">
 <h2>Understand partial merges<a class="doc-heading-link" href="#merges" aria-label="Link to section Understand partial merges">#</a>
 </h2>
-<p>The task waits for GitHub to report every required PR merged. A partial merge stays incomplete. If a linked PR reopens, inspect the updated task state rather than relying on an earlier notification.</p>
+<p>The task finishes when GitHub reports every required PR merged; a coding tool then shows it as closed with stage <code>MERGED</code>. A partial merge stays incomplete. If a linked PR reopens, inspect the updated task state rather than relying on an earlier notification.</p>
 </section>
 <section id="recovery">
 <h2>Recover without creating duplicate work<a class="doc-heading-link" href="#recovery" aria-label="Link to section Recover without creating duplicate work">#</a>
@@ -129,19 +128,20 @@
 <section id="initiation">
 <h2>Work starts with an explicit request<a class="doc-heading-link" href="#initiation" aria-label="Link to section Work starts with an explicit request">#</a>
 </h2>
-<p>Ask Rovara Code in Slack or through your coding tool. Creating or updating a GitHub issue does not initiate a task. PR comments propose follow-up work; the owner approves changes before implementation.</p>
+<p>Hosted Rovara Code starts work only when asked in Slack or through your coding tool. Creating or updating a GitHub issue does not start a hosted task. PR comments produce feedback proposals; the owner approves fixes before implementation.</p>
+<p>The separate <a href="../loop/index.html">Rovara loop</a> runs on your own computer and does start work from collaborators’ <code>/rovara</code> comments on issues.</p>
 </section>
 </article>
 <div class="docs-maintenance">
-<span>Installation updated 6 October 2026</span>
+<span>Docs updated 13 October 2026</span>
 <a href="../release/index.html#documentation">How these docs are maintained</a>
 <a href="https://github.com/rovara-dev/rovara-dev.github.io/issues/new">Report a docs issue</a>
 </div>
 <nav class="docs-pager" aria-label="Next and previous pages">
 <a href="../feedback/index.html">
 <span>Previous</span>Respond to PR feedback</a>
-<a href="../operations/index.html">
-<span>Next</span>Workspaces and costs →</a>
+<a href="../loop/index.html">
+<span>Next</span>Rovara loop on GitHub issues →</a>
 </nav>
 <footer class="docs-footer">
 <span>Rovara Code · Coding agents in your AWS account.</span>
@@ -152,7 +152,7 @@
 <aside class="docs-toc">
 <nav aria-label="On this page">
 <p>On this page</p>
-<a href="#dependencies">Read dependency order</a>
+<a href="#dependencies">Task dependencies are not built yet</a>
 <a href="#blocked">When work is blocked</a>
 <a href="#linked-prs">Track the complete PR set</a>
 <a href="#merges">Understand partial merges</a>

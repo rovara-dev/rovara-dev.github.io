@@ -32,7 +32,7 @@
 </button>
 <nav aria-label="Main navigation">
 <a href="../../index.html">Product</a>
-<a href="../release/index.html" class="docs-status" title="Published installer and native workflow preview">Release &amp; preview status</a>
+<a href="../release/index.html" class="docs-status" title="Published release and mainline status">Release status</a>
 </nav>
 </header>
 <div class="docs-layout">
@@ -50,15 +50,18 @@
 <p>Work with Rovara Code</p>
 <a href="../tasks/index.html" >Your first Quick task</a>
 <a href="../planning/index.html" >Plan a larger feature</a>
+<a href="../task-page/index.html" >Decide on the task page</a>
 <a href="../coding-tools/index.html" >Connect your coding tool</a>
 <a href="../evidence/index.html" >Inspect changes, checks and reviews</a>
 <a href="../feedback/index.html" >Respond to PR feedback</a>
-<a href="../coordination/index.html" >Dependencies and linked PRs</a>
+<a href="../coordination/index.html" >Linked PRs and dependencies</a>
+<a href="../loop/index.html" >Rovara loop on GitHub issues</a>
 <a href="../operations/index.html" >Workspaces and costs</a>
 </div>
 <div class="docs-nav-group">
 <p>Configure</p>
 <a href="../configuration/index.html" >Projects and checks</a>
+<a href="../chatgpt/index.html" >Sign in with ChatGPT</a>
 </div>
 <div class="docs-nav-group">
 <p>Reference</p>
@@ -87,8 +90,9 @@
 <summary>On this page</summary>
 <nav aria-label="Page sections">
 <a href="#connect">Connect a client</a>
-<a href="#tools">Released developer tools (v0.2.0)</a>
-<a href="#workflow-tools">Native workflow tools (preview)</a>
+<a href="#tools">Direct-task tools (v0.3.1)</a>
+<a href="#workflow-tools">Workflow tools (mainline)</a>
+<a href="#people-tools">Task People tools (mainline)</a>
 <a href="#decisions">Decision inputs</a>
 <a href="#retry">Waits and retries</a>
 <a href="#permissions">Access and sharing</a>
@@ -101,7 +105,7 @@
 <p>Start with the <a href="../coding-tools/index.html">coding-tool connection guide</a>. Tool names keep the <code>agentx_</code> prefix. The coding client calls these tools; you normally ask for the action in plain language.</p>
 </section>
 <section id="tools">
-<h2>Released developer tools (v0.2.0)<a class="doc-heading-link" href="#tools" aria-label="Link to section Released developer tools (v0.2.0)">#</a>
+<h2>Direct-task tools (v0.3.1)<a class="doc-heading-link" href="#tools" aria-label="Link to section Direct-task tools (v0.3.1)">#</a>
 </h2>
 <div class="doc-table-wrap">
 <table>
@@ -205,9 +209,9 @@
 </div>
 </section>
 <section id="workflow-tools">
-<h2>Native workflow tools (preview)<a class="doc-heading-link" href="#workflow-tools" aria-label="Link to section Native workflow tools (preview)">#</a>
+<h2>Workflow tools (mainline)<a class="doc-heading-link" href="#workflow-tools" aria-label="Link to section Workflow tools (mainline)">#</a>
 </h2>
-<p>These four tools were inspected in a separate native-workflow implementation. They are not in the v0.2.0 developer tool list. Use them only with a deployment that provides them.</p>
+<p>Mainline adds these tools for Quick/Full workflow tasks. They are not in v0.3.1. Use the tools your deployed server advertises.</p>
 <div class="doc-table-wrap">
 <table>
 <thead>
@@ -221,30 +225,106 @@
 <td>
 <code>agentx_start_workflow</code>
 </td>
-<td>Start Quick or Full with project and complete instructions. workflow_path defaults to quick. Returns the task and workflow state.</td>
+<td>Start a workflow with project, complete instructions and a required <code>workflow_path</code> (<code>quick</code> or <code>full</code>). Returns the task and workflow state.</td>
 </tr>
 <tr>
 <td>
 <code>agentx_decide_workflow</code>
 </td>
-<td>Decide on the current document using task_id, expected_revision, artifact_digest, decision, reason and a retry-safe request_id.</td>
+<td>Decide on the current document with task_id, expected_revision, artifact_digest, decision, reason and a retry-safe request_id.</td>
 </tr>
 <tr>
 <td>
 <code>agentx_review_workflow_candidate</code>
 </td>
-<td>Start the initial candidate review only in REVIEW / WAITING, with all required verification checks passing for the current candidate. Supply task_id and instructions; this is not a general re-review or feedback tool.</td>
+<td>Reviews start on their own after checks pass. Use this to retry a blocked review, with the exact expected_revision and candidate_digest; refused if the code or checks changed.</td>
 </tr>
 <tr>
 <td>
 <code>agentx_retry_workflow</code>
 </td>
-<td>Restart read-only planning only in PLAN / BLOCKED with an actionable workspace. Supply task_id and instructions; this does not retry arbitrary check, review, webhook or closeout operations.</td>
+<td>Restart blocked read-only planning or blocked coding, or rerun checks for a blocked VERIFY stage. Rerunning checks needs expected_revision.</td>
+</tr>
+<tr>
+<td>
+<code>agentx_send_workflow_back</code>
+</td>
+<td>Send a blocked change back to coding with the failed checks and findings the change introduced, plus your instructions. Owner only.</td>
+</tr>
+<tr>
+<td>
+<code>agentx_resolve_review_findings</code>
+</td>
+<td>Answer every blocking finding: <code>accept</code> with a reason (listed in the draft PR) or <code>fix</code> with optional instructions. At most 20 per call. Owner only.</td>
+</tr>
+<tr>
+<td>
+<code>agentx_retry_workflow_publish</code>
+</td>
+<td>Retry opening the draft PR for the code whose checks and reviews passed. Owner only.</td>
+</tr>
+<tr>
+<td>
+<code>agentx_get_pr_feedback</code>
+</td>
+<td>Read AgentX’s proposal for PR comments: each finding’s ID, priority, recommendation, proposed change or question, and the comments it answers. Owner only.</td>
+</tr>
+<tr>
+<td>
+<code>agentx_decide_pr_feedback</code>
+</td>
+<td>Decide that proposal: APPROVE (optionally naming finding_ids), REQUEST_CHANGES, DISMISS or RETRY_REVIEW. Copy the digests from <code>agentx_get_pr_feedback</code>. Owner only.</td>
+</tr>
+<tr>
+<td>
+<code>agentx_keep_pull_request</code>
+</td>
+<td>After an approved feedback fix changed no code, keep the PR as it is and wait for the merge again. Owner only.</td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>Use the tools your deployed server advertises. This reference covers the inspected native-workflow tool additions; an older server may only expose the direct-task tools.</p>
+</section>
+<section id="people-tools">
+<h2>Task People tools (mainline)<a class="doc-heading-link" href="#people-tools" aria-label="Link to section Task People tools (mainline)">#</a>
+</h2>
+<p>These tools show and propose changes to who can use a task. Role changes and invitations are behind environment settings that default to off.</p>
+<div class="doc-table-wrap">
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>agentx_get_task_people</code>
+</td>
+<td>Show the current People revision and who can use the task. Use person_id, not names, for changes.</td>
+</tr>
+<tr>
+<td>
+<code>agentx_get_task_people_request</code>
+</td>
+<td>Check the receipt of a People request. It never confirms a pending request.</td>
+</tr>
+<tr>
+<td>
+<code>agentx_set_task_person</code>
+</td>
+<td>Propose a role change. A human must confirm before it commits.</td>
+</tr>
+<tr>
+<td>
+<code>agentx_take_task_ownership</code>
+</td>
+<td>Propose taking ownership of an orphaned task. A human must confirm before it commits.</td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 <section id="decisions">
 <h2>Decision inputs<a class="doc-heading-link" href="#decisions" aria-label="Link to section Decision inputs">#</a>
@@ -272,7 +352,7 @@
 </tr>
 <tr>
 <td>decision</td>
-<td>APPROVE, REQUEST_CHANGES, REJECT or SKIP. Not every decision is valid at every stage.</td>
+<td>APPROVE, REQUEST_CHANGES, REJECT or SKIP. SKIP is refused unless the project allows it.</td>
 </tr>
 <tr>
 <td>reason</td>
@@ -285,7 +365,7 @@
 </tbody>
 </table>
 </div>
-<p>The server validates identity, state and freshness. Never reuse an older document digest to approve a revised plan. Feedback subset controls belong to the authenticated review surface; this table does not invent a feedback MCP API.</p>
+<p>The server validates identity, state and freshness. Never reuse an older document digest to approve a revised plan. Workflow and feedback calls that carry an expected revision or digest are refused when the task has moved on; read the task again and decide on the current state.</p>
 </section>
 <section id="retry">
 <h2>Waits and retries<a class="doc-heading-link" href="#retry" aria-label="Link to section Waits and retries">#</a>
@@ -300,7 +380,7 @@
 </section>
 </article>
 <div class="docs-maintenance">
-<span>Installation updated 6 October 2026</span>
+<span>Docs updated 13 October 2026</span>
 <a href="../release/index.html#documentation">How these docs are maintained</a>
 <a href="https://github.com/rovara-dev/rovara-dev.github.io/issues/new">Report a docs issue</a>
 </div>
@@ -320,8 +400,9 @@
 <nav aria-label="On this page">
 <p>On this page</p>
 <a href="#connect">Connect a client</a>
-<a href="#tools">Released developer tools (v0.2.0)</a>
-<a href="#workflow-tools">Native workflow tools (preview)</a>
+<a href="#tools">Direct-task tools (v0.3.1)</a>
+<a href="#workflow-tools">Workflow tools (mainline)</a>
+<a href="#people-tools">Task People tools (mainline)</a>
 <a href="#decisions">Decision inputs</a>
 <a href="#retry">Waits and retries</a>
 <a href="#permissions">Access and sharing</a>

@@ -32,7 +32,7 @@
 </button>
 <nav aria-label="Main navigation">
 <a href="../../index.html">Product</a>
-<a href="../release/index.html" class="docs-status" title="Published installer and native workflow preview">Release &amp; preview status</a>
+<a href="../release/index.html" class="docs-status" title="Published release and mainline status">Release status</a>
 </nav>
 </header>
 <div class="docs-layout">
@@ -50,15 +50,18 @@
 <p>Work with Rovara Code</p>
 <a href="../tasks/index.html" >Your first Quick task</a>
 <a href="../planning/index.html" >Plan a larger feature</a>
+<a href="../task-page/index.html" >Decide on the task page</a>
 <a href="../coding-tools/index.html" >Connect your coding tool</a>
 <a href="../evidence/index.html" >Inspect changes, checks and reviews</a>
 <a href="../feedback/index.html" >Respond to PR feedback</a>
-<a href="../coordination/index.html" >Dependencies and linked PRs</a>
+<a href="../coordination/index.html" >Linked PRs and dependencies</a>
+<a href="../loop/index.html" >Rovara loop on GitHub issues</a>
 <a href="../operations/index.html" >Workspaces and costs</a>
 </div>
 <div class="docs-nav-group">
 <p>Configure</p>
 <a href="../configuration/index.html" >Projects and checks</a>
+<a href="../chatgpt/index.html" >Sign in with ChatGPT</a>
 </div>
 <div class="docs-nav-group">
 <p>Reference</p>
@@ -165,14 +168,24 @@ npx @preplabsai/rovara-code init --env &lt;name&gt;</code>
 <h2>3. Give it a first task<a class="doc-heading-link" href="#first-task" aria-label="Link to section 3. Give it a first task">#</a>
 </h2>
 <p>In the channel bound during setup, select the installed bot through Slack’s mention picker. Its default name still uses <code>AgentX</code>.</p>
+<p>In the published v0.3.1 release, a mention goes to the chat agent:</p>
 <pre>
 <code>@AgentX inspect the project and implement the navigation fix. Run the relevant tests.
 @AgentX create a pull request for the personal-website repository titled &quot;Improve navigation&quot;.</code>
 </pre>
-<p>These are the README examples; replace the task and repository with your project. Inspect the changes and evidence before asking for a PR. Your team decides what gets merged.</p>
+<p>On current mainline (the next release), a plain mention is routed first. A question is answered in the thread. A change gets a card suggesting <strong>Quick</strong> or <strong>Full</strong>, and nothing changes code until you press <strong>Start</strong>. Start with <code>chat:</code> to reach the chat agent as before:</p>
+<pre>
+<code>@AgentX Add password reset to the account page
+@AgentX chat: inspect the project and implement the navigation fix. Run the relevant tests.</code>
+</pre>
+<p>Replace the task and repository with your project. Inspect the changes and evidence before merging. Your team decides what gets merged. <a href="../tasks/index.html">Follow the Quick tutorial →</a>
+</p>
+<div class="doc-callout">
+<strong>Upgrading an existing install?</strong>
+<p>To save thread replies that do not mention AgentX, the Slack app needs the <code>channels:history</code> and <code>groups:history</code> scopes and the <code>message.channels</code> and <code>message.groups</code> events. Update the app from the manifest <code>agentx init</code> generates, then reinstall it to the workspace.</p>
+</div>
 <p>Prefer an IDE? <a href="../coding-tools/index.html">Connect Claude Code, Codex or Cursor →</a>
 </p>
-<p>Quick/Full planning and feedback walkthroughs elsewhere in these docs describe the native workflow preview. They require a compatible deployment and are not promised by this installation guide.</p>
 </section>
 <section id="resume">
 <h2>Resume or diagnose setup<a class="doc-heading-link" href="#resume" aria-label="Link to section Resume or diagnose setup">#</a>
@@ -209,12 +222,12 @@ npx @preplabsai/rovara-code init --env &lt;name&gt;</code>
 rovara --help</code>
 </pre>
 <p>The package also provides <code>agentx</code> as a compatibility command. AWS resources, <code>~/.agentx</code>, MCP server/tool IDs and the default Slack app retain their existing names. Use the examples as written.</p>
-<p>Instructions checked against the README and linked guides on 6 October 2026. <a href="../release/index.html">Release, licence and documentation status →</a>
+<p>Installation commands checked against the README and linked guides on 13 October 2026. <a href="../release/index.html">Release, licence and documentation status →</a>
 </p>
 </section>
 </article>
 <div class="docs-maintenance">
-<span>Installation updated 6 October 2026</span>
+<span>Docs updated 13 October 2026</span>
 <a href="../release/index.html#documentation">How these docs are maintained</a>
 <a href="https://github.com/rovara-dev/rovara-dev.github.io/issues/new">Report a docs issue</a>
 </div>

@@ -22,5 +22,7 @@
     "LICENSE-APACHE": "c6034e3540236d24415832d93ac4dee6c543f0c3d8956a332d02ef6e880011ec",
     "RELICENSED.md": "81b656e4b305246b4bdfeea013d20fbf429b512c846ac49a9ede7c3e68f07ca7"
   },
-  "qualification": "The v0.3.1 source, GitHub release bundle and npm package were published with MIT as the current license for PrepLabsAI-owned code; the npm registry reports MIT metadata. The previously released v0.3.0 GitHub/npm artifacts remain Apache 2.0 releases, and PrepLabsAI also grants MIT rights to its owned code in earlier versions. No fresh AWS installation was performed by this website update."
+  "qualification": "The v0.3.1 source, GitHub release bundle and npm package were published with MIT as the current license for PrepLabsAI-owned code; the npm registry reports MIT metadata. The previously released v0.3.0 GitHub/npm artifacts remain Apache 2.0 releases, and PrepLabsAI also grants MIT rights to its owned code in earlier versions. No fresh AWS installation was performed by this website update.",
+  "latestReleaseRecheckedAt": "2026-10-13",
+  "latestReleaseNote": "npm and GitHub still list v0.3.1 as the latest release on 13 October 2026; mainline b18fe4eb is ahead of it."
 }

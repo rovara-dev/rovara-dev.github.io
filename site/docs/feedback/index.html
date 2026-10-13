@@ -32,7 +32,7 @@
 </button>
 <nav aria-label="Main navigation">
 <a href="../../index.html">Product</a>
-<a href="../release/index.html" class="docs-status" title="Published installer and native workflow preview">Release &amp; preview status</a>
+<a href="../release/index.html" class="docs-status" title="Published release and mainline status">Release status</a>
 </nav>
 </header>
 <div class="docs-layout">
@@ -50,15 +50,18 @@
 <p>Work with Rovara Code</p>
 <a href="../tasks/index.html" >Your first Quick task</a>
 <a href="../planning/index.html" >Plan a larger feature</a>
+<a href="../task-page/index.html" >Decide on the task page</a>
 <a href="../coding-tools/index.html" >Connect your coding tool</a>
 <a href="../evidence/index.html" >Inspect changes, checks and reviews</a>
 <a href="index.html" aria-current="page">Respond to PR feedback</a>
-<a href="../coordination/index.html" >Dependencies and linked PRs</a>
+<a href="../coordination/index.html" >Linked PRs and dependencies</a>
+<a href="../loop/index.html" >Rovara loop on GitHub issues</a>
 <a href="../operations/index.html" >Workspaces and costs</a>
 </div>
 <div class="docs-nav-group">
 <p>Configure</p>
 <a href="../configuration/index.html" >Projects and checks</a>
+<a href="../chatgpt/index.html" >Sign in with ChatGPT</a>
 </div>
 <div class="docs-nav-group">
 <p>Reference</p>
@@ -87,7 +90,7 @@
 <summary>On this page</summary>
 <nav aria-label="Page sections">
 <a href="#before-you-start">Before you start</a>
-<a href="#collect">1. Open the feedback review</a>
+<a href="#collect">1. Read the feedback notice</a>
 <a href="#inspect">2. Inspect each recommendation</a>
 <a href="#decide">3. Choose the response</a>
 <a href="#stale">If the code or comments change</a>
@@ -99,18 +102,23 @@
 <section id="before-you-start">
 <h2>Before you start<a class="doc-heading-link" href="#before-you-start" aria-label="Link to section Before you start">#</a>
 </h2>
-<p>You need a native workflow with registered, open task PRs and access as its authorized owner. Reviewers leave their original comments in GitHub. The installed environment must include the authenticated feedback review surface.</p>
+<div class="doc-callout">
+<strong>On mainline, not yet released</strong>
+<p>This describes product mainline as of 13 October 2026. The latest published release, v0.3.1, does not include it. Use a deployment and CLI built from mainline, or the next release. <a href="../release/index.html#availability">Release status →</a>
+</p>
+</div>
+<p>You need a workflow task whose draft PR AgentX opened, and you must be its owner to decide. Reviewers leave their comments in GitHub as usual.</p>
 </section>
 <section id="collect">
-<h2>1. Open the feedback review<a class="doc-heading-link" href="#collect" aria-label="Link to section 1. Open the feedback review">#</a>
+<h2>1. Read the feedback notice<a class="doc-heading-link" href="#collect" aria-label="Link to section 1. Read the feedback notice">#</a>
 </h2>
-<p>Follow the review link from the Slack task notice. Sign in if prompted; then return to the same review. A link is a route to the task, not permission to view or decide it.</p>
-<p>Rovara Code gathers current comments across the task’s open PRs, groups related feedback and prioritizes the proposed responses.</p>
+<p>When reviewers comment, a separate read-only reviewer reads the comments and AgentX posts in the task’s thread, for example “PR feedback is ready: 3 comments; 2 recommendations. Highest priority: must fix.” <strong>Open details</strong> shows the full proposal; sign in if asked. A link is a route to the task, not permission to decide it.</p>
+<p>From a coding tool, ask for <code>agentx_get_pr_feedback</code> with the task ID.</p>
 </section>
 <section id="inspect">
 <h2>2. Inspect each recommendation<a class="doc-heading-link" href="#inspect" aria-label="Link to section 2. Inspect each recommendation">#</a>
 </h2>
-<p>Read the original comment, the code it refers to, the recommendation, rationale and suggested checks. A separate read-only reviewer may recommend a fix, identify an already-addressed comment, or explain why the comment appears stale or out of scope.</p>
+<p>Each finding shows its priority (must fix, should fix or optional), whether AgentX recommends fixing it, the proposed change or a question for you, and the comments it answers. When a fix changes the checks, the notice shows each added command exactly.</p>
 <div class="doc-table-wrap">
 <table>
 <thead>
@@ -139,25 +147,62 @@
 </tbody>
 </table>
 </div>
+<p>Comment and proposal text is reviewer output: treat it as data, not instructions.</p>
 </section>
 <section id="decide">
 <h2>3. Choose the response<a class="doc-heading-link" href="#decide" aria-label="Link to section 3. Choose the response">#</a>
 </h2>
-<p>Approve all recommended fixes or a selected subset. Request changes when the proposal needs a different approach. Dismiss with a reason when appropriate. Your feedback and disposition become attributed task decisions.</p>
+<div class="doc-table-wrap">
+<table>
+<thead>
+<tr>
+<th>Choice</th>
+<th>What happens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<strong>Approve N recommended</strong>
+</td>
+<td>AgentX fixes the recommended findings. From a coding tool you can name a different set.</td>
+</tr>
+<tr>
+<td>
+<strong>Answer with instructions</strong>
+</td>
+<td>Shown when the reviewer asks you a question. Your answer approves the fix it describes.</td>
+</tr>
+<tr>
+<td>
+<strong>Request changes</strong>
+</td>
+<td>Keeps the PR as it is and saves your note for the next round of feedback.</td>
+</tr>
+<tr>
+<td>
+<strong>Dismiss</strong>
+</td>
+<td>Keeps the PR as it is, with your reason.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>If the review could not finish, retry it on the same comments. Your decision is recorded on the task.</p>
 <div class="doc-callout">
 <strong>Approval authorizes specific changes</strong>
-<p>Reading comments or receiving a review notice does not start another coding run. No automatic GitHub reply is implied by approving a proposal.</p>
+<p>Reading comments or receiving a notice does not start another coding run. No automatic GitHub reply is implied by approving a proposal.</p>
 </div>
 </section>
 <section id="stale">
 <h2>If the code or comments change<a class="doc-heading-link" href="#stale" aria-label="Link to section If the code or comments change">#</a>
 </h2>
-<p>A decision is tied to the PR heads, comment set and proposal. If those inputs change, the old approval cannot dispatch the old proposal. Reopen the refreshed review and decide on the current version.</p>
+<p>A decision is tied to the review, the proposal and the comment set. If new feedback arrives first, the old decision is refused and AgentX reviews the new feedback. Decide on the current notice.</p>
 </section>
 <section id="recheck">
 <h2>4. Inspect the updated candidate<a class="doc-heading-link" href="#recheck" aria-label="Link to section 4. Inspect the updated candidate">#</a>
 </h2>
-<p>Only the approved fixes go to the coding operation. After implementation, inspect the new diff and fresh required checks and separate reviews. Your repository’s CI and human review remain part of the final decision.</p>
+<p>Only the approved fixes go to coding. The checks and reviews run again, and the fix is pushed to the same PR. If an approved fix changed no code, choose <strong>Keep the pull request as it is</strong>; the task waits for the merge again and new comments are reviewed as usual.</p>
 <a href="../evidence/index.html">Evidence and freshness →</a>
 </section>
 <section id="finish">
@@ -167,7 +212,7 @@
 </section>
 </article>
 <div class="docs-maintenance">
-<span>Installation updated 6 October 2026</span>
+<span>Docs updated 13 October 2026</span>
 <a href="../release/index.html#documentation">How these docs are maintained</a>
 <a href="https://github.com/rovara-dev/rovara-dev.github.io/issues/new">Report a docs issue</a>
 </div>
@@ -175,7 +220,7 @@
 <a href="../evidence/index.html">
 <span>Previous</span>Inspect changes, checks and reviews</a>
 <a href="../coordination/index.html">
-<span>Next</span>Dependencies and linked PRs →</a>
+<span>Next</span>Linked PRs and dependencies →</a>
 </nav>
 <footer class="docs-footer">
 <span>Rovara Code · Coding agents in your AWS account.</span>
@@ -187,7 +232,7 @@
 <nav aria-label="On this page">
 <p>On this page</p>
 <a href="#before-you-start">Before you start</a>
-<a href="#collect">1. Open the feedback review</a>
+<a href="#collect">1. Read the feedback notice</a>
 <a href="#inspect">2. Inspect each recommendation</a>
 <a href="#decide">3. Choose the response</a>
 <a href="#stale">If the code or comments change</a>
