@@ -32,7 +32,7 @@
 </button>
 <nav aria-label="Main navigation">
 <a href="../../index.html">Product</a>
-<a href="../release/index.html" class="docs-status" title="Published installer and native workflow preview">Release &amp; preview status</a>
+<a href="../release/index.html" class="docs-status" title="Published release and mainline status">Release status</a>
 </nav>
 </header>
 <div class="docs-layout">
@@ -50,15 +50,18 @@
 <p>Work with Rovara Code</p>
 <a href="../tasks/index.html" >Your first Quick task</a>
 <a href="../planning/index.html" >Plan a larger feature</a>
+<a href="../task-page/index.html" >Decide on the task page</a>
 <a href="../coding-tools/index.html" >Connect your coding tool</a>
 <a href="../evidence/index.html" >Inspect changes, checks and reviews</a>
 <a href="../feedback/index.html" >Respond to PR feedback</a>
-<a href="../coordination/index.html" >Dependencies and linked PRs</a>
+<a href="../coordination/index.html" >Linked PRs and dependencies</a>
+<a href="../loop/index.html" >Rovara loop on GitHub issues</a>
 <a href="../operations/index.html" >Workspaces and costs</a>
 </div>
 <div class="docs-nav-group">
 <p>Configure</p>
 <a href="../configuration/index.html" >Projects and checks</a>
+<a href="../chatgpt/index.html" >Sign in with ChatGPT</a>
 </div>
 <div class="docs-nav-group">
 <p>Reference</p>
@@ -98,7 +101,7 @@
 <section id="overview">
 <h2>A task record connects the surfaces<a class="doc-heading-link" href="#overview" aria-label="Link to section A task record connects the surfaces">#</a>
 </h2>
-<p>Slack, the coding-tool MCP client and the authenticated feedback page are entry and review surfaces. The Rovara Code task/workflow record connects plans, operations, decisions, candidate evidence and linked PRs.</p>
+<p>Slack, the coding-tool MCP client and the authenticated task page are entry and review surfaces. The Rovara Code task/workflow record connects plans, operations, decisions, candidate evidence and linked PRs.</p>
 <figure class="doc-system-figure">
 <img src="../../assets/diagrams/architecture.svg" width="1100" height="770" alt="Outside AWS: Slack, coding clients, browser and GitHub. Inside AWS: authorized control plane, worker operations, task state and artifact storage.">
 <figcaption>
@@ -120,19 +123,19 @@
 <tbody>
 <tr>
 <td>Slack</td>
-<td>Project-bound task thread; plan Canvas; concise updates and owner controls.</td>
+<td>Request routing card; task thread; approval cards and owner buttons; thread replies saved for the next step.</td>
 </tr>
 <tr>
 <td>Coding tool</td>
 <td>Local agentx MCP client calls the authorized developer task API.</td>
 </tr>
 <tr>
-<td>Feedback page</td>
-<td>Authenticated task-scoped view and owner decisions through the API.</td>
+<td>Task page</td>
+<td>Authenticated, task-scoped plan decisions, comments, Ask AgentX and PR feedback details.</td>
 </tr>
 <tr>
 <td>GitHub</td>
-<td>Repository access, comments, CI and authoritative PR/merge state.</td>
+<td>Repository access, signed webhooks, comments, CI and authoritative PR/merge state.</td>
 </tr>
 </tbody>
 </table>
@@ -143,6 +146,7 @@
 </h2>
 <p>EC2 provides the coding workspace with encrypted EBS storage. The configured devcontainer supplies the project environment. Coding tools read/edit files and run shell commands.</p>
 <p>Runtime check execution does not accept the coding agent’s success prose as test output. Code and security AI reviewers run in separate read-only sessions or operations. Separate review roles do not imply separate physical hosts.</p>
+<p>Coding, check and review runs never receive a push token. A separate publish step stops the task’s processes and containers, then pushes the checked commit from an isolated temporary repository. Known limitation: without a dev container, the coding step on EC2 currently has the worker’s Docker access (<a href="https://github.com/PrepLabsAI/Rovara/issues/325">#325</a>).</p>
 </section>
 <section id="state">
 <h2>State and evidence<a class="doc-heading-link" href="#state" aria-label="Link to section State and evidence">#</a>
@@ -153,7 +157,7 @@
 <section id="boundary">
 <h2>Account and external services<a class="doc-heading-link" href="#boundary" aria-label="Link to section Account and external services">#</a>
 </h2>
-<p>Your AWS account is the documented security boundary. Environments in the same account are not separate security boundaries. Bedrock is AWS-hosted; configured external model providers and vendor MCP servers receive their respective requests outside the account.</p>
+<p>Your AWS account is the documented security boundary. Environments in the same account are not separate security boundaries. Bedrock is AWS-hosted; configured external model providers, connected ChatGPT plans and vendor MCP servers receive their respective requests outside the account. ChatGPT tokens stay encrypted in the control plane.</p>
 <p>Action policy can allow, ask or deny orchestrator tool calls. It does not gate every worker shell command or edit.</p>
 </section>
 <section id="retention">
@@ -164,13 +168,13 @@
 </section>
 </article>
 <div class="docs-maintenance">
-<span>Installation updated 6 October 2026</span>
+<span>Docs updated 13 October 2026</span>
 <a href="../release/index.html#documentation">How these docs are maintained</a>
 <a href="https://github.com/rovara-dev/rovara-dev.github.io/issues/new">Report a docs issue</a>
 </div>
 <nav class="docs-pager" aria-label="Next and previous pages">
-<a href="../configuration/index.html">
-<span>Previous</span>Projects and checks</a>
+<a href="../chatgpt/index.html">
+<span>Previous</span>Sign in with ChatGPT</a>
 <a href="../mcp/index.html">
 <span>Next</span>MCP tool reference →</a>
 </nav>

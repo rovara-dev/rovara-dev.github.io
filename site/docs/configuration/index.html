@@ -32,7 +32,7 @@
 </button>
 <nav aria-label="Main navigation">
 <a href="../../index.html">Product</a>
-<a href="../release/index.html" class="docs-status" title="Published installer and native workflow preview">Release &amp; preview status</a>
+<a href="../release/index.html" class="docs-status" title="Published release and mainline status">Release status</a>
 </nav>
 </header>
 <div class="docs-layout">
@@ -50,15 +50,18 @@
 <p>Work with Rovara Code</p>
 <a href="../tasks/index.html" >Your first Quick task</a>
 <a href="../planning/index.html" >Plan a larger feature</a>
+<a href="../task-page/index.html" >Decide on the task page</a>
 <a href="../coding-tools/index.html" >Connect your coding tool</a>
 <a href="../evidence/index.html" >Inspect changes, checks and reviews</a>
 <a href="../feedback/index.html" >Respond to PR feedback</a>
-<a href="../coordination/index.html" >Dependencies and linked PRs</a>
+<a href="../coordination/index.html" >Linked PRs and dependencies</a>
+<a href="../loop/index.html" >Rovara loop on GitHub issues</a>
 <a href="../operations/index.html" >Workspaces and costs</a>
 </div>
 <div class="docs-nav-group">
 <p>Configure</p>
 <a href="index.html" aria-current="page">Projects and checks</a>
+<a href="../chatgpt/index.html" >Sign in with ChatGPT</a>
 </div>
 <div class="docs-nav-group">
 <p>Reference</p>
@@ -89,6 +92,9 @@
 <a href="#project-file">Define a project</a>
 <a href="#checks">Choose the checks</a>
 <a href="#workflow-checks">Required and optional workflow checks</a>
+<a href="#slack-start">Starting tasks from Slack</a>
+<a href="#git-limits">Repositories AgentX can publish</a>
+<a href="#devcontainer">Dev container rules</a>
 <a href="#access">Models, connections and access</a>
 </nav>
 </details>
@@ -152,53 +158,92 @@ orchestratorInstructions: &gt;-
 <section id="workflow-checks">
 <h2>Required and optional workflow checks<a class="doc-heading-link" href="#workflow-checks" aria-label="Link to section Required and optional workflow checks">#</a>
 </h2>
-<p>Project-required checks remain on in Quick and Full. The owner can select only optional checks registered for that project at plan approval. Those choices are stored with the decision.</p>
-<p>Configure check working directories, executables, arguments and timeouts. A check name should describe its useful coverage. Do not treat optional selection as permission to bypass required checks or change repository merge controls.</p>
+<p>Project readiness checks always run in Quick and Full and cannot be turned off. A project can also offer up to 20 named optional checks; the task owner chooses among them when approving the coding plan. The chosen IDs are saved with the decision, and a new plan starts with none selected.</p>
+<pre>
+<code>developerTasks:
+  enabled: true
+  optionalWorkflowChecks:
+    - id: coverage
+      label: Coverage report
+      command:
+        cwd: repo/payments-api
+        executable: npm
+        args: [run, coverage]
+        timeoutSeconds: 600</code>
+</pre>
+<p>A check name should describe its useful coverage. Optional selection does not bypass required checks or change repository merge controls.</p>
+</section>
+<section id="slack-start">
+<h2>Starting tasks from Slack<a class="doc-heading-link" href="#slack-start" aria-label="Link to section Starting tasks from Slack">#</a>
+</h2>
+<div class="doc-callout">
+<strong>On mainline, not yet released</strong>
+<p>This describes product mainline as of 13 October 2026. The latest published release, v0.3.1, does not include it. Use a deployment and CLI built from mainline, or the next release. <a href="../release/index.html#availability">Release status →</a>
+</p>
+</div>
+<p>
+<code>developerTasks.enabled</code> controls whether developers may start tasks on the project from an AI tool or a Slack workflow. Starting from Slack also needs shared tasks (<code>SHARED_TASKS</code>) on for the Slack service; without them, AgentX answers every start asking an admin to turn them on.</p>
+<p>A plain top-level mention is sorted by the classifier model chosen at <code>agentx init</code>. It sees a fixed instruction and the message text only, never repository content, and waits at most 4 seconds. There is no separate routing model setting. Prefixes (<code>quick:</code>, <code>full:</code>, <code>workflow:</code>, <code>chat:</code>) skip the model.</p>
+<p>To save thread replies that do not mention AgentX, the app needs the <code>channels:history</code> and <code>groups:history</code> scopes and the <code>message.channels</code> and <code>message.groups</code> events. Existing installs must update the app from the generated manifest and reinstall it. AgentX ignores, and does not store, channel messages outside task threads.</p>
+</section>
+<section id="git-limits">
+<h2>Repositories AgentX can publish<a class="doc-heading-link" href="#git-limits" aria-label="Link to section Repositories AgentX can publish">#</a>
+</h2>
+<p>When AgentX runs Git itself (to read the agent’s changes or publish them), it ignores what the repository’s Git config asks Git to run:</p>
+<ul>
+<li>
+<strong>Git LFS</strong> repositories are not supported yet; publishing is refused when any file uses <code>filter=lfs</code>.</li>
+<li>Other <strong>filters</strong> are switched off, so an encryption filter such as git-crypt would stage plaintext. Do not register such a repository.</li>
+<li>
+<strong>Submodules</strong> checked out in the workspace, or a nested repository the agent creates, stop publication; the error names the path.</li>
+<li>
+<strong>Hooks, signing and credential helpers</strong> do not run. Pushes go to the registered URL over HTTPS only, and are refused while the repository sets other <code>url.*</code>, <code>http.*</code> or <code>remote.*</code> keys.</li>
+</ul>
+<p>Setup and readiness commands are the project’s own code and run with the worker’s normal Git settings.</p>
+</section>
+<section id="devcontainer">
+<h2>Dev container rules<a class="doc-heading-link" href="#devcontainer" aria-label="Link to section Dev container rules">#</a>
+</h2>
+<p>The dev container runs on the worker host’s Docker, and the agent can edit its configuration. So AgentX checks the merged configuration before each start, and the running container after, and refuses settings that reach the host:</p>
+<ul>
+<li>
+<code>initializeCommand</code> and <code>dockerComposeFile</code>.</li>
+<li>
+<code>privileged</code>, <code>securityOpt</code>, and added capabilities other than <code>SYS_PTRACE</code>.</li>
+<li>
+<code>runArgs</code> that share the host’s processes, network, devices or namespaces.</li>
+<li>Bind mounts of <code>/</code>, the Docker socket, the workspace root or anything outside the workspace.</li>
+<li>Features AgentX cannot pin to the content it checked, and builds that read outside the workspace.</li>
+</ul>
+<p>Images, builds, features, lifecycle commands, environment variables, named volumes and bind mounts inside the workspace are allowed. <a href="https://github.com/PrepLabsAI/Rovara/blob/mainline/docs/project-configuration.md">Full dev container and publication rules →</a>
+</p>
 </section>
 <section id="access">
 <h2>Models, connections and access<a class="doc-heading-link" href="#access" aria-label="Link to section Models, connections and access">#</a>
 </h2>
-
-            <dl>
-              <dt>Models</dt>
-              <dd>
-                Choose approved provider/model pairs. Worker and orchestration
-                configuration are distinct. External providers receive model
-                requests outside AWS.
-              </dd>
-              <dt>Connectors</dt>
-              <dd>
-                Linear, Jira, Asana, GitHub, and remote MCP tools have
-                configured project scopes and server-side credential handling.
-              </dd>
-              <dt>Action policy</dt>
-              <dd>
-                Rules allow, ask, or deny orchestrator tool calls. They do not
-                gate every shell command or file edit on the coding worker.
-              </dd>
-              <dt>Developer tasks</dt>
-              <dd>
-                Project settings control whether coding-tool tasks are enabled
-                and how they may be shared into Slack.
-              </dd>
-            </dl>
-            <p>
-              Do not place credentials in command environment fields or project
-              YAML. Verify scope and provider availability before enabling a
-              connection.
-            </p>
-          </section>
+<dl>
+<dt>Models</dt>
+<dd>Choose approved provider/model pairs. Worker and orchestration configuration are distinct. External providers receive model requests outside AWS. Developers can also run their own tasks on a <a href="../chatgpt/index.html">connected ChatGPT plan</a> when an admin allows it.</dd>
+<dt>Connectors</dt>
+<dd>Linear, Jira, Asana, GitHub, and remote MCP tools have configured project scopes and server-side credential handling.</dd>
+<dt>Action policy</dt>
+<dd>Rules allow, ask, or deny orchestrator tool calls. They do not gate every shell command or file edit on the coding worker.</dd>
+<dt>Developer tasks</dt>
+<dd>Project settings control whether coding-tool and Slack workflow tasks are enabled and how they may be shared into Slack.</dd>
+</dl>
+<p>Do not place credentials in command environment fields or project YAML. Verify scope and provider availability before enabling a connection.</p>
+</section>
 </article>
 <div class="docs-maintenance">
-<span>Installation updated 6 October 2026</span>
+<span>Docs updated 13 October 2026</span>
 <a href="../release/index.html#documentation">How these docs are maintained</a>
 <a href="https://github.com/rovara-dev/rovara-dev.github.io/issues/new">Report a docs issue</a>
 </div>
 <nav class="docs-pager" aria-label="Next and previous pages">
 <a href="../operations/index.html">
 <span>Previous</span>Workspaces and costs</a>
-<a href="../architecture/index.html">
-<span>Next</span>System architecture →</a>
+<a href="../chatgpt/index.html">
+<span>Next</span>Sign in with ChatGPT →</a>
 </nav>
 <footer class="docs-footer">
 <span>Rovara Code · Coding agents in your AWS account.</span>
@@ -212,6 +257,9 @@ orchestratorInstructions: &gt;-
 <a href="#project-file">Define a project</a>
 <a href="#checks">Choose the checks</a>
 <a href="#workflow-checks">Required and optional workflow checks</a>
+<a href="#slack-start">Starting tasks from Slack</a>
+<a href="#git-limits">Repositories AgentX can publish</a>
+<a href="#devcontainer">Dev container rules</a>
 <a href="#access">Models, connections and access</a>
 </nav>
 </aside>

@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f8f5ef">
+<title>Rovara loop on GitHub issues — Rovara Code</title>
+<meta name="description" content="Run Rovara’s workflow on your own computer: your GitHub issues drive your own Claude Code or Codex.">
+<link rel="canonical" href="https://rovara-dev.github.io/docs/loop/">
+<link rel="icon" href="../../assets/icons/git-pull-request.svg">
+<link rel="preload" href="../../assets/fonts/inter-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/site.css">
+<link rel="stylesheet" href="../../assets/refined.css">
+<link rel="stylesheet" href="../../assets/docs.css">
+<script src="../../assets/docs.js" defer>
+</script>
+</head>
+<body class="docs-page">
+<noscript>
+<style>.docs-search-trigger{display:none}</style>
+</noscript>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="docs-header">
+<div class="docs-brand">
+<a href="../../index.html" aria-label="Rovara Code home">Rovara Code</a>
+<span>Docs</span>
+</div>
+<button class="docs-search-trigger" data-doc-search aria-label="Search documentation" aria-haspopup="dialog">
+<img src="../../assets/icons/magnifying-glass.svg" width="18" height="18" alt="">
+<span>Search documentation</span>
+<kbd>⌘ K</kbd>
+</button>
+<nav aria-label="Main navigation">
+<a href="../../index.html">Product</a>
+<a href="../release/index.html" class="docs-status" title="Published release and mainline status">Release status</a>
+</nav>
+</header>
+<div class="docs-layout">
+<aside class="docs-sidebar">
+<details class="docs-nav-disclosure" open>
+<summary>Browse documentation</summary>
+<nav aria-label="Documentation">
+<div class="docs-nav-group">
+<p>Start here</p>
+<a href="../index.html" >Rovara Code documentation</a>
+<a href="../install/index.html" >Install Rovara</a>
+<a href="../concepts/index.html" >Core concepts</a>
+</div>
+<div class="docs-nav-group">
+<p>Work with Rovara Code</p>
+<a href="../tasks/index.html" >Your first Quick task</a>
+<a href="../planning/index.html" >Plan a larger feature</a>
+<a href="../task-page/index.html" >Decide on the task page</a>
+<a href="../coding-tools/index.html" >Connect your coding tool</a>
+<a href="../evidence/index.html" >Inspect changes, checks and reviews</a>
+<a href="../feedback/index.html" >Respond to PR feedback</a>
+<a href="../coordination/index.html" >Linked PRs and dependencies</a>
+<a href="index.html" aria-current="page">Rovara loop on GitHub issues</a>
+<a href="../operations/index.html" >Workspaces and costs</a>
+</div>
+<div class="docs-nav-group">
+<p>Configure</p>
+<a href="../configuration/index.html" >Projects and checks</a>
+<a href="../chatgpt/index.html" >Sign in with ChatGPT</a>
+</div>
+<div class="docs-nav-group">
+<p>Reference</p>
+<a href="../architecture/index.html" >System architecture</a>
+<a href="../mcp/index.html" >MCP tool reference</a>
+<a href="../benchmarks/index.html" >Benchmarks and recorded runs</a>
+</div>
+<div class="docs-nav-group">
+<p>Help</p>
+<a href="../troubleshooting/index.html" >Troubleshooting</a>
+<a href="../release/index.html" >Release and licence</a>
+</div>
+</nav>
+</details>
+</aside>
+<main id="main" class="docs-content">
+<div class="docs-breadcrumb">
+<a href="../index.html">Documentation</a>
+<span>/</span>Work with Rovara Code</div>
+<header class="docs-title">
+<p class="docs-kind">Guide</p>
+<h1>Rovara loop on GitHub issues</h1>
+<p>Run Rovara’s workflow on your own computer: your GitHub issues drive your own Claude Code or Codex.</p>
+</header>
+<details class="docs-mobile-toc">
+<summary>On this page</summary>
+<nav aria-label="Page sections">
+<a href="#what">What Rovara loop is</a>
+<a href="#setup">Set up a repository</a>
+<a href="#loops">Choose a loop</a>
+<a href="#quick">Quick and Full</a>
+<a href="#reviews">Reviews</a>
+<a href="#pull-requests">Pull requests and several repositories</a>
+<a href="#watch">Watch and answer the agent</a>
+<a href="#commands">Commands</a>
+<a href="#data">What is kept where</a>
+</nav>
+</details>
+<article class="docs-article">
+<section id="what">
+<h2>What Rovara loop is<a class="doc-heading-link" href="#what" aria-label="Link to section What Rovara loop is">#</a>
+</h2>
+<p>
+<code>rovara loop</code> turns collaborators’ comments on your GitHub issues into work for your own Claude Code or Codex, and drives that work through plan approval, checks, reviews and a pull request. It needs no Rovara install and no AWS account: only the Rovara CLI, the GitHub CLI (<code>gh</code>, signed in), <code>tmux</code>, <code>git</code>, and Claude Code or Codex.</p>
+<div class="doc-callout">
+<strong>On mainline, not yet released</strong>
+<p>This describes product mainline as of 13 October 2026. The latest published release, v0.3.1, does not include it. Use a deployment and CLI built from mainline, or the next release. <a href="../release/index.html#availability">Release status →</a>
+</p>
+</div>
+<p>Available today: the Do, Quick, Full, Review and Contribute loops. Webhooks, Slack approvals and Jira come later. The idea is inspired by <a href="https://github.com/MadaraUchiha-314/the-loop">the-loop</a> by Rohith Ramakrishnan; Rovara loop is Rovara’s own implementation.</p>
+</section>
+<section id="setup">
+<h2>Set up a repository<a class="doc-heading-link" href="#setup" aria-label="Link to section Set up a repository">#</a>
+</h2>
+<p>In a checkout of the repository:</p>
+<pre>
+<code>rovara loop init     # writes .rovara/loop.yaml, with you as its one collaborator
+git add .rovara/loop.yaml &amp;&amp; git commit -m &quot;chore: rovara loop config&quot;
+rovara loop add      # lets the loop read this repository's issues
+rovara loop start    # runs the daemon in the background</code>
+</pre>
+<p>
+<code>.rovara/loop.yaml</code> says who the loop obeys and how changes are proved:</p>
+<pre>
+<code>version: 1
+collaborators:      # the only GitHub logins whose comments start, steer or stop a loop
+  - maya
+  - sam
+harness:
+  name: claude-code # or codex
+  args: []
+checks:             # run before a pull request, in order
+  - name: tests
+    run: npm test
+reviews:
+  enabled: true
+  harness: codex    # a different agent from the one doing the work is a real critic
+  security: true
+  maxRounds: 3</code>
+</pre>
+<p>Comments from anyone else are never read as instructions. A repository is read from the moment it is added; older comments are never replayed.</p>
+</section>
+<section id="loops">
+<h2>Choose a loop<a class="doc-heading-link" href="#loops" aria-label="Link to section Choose a loop">#</a>
+</h2>
+<div class="doc-table-wrap">
+<table>
+<thead>
+<tr>
+<th>Comment</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>/rovara do &lt;instruction&gt;</code>
+</td>
+<td>Works on its own branch with no gates. Commits, but never pushes or opens a PR.</td>
+</tr>
+<tr>
+<td>
+<code>/rovara quick &lt;instruction&gt;</code>
+</td>
+<td>Plan → approval → code → checks → reviews → pull request.</td>
+</tr>
+<tr>
+<td>
+<code>/rovara full &lt;instruction&gt;</code>
+</td>
+<td>Requirements, design and plan, each approved, then as Quick.</td>
+</tr>
+<tr>
+<td>
+<code>/rovara review [brief]</code>
+</td>
+<td>Reviews open PRs against a collaborator’s brief. Changes no code.</td>
+</tr>
+<tr>
+<td>
+<code>/rovara contribute</code>
+</td>
+<td>Joins an existing issue or someone else’s PR to meet a stated goal and success criteria.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Steer with replies on the issue. <code>/rovara approve</code> passes a gate, <code>/rovara changes: …</code> (or any reply) asks for changes, and <code>/rovara stop</code> or closing the issue ends the loop. The issue’s <code>rovara:*</code> label shows where it stands.</p>
+</section>
+<section id="quick">
+<h2>Quick and Full<a class="doc-heading-link" href="#quick" aria-label="Link to section Quick and Full">#</a>
+</h2>
+<p>Quick: the agent writes <code>docs/rovara/&lt;issue&gt;/plan.md</code> (Summary, Changes, Testing) and changes no code. A collaborator approves it, which locks it. The agent codes, commits and writes a self-review; the loop runs the repository’s checks and reviews. Then the loop itself, never the agent, pushes <code>rovara/&lt;issue&gt;</code> and opens a PR that closes the issue.</p>
+<p>Full adds <code>requirements.md</code> and <code>design.md</code> before the plan, each with its own gate. A later claim that changed an approved document is refused. <code>/rovara full --skip design</code> declares a phase away, and the PR says who declared it. Before publishing, the loop commits <code>checks.md</code> and <code>reviews.md</code> to <code>docs/rovara/&lt;issue&gt;/evidence/</code>.</p>
+<p>
+<strong>Nothing is pushed before the plan is approved, the checks pass and the reviews pass, or a person accepts them.</strong>
+</p>
+</section>
+<section id="reviews">
+<h2>Reviews<a class="doc-heading-link" href="#reviews" aria-label="Link to section Reviews">#</a>
+</h2>
+<ol>
+<li>
+<strong>The agent’s own review</strong>, written to <code>evidence/self-review.md</code>. A claim without it is refused.</li>
+<li>
+<strong>A code review and a security review</strong>, run headless and read-only: Claude Code in plan mode, or Codex in its read-only sandbox with <code>reviews.harness: codex</code>.</li>
+<li>
+<strong>The blocking rule.</strong> A finding blocks when the change introduced it; a security finding is never advisory.</li>
+</ol>
+<p>A blocking finding goes back to the agent. After <code>maxRounds</code> rounds that still block, or a review that could not run, a person decides. A review that could not run never counts as a pass.</p>
+</section>
+<section id="pull-requests">
+<h2>Pull requests and several repositories<a class="doc-heading-link" href="#pull-requests" aria-label="Link to section Pull requests and several repositories">#</a>
+</h2>
+<p>Once the loop opens a PR, collaborators’ comments, inline review comments and change-requesting reviews reach the agent like replies on the issue. The loop reruns checks and reviews and pushes to the same PR. Merging closes the issue, which ends the loop.</p>
+<p>When the plan lists a <code>## Repositories</code> section, the loop starts one per-PR loop for each repository, each with its own agent, worktree, branch, checks and reviews under that repository’s <code>.rovara/loop.yaml</code>. Each PR is approved on itself. When every PR is approved, the issue lists them and waits for you to merge.</p>
+</section>
+<section id="watch">
+<h2>Watch and answer the agent<a class="doc-heading-link" href="#watch" aria-label="Link to section Watch and answer the agent">#</a>
+</h2>
+<p>The agent runs interactively in tmux. <code>tmux attach -t =rovara-&lt;owner&gt;_&lt;repo&gt;-&lt;issue&gt;</code> shows it; detach with <code>Ctrl-b d</code>.</p>
+<ul>
+<li>Claude Code starts in its default permission mode and asks before edits or commands. Pass a permission mode in <code>harness.args</code> to change that.</li>
+<li>Codex starts in its workspace-write sandbox, without network access.</li>
+</ul>
+<p>When the agent has waited on a permission prompt for a minute, the loop says so on the issue. A session that ends while working is resumed up to three times in a row.</p>
+</section>
+<section id="commands">
+<h2>Commands<a class="doc-heading-link" href="#commands" aria-label="Link to section Commands">#</a>
+</h2>
+<div class="doc-table-wrap">
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>rovara loop init [path]</code>
+</td>
+<td>Writes <code>.rovara/loop.yaml</code>.</td>
+</tr>
+<tr>
+<td>
+<code>rovara loop add [path]</code> · <code>remove &lt;owner/name&gt;</code>
+</td>
+<td>Starts or stops reading a repository’s issues.</td>
+</tr>
+<tr>
+<td>
+<code>rovara loop start</code> · <code>stop</code> · <code>status</code>
+</td>
+<td>Controls the background daemon. Its log is <code>~/.rovara/loop/daemon.log</code>.</td>
+</tr>
+<tr>
+<td>
+<code>rovara loop do</code> · <code>quick</code> · <code>full --issue &lt;n&gt; &lt;instruction&gt;</code>
+</td>
+<td>Posts the matching <code>/rovara</code> comment on the issue, as you.</td>
+</tr>
+<tr>
+<td>
+<code>rovara loop review</code> · <code>contribute --issue &lt;n&gt; [brief]</code>
+</td>
+<td>Posts <code>/rovara review</code> or <code>contribute</code>, as you.</td>
+</tr>
+<tr>
+<td>
+<code>rovara loop check &lt;issue&gt;</code>
+</td>
+<td>Shows where an issue’s loop stands without running anything.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="data">
+<h2>What is kept where<a class="doc-heading-link" href="#data" aria-label="Link to section What is kept where">#</a>
+</h2>
+<ul>
+<li>
+<strong>Your computer:</strong> each work item’s cached state, event log, worktree and the agent’s MCP configuration, under <code>~/.rovara/loop/</code>. Nothing is written into your Claude Code or Codex settings.</li>
+<li>
+<strong>GitHub:</strong> the issue holds the truth: its comments and its <code>rovara:*</code> label.</li>
+<li>
+<strong>Credentials:</strong> the loop uses your own <code>gh</code> login and stores no token.</li>
+</ul>
+<p>
+<a href="https://github.com/PrepLabsAI/Rovara/blob/mainline/docs/loop.md">Full Rovara loop guide →</a>
+</p>
+</section>
+</article>
+<div class="docs-maintenance">
+<span>Docs updated 13 October 2026</span>
+<a href="../release/index.html#documentation">How these docs are maintained</a>
+<a href="https://github.com/rovara-dev/rovara-dev.github.io/issues/new">Report a docs issue</a>
+</div>
+<nav class="docs-pager" aria-label="Next and previous pages">
+<a href="../coordination/index.html">
+<span>Previous</span>Linked PRs and dependencies</a>
+<a href="../operations/index.html">
+<span>Next</span>Workspaces and costs →</a>
+</nav>
+<footer class="docs-footer">
+<span>Rovara Code · Coding agents in your AWS account.</span>
+<a href="https://github.com/PrepLabsAI/Rovara">Product source</a>
+<a href="../release/index.html#license">Licence</a>
+</footer>
+</main>
+<aside class="docs-toc">
+<nav aria-label="On this page">
+<p>On this page</p>
+<a href="#what">What Rovara loop is</a>
+<a href="#setup">Set up a repository</a>
+<a href="#loops">Choose a loop</a>
+<a href="#quick">Quick and Full</a>
+<a href="#reviews">Reviews</a>
+<a href="#pull-requests">Pull requests and several repositories</a>
+<a href="#watch">Watch and answer the agent</a>
+<a href="#commands">Commands</a>
+<a href="#data">What is kept where</a>
+</nav>
+</aside>
+</div>
+<dialog class="docs-search-dialog" aria-labelledby="docs-search-title" data-index="../../data/docs-search.json">
+<div class="docs-search-heading">
+<h2 id="docs-search-title">Search documentation</h2>
+<button data-search-close aria-label="Close search">Esc</button>
+</div>
+<label class="sr-only" for="docs-search-input">Search terms</label>
+<input id="docs-search-input" type="search" placeholder="Try plan approval, PR feedback or checks…" autocomplete="off">
+<p class="docs-search-status" aria-live="polite">
+</p>
+<ul class="docs-search-results">
+</ul>
+<p class="docs-search-help">↑ ↓ Navigate · Enter Open · Esc Close</p>
+</dialog>
+</body>
+</html>

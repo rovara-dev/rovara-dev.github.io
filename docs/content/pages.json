@@ -9,7 +9,7 @@
       {
         "id": "what-is-rovara",
         "title": "A coding agent with a workflow you control",
-        "html": "<p>Rovara Code provides a coding workflow: remote implementation in your AWS account, plan approvals, named checks, separate code and security AI reviews, and help responding to PR feedback. Your team owns the final merge.</p><ol class=\"doc-flow\"><li>Request</li><li>Approve plan</li><li>Code + evidence</li><li>PR + feedback</li><li>Your review</li></ol>"
+        "html": "<p>Rovara Code is a coding workflow that runs in your AWS account. Ask in Slack or from your coding tool. Rovara Code suggests a Quick or Full path, writes a plan for you to approve, codes it, runs named checks and separate code and security AI reviews, and opens a draft PR. It also proposes fixes for PR feedback. Your team owns the final merge.</p><ol class=\"doc-flow\"><li>Request</li><li>Approve plan</li><li>Code, checks + reviews</li><li>Draft PR + feedback</li><li>Your merge</li></ol>"
       },
       {
         "id": "start",
@@ -19,12 +19,12 @@
       {
         "id": "learn",
         "title": "Follow the complete journey",
-        "html": "<ul class=\"doc-link-list\"><li><a href=\"planning/index.html\">Plan a larger feature</a><span>Requirements, design and coding-plan approvals in Full.</span></li><li><a href=\"evidence/index.html\">Inspect changes, checks and reviews</a><span>Read actual output and identify gaps or stale evidence.</span></li><li><a href=\"feedback/index.html\">Respond to PR feedback</a><span>Review proposals and approve the fixes you want.</span></li><li><a href=\"coordination/index.html\">Follow dependencies and linked PRs</a><span>Understand blockers and what the task is waiting for.</span></li></ul>"
+        "html": "<ul class=\"doc-link-list\"><li><a href=\"planning/index.html\">Plan a larger feature</a><span>Requirements, design and coding-plan approvals in Full.</span></li><li><a href=\"task-page/index.html\">Decide on the task page</a><span>Answer the plan’s decisions, comment and ask AgentX.</span></li><li><a href=\"evidence/index.html\">Inspect changes, checks and reviews</a><span>Read actual output and identify gaps or stale evidence.</span></li><li><a href=\"feedback/index.html\">Respond to PR feedback</a><span>Review proposals and approve the fixes you want.</span></li><li><a href=\"loop/index.html\">Run Rovara loop on GitHub issues</a><span>The same workflow, run on your computer by your own Claude Code or Codex.</span></li><li><a href=\"coordination/index.html\">Follow linked PRs</a><span>Understand what the task is waiting for.</span></li></ul>"
       },
       {
         "id": "configure",
         "title": "Understand your environment",
-        "html": "<ul class=\"doc-link-list\"><li><a href=\"architecture/index.html\">System architecture</a><span>Where work, decisions and evidence live.</span></li><li><a href=\"configuration/index.html\">Projects and checks</a><span>Repository setup, required checks and optional check choices.</span></li><li><a href=\"operations/index.html\">Workspaces and costs</a><span>Continue, cancel, close and retain the record.</span></li><li><a href=\"troubleshooting/index.html\">Troubleshooting</a><span>Find the next useful action without duplicating work.</span></li></ul>"
+        "html": "<ul class=\"doc-link-list\"><li><a href=\"architecture/index.html\">System architecture</a><span>Where work, decisions and evidence live.</span></li><li><a href=\"configuration/index.html\">Projects and checks</a><span>Repository setup, required checks and optional check choices.</span></li><li><a href=\"chatgpt/index.html\">Sign in with ChatGPT</a><span>Run each developer’s tasks on their own ChatGPT plan.</span></li><li><a href=\"operations/index.html\">Workspaces and costs</a><span>Continue, cancel, close and retain the record.</span></li><li><a href=\"troubleshooting/index.html\">Troubleshooting</a><span>Find the next useful action without duplicating work.</span></li></ul>"
       },
       {
         "id": "examples",
@@ -63,7 +63,7 @@
       {
         "id": "first-task",
         "title": "3. Give it a first task",
-        "html": "<p>In the channel bound during setup, select the installed bot through Slack’s mention picker. Its default name still uses <code>AgentX</code>.</p><pre><code>@AgentX inspect the project and implement the navigation fix. Run the relevant tests.\n@AgentX create a pull request for the personal-website repository titled &quot;Improve navigation&quot;.</code></pre><p>These are the README examples; replace the task and repository with your project. Inspect the changes and evidence before asking for a PR. Your team decides what gets merged.</p><p>Prefer an IDE? <a href=\"../coding-tools/index.html\">Connect Claude Code, Codex or Cursor →</a></p><p>Quick/Full planning and feedback walkthroughs elsewhere in these docs describe the native workflow preview. They require a compatible deployment and are not promised by this installation guide.</p>"
+        "html": "<p>In the channel bound during setup, select the installed bot through Slack’s mention picker. Its default name still uses <code>AgentX</code>.</p><p>In the published v0.3.1 release, a mention goes to the chat agent:</p><pre><code>@AgentX inspect the project and implement the navigation fix. Run the relevant tests.\n@AgentX create a pull request for the personal-website repository titled &quot;Improve navigation&quot;.</code></pre><p>On current mainline (the next release), a plain mention is routed first. A question is answered in the thread. A change gets a card suggesting <strong>Quick</strong> or <strong>Full</strong>, and nothing changes code until you press <strong>Start</strong>. Start with <code>chat:</code> to reach the chat agent as before:</p><pre><code>@AgentX Add password reset to the account page\n@AgentX chat: inspect the project and implement the navigation fix. Run the relevant tests.</code></pre><p>Replace the task and repository with your project. Inspect the changes and evidence before merging. Your team decides what gets merged. <a href=\"../tasks/index.html\">Follow the Quick tutorial →</a></p><div class=\"doc-callout\"><strong>Upgrading an existing install?</strong><p>To save thread replies that do not mention AgentX, the Slack app needs the <code>channels:history</code> and <code>groups:history</code> scopes and the <code>message.channels</code> and <code>message.groups</code> events. Update the app from the manifest <code>agentx init</code> generates, then reinstall it to the workspace.</p></div><p>Prefer an IDE? <a href=\"../coding-tools/index.html\">Connect Claude Code, Codex or Cursor →</a></p>"
       },
       {
         "id": "resume",
@@ -78,7 +78,7 @@
       {
         "id": "names",
         "title": "Rovara name, compatible commands",
-        "html": "<p>The product repository is <a href=\"https://github.com/PrepLabsAI/Rovara\">PrepLabsAI/Rovara</a>. The published package is <code>@preplabsai/rovara-code</code>. You can install the CLI once:</p><pre><code>npm install -g @preplabsai/rovara-code\nrovara --help</code></pre><p>The package also provides <code>agentx</code> as a compatibility command. AWS resources, <code>~/.agentx</code>, MCP server/tool IDs and the default Slack app retain their existing names. Use the examples as written.</p><p>Instructions checked against the README and linked guides on 6 October 2026. <a href=\"../release/index.html\">Release, licence and documentation status →</a></p>"
+        "html": "<p>The product repository is <a href=\"https://github.com/PrepLabsAI/Rovara\">PrepLabsAI/Rovara</a>. The published package is <code>@preplabsai/rovara-code</code>. You can install the CLI once:</p><pre><code>npm install -g @preplabsai/rovara-code\nrovara --help</code></pre><p>The package also provides <code>agentx</code> as a compatibility command. AWS resources, <code>~/.agentx</code>, MCP server/tool IDs and the default Slack app retain their existing names. Use the examples as written.</p><p>Installation commands checked against the README and linked guides on 13 October 2026. <a href=\"../release/index.html\">Release, licence and documentation status →</a></p>"
       }
     ]
   },
@@ -86,7 +86,7 @@
     "slug": "concepts",
     "title": "Core concepts",
     "group": "Start here",
-    "lead": "Five ideas help you understand where work happens and what comes back.",
+    "lead": "The ideas that explain where work happens, who decides, and what comes back.",
     "kind": "Concepts",
     "sections": [
       {
@@ -97,12 +97,17 @@
       {
         "id": "task",
         "title": "Task and workflow",
-        "html": "<p>The unit connecting a request, plan versions, operations, decisions, evidence and PR links. Native Quick/Full workflows add explicit planning and review stages. Existing direct tasks are a separate entry path.</p>"
+        "html": "<p>The unit connecting a request, plan versions, operations, decisions, evidence and PR links. A workflow task follows Quick (one coding plan) or Full (requirements, design, then a coding plan). Direct tasks (<code>chat:</code> in Slack, <code>agentx_start_task</code> in a coding tool) are a separate path without plan approvals.</p>"
       },
       {
         "id": "plan",
         "title": "Plan and owner decision",
-        "html": "<p>A saved document describes approved scope and approach. Its version and digest identify what the owner decided. A revised document requires a current decision.</p>"
+        "html": "<p>A saved document describes approved scope and approach. Its version and digest identify what the owner decided. A revised document requires a current decision. Only the task owner decides; teammates in the channel can reply, comment and suggest.</p>"
+      },
+      {
+        "id": "task-page",
+        "title": "Task page",
+        "html": "<p>The authenticated web page for one task, linked from every approval card. The owner answers the plan’s decisions and approves or requests changes there; teammates comment and suggest. <a href=\"../task-page/index.html\">Task page guide →</a></p>"
       },
       {
         "id": "workspace",
@@ -117,12 +122,12 @@
       {
         "id": "evidence",
         "title": "Checks and AI review",
-        "html": "<p>Named command results are evidence of those checks in their recorded environment. Separate code/security AI review reports are attributed findings, not a guarantee of correctness.</p>"
+        "html": "<p>Named command results are evidence of those checks in their recorded environment. Separate code and security AI reviews start once the checks pass; only problems the change introduced block. Review reports are attributed findings, not a guarantee of correctness.</p>"
       },
       {
         "id": "pull-request",
         "title": "Pull request and feedback",
-        "html": "<p>GitHub hosts the proposed change, repository CI, comments and merge decision. Rovara Code connects registered PRs to the task and proposes feedback fixes for owner approval.</p>"
+        "html": "<p>GitHub hosts the proposed change, repository CI, comments and merge decision. Rovara Code opens a draft PR of exactly the checked and reviewed code, follows it through signed GitHub events, and proposes feedback fixes for owner approval.</p>"
       }
     ]
   },
@@ -130,48 +135,48 @@
     "slug": "tasks",
     "title": "Your first Quick task",
     "group": "Work with Rovara Code",
-    "lead": "Approve one plan, let Rovara Code implement the change, and inspect the evidence before requesting a PR.",
+    "lead": "Approve one plan, let Rovara Code code, check and review the change, then review its draft PR.",
     "kind": "Tutorial",
     "sections": [
       {
         "id": "before-you-start",
         "title": "Before you start",
-        "html": "<p>You need an environment with the native workflow enabled, access to a registered project, and the project’s installed Slack app or coding-tool connection. <a href=\"../install/index.html\">Install Rovara</a> before following this preview workflow.</p><p>Use Slack’s mention picker to select the app installed in your channel. Existing CLI commands still use <code>agentx</code>.</p><div class=\"doc-callout\"><strong>Quick is the simplest planning path</strong><p>Use it for a well-defined fix. For ambiguous or larger work, <a href=\"../planning/index.html\">choose Full</a>. Ordinary direct tasks remain a separate path.</p></div>"
+        "html": "<div class=\"doc-callout\"><strong>On mainline, not yet released</strong><p>This describes product mainline as of 13 October 2026. The latest published release, v0.3.1, does not include it. Use a deployment and CLI built from mainline, or the next release. <a href=\"../release/index.html#availability\">Release status →</a></p></div><p>You need access to a registered project and its Slack channel, or a <a href=\"../coding-tools/index.html\">coding-tool connection</a>. Starting tasks from Slack needs shared tasks turned on for the Slack service; if AgentX asks an admin to turn them on, see <a href=\"../configuration/index.html#slack-start\">Starting tasks from Slack</a>.</p><p>Use Slack’s mention picker to select the app installed in your channel. Its default name still uses <code>AgentX</code>.</p><div class=\"doc-callout\"><strong>Quick is the simplest planning path</strong><p>Use it for a well-defined fix. For ambiguous or larger work, <a href=\"../planning/index.html\">choose Full</a>.</p></div>"
       },
       {
         "id": "request",
         "title": "1. Request a bounded change",
-        "html": "<p>In the project-bound channel, select the app installed in your channel and send:</p><pre><code>@your-installed-app workflow: Make the docs Copy button reset its label after copying.\nAnnounce success accessibly, preserve manual copy if the clipboard fails,\nand add checks for success, reset and failure.</code></pre><p>This is an example request; replace it with work for your project. Expect a task thread and then a plan ready for your decision. Do not start another task because planning takes time.</p>"
+        "html": "<p>In the project-bound channel, start the request with <code>quick:</code> to go straight to Quick:</p><pre><code>@AgentX quick: Make the docs Copy button reset its label after copying.\nAnnounce success accessibly, preserve manual copy if the clipboard fails,\nand add checks for success, reset and failure.</code></pre><p>Without a prefix, AgentX sorts the request first. A question is answered in the thread. A small change gets a card, “Looks like a small change. I’ll use Quick.”, with <strong>Start</strong>, <strong>Use Full instead</strong> and <strong>Just answer</strong>. An unclear request offers all three. You can also reply <code>quick</code>, <code>full</code> or <code>answer</code> in the thread.</p><p>Only the person who asked can choose, and the card waits for a day. Nothing that changes code starts without that click. Other prefixes: <code>full:</code> starts Full, <code>workflow:</code> asks Quick or Full with no suggestion, and <code>chat:</code> goes to the chat agent.</p>"
       },
       {
         "id": "plan",
         "title": "2. Read the plan",
-        "html": "<p>Open the linked Canvas. Check the intended behavior, files or areas involved, scope exclusions and proposed checks. Rovara Code has inspected the request with read-only tools at this stage.</p><ul><li>Does it describe the change you actually want?</li><li>Are the acceptance checks useful?</li><li>Are assumptions or dependencies missing?</li></ul><p>If the plan needs correction, use <strong>Request changes</strong> and explain the adjustment. Review the revised version.</p>"
+        "html": "<p>AgentX inspects the request with read-only tools and posts an approval card: what is waiting, up to three summary lines and a link to the plan (a Slack Canvas, or the task page when the workspace cannot create Canvases). <strong>Open review</strong> opens the <a href=\"../task-page/index.html\">task page</a>.</p><ul><li>Does it describe the change you actually want?</li><li>Are the acceptance checks useful?</li><li>Are assumptions or dependencies missing?</li></ul><p>Reply in the thread with anything the plan should know. Every reply, yours or a teammate’s, is saved for the task’s next step. Replies never move the task; only the owner’s buttons do.</p>"
       },
       {
         "id": "approve",
         "title": "3. Approve the current version",
-        "html": "<p>Use <strong>Approve</strong> on the current decision prompt. Required project checks are locked on; choose from project-configured optional checks when offered.</p><p>Your decision applies to that plan version. A comment in the thread is feedback, not approval. An old prompt cannot authorize a revised plan.</p>"
+        "html": "<p>Press <strong>Approve</strong> on the card or the task page. The project’s readiness checks always run; you can add any optional checks the project offers. Your choices are saved with the decision.</p><p>To change the plan, press <strong>Request changes</strong> on the task page with at least one comment or a note. AgentX writes the next version and answers each comment “Done:” or “Not changed because:”. A decision applies to the version it names; an old card cannot approve a newer plan.</p>"
       },
       {
         "id": "review",
-        "title": "4. Inspect checks and request reviews",
-        "html": "<p>Rovara Code implements in the project’s remote workspace and runs the configured checks. Inspect the diff, raw output and candidate reference. Failed or missing required checks remain a visible blocker.</p><p>When the task reaches <code>REVIEW / WAITING</code> with passing checks for that candidate, explicitly request the separate code and security reviews. In your connected coding tool, ask:</p><pre><code>Use agentx_review_workflow_candidate for &lt;task-id&gt;.\nReview the current candidate against the approved plan.\nDo not edit code.</code></pre><p>Use the existing task ID. The tool starts the initial read-only reviews; it is not a generic retry. Inspect their reports before requesting draft PRs. If working only in Slack, use the review action supported by your installed version or ask the operator how to request it.</p><a href=\"../evidence/index.html\">Review guide →</a>"
+        "title": "4. Let the checks and reviews run",
+        "html": "<p>After approval, AgentX codes the plan in the project’s remote workspace and runs the required and chosen checks on that exact code. When they pass, it starts the separate code and security reviews by itself.</p><p>Only problems the change introduced block. An older problem outside the changed lines is noted but does not block. If a check or review blocks, the thread lists the problems with <strong>Send back to coding</strong>, <strong>Retry reviews</strong> and <strong>Close task</strong>. Send back gives the problems to coding, and the checks and reviews run again on the new code.</p><p>From a coding tool, the owner can also accept a blocking finding with a reason, which the draft PR then lists. <a href=\"../evidence/index.html#reviews\">How to read the reviews →</a></p>"
       },
       {
         "id": "pull-request",
-        "title": "5. Request draft PRs",
-        "html": "<p>When the workflow is ready, ask Rovara Code to open draft PRs for review. Inspect the task to find their GitHub links. PR creation is a separate request; readiness does not merge the code.</p><p>Review repository CI and the diff in GitHub. <strong>You decide what gets merged.</strong></p>"
+        "title": "5. Review the draft PR",
+        "html": "<p>When the checks and both reviews pass, AgentX opens a draft PR of exactly the checked code and posts the link in the thread. Its description says what the approved plan set out to do and which checks and reviews passed, and links the task page. If the PR did not open, the thread offers <strong>Retry opening the pull request</strong>.</p><p>Review repository CI and the diff in GitHub. <strong>You decide what gets merged.</strong></p>"
       },
       {
         "id": "continue",
         "title": "6. Handle reviewer feedback",
-        "html": "<p>Rovara Code gathers feedback on the task’s linked PRs and proposes responses. Open the detailed review, choose the fixes you want, and approve them or request changes. Approved fixes produce a new candidate and fresh evidence.</p><a href=\"../feedback/index.html\">Follow the feedback tutorial →</a>"
+        "html": "<p>When reviewers comment on the PR, AgentX reviews the comments and posts “PR feedback is ready” in the thread, with its recommendations and the highest priority. Approve the fixes you want, answer its questions, or dismiss. Approved fixes go through checks and reviews again and are pushed to the same PR.</p><a href=\"../feedback/index.html\">Follow the feedback tutorial →</a>"
       },
       {
         "id": "finish",
         "title": "7. Finish and preserve the work",
-        "html": "<p>A task with several required PRs waits until all are observed merged. Inspect the task’s next action and closeout state. Canonical artifacts and decisions remain in Rovara Code under configured retention; Canvas copies are cleaned up after preservation is verified.</p><p>Workspace closure is a separate action and can refuse if unpublished changes remain. <a href=\"../operations/index.html\">Workspace and closeout guide →</a></p>"
+        "html": "<p>The task finishes when GitHub reports its PRs merged. It gives back its workspace, frees its place in your open-task limit, and shows as closed. Canvas copies are cleaned up after the task’s documents and decisions are saved.</p><p>To stop a running task from its Slack thread, the owner sends <code>@AgentX stop</code>. A plain <code>stop</code> without the mention is saved as a reply. <a href=\"../operations/index.html\">Workspace and closeout guide →</a></p>"
       }
     ]
   },
@@ -185,37 +190,86 @@
       {
         "id": "before-you-start",
         "title": "Before you start",
-        "html": "<p>You need an environment with the native workflow enabled, access to a registered project, and the project’s installed Slack app or coding-tool connection. <a href=\"../install/index.html\">Install Rovara</a> before following this preview workflow.</p><p>Use Slack’s mention picker to select the app installed in your channel. Existing CLI commands still use <code>agentx</code>.</p><p>Choose Full when behavior, interfaces or implementation choices need discussion. Full changes planning depth; it does not relax project-required checks or review requirements.</p>"
+        "html": "<div class=\"doc-callout\"><strong>On mainline, not yet released</strong><p>This describes product mainline as of 13 October 2026. The latest published release, v0.3.1, does not include it. Use a deployment and CLI built from mainline, or the next release. <a href=\"../release/index.html#availability\">Release status →</a></p></div><p>You need access to a registered project and its Slack channel, or a coding-tool connection. Choose Full when behavior, interfaces or implementation choices need discussion. Full changes planning depth; it does not relax project-required checks or reviews.</p>"
       },
       {
         "id": "request",
         "title": "1. Choose Full at task start",
-        "html": "<p>Select the Full workflow through your installed workflow surface. In a coding tool, explicitly ask it to call <code>agentx_start_workflow</code> with <code>workflow_path: \"full\"</code> for your project.</p><pre><code>Start a Full Rovara Code workflow in &lt;project-name&gt;.\nAdd password reset to the account page.\nShow me requirements, design and the coding plan for approval\nbefore implementation. Keep existing sign-in behavior.</code></pre><p>Use your project’s actual name. If your Slack app does not expose Full selection, use the workflow MCP path or ask the operator which installed version supports it.</p>"
+        "html": "<p>Start the request with <code>full:</code> in the bound channel:</p><pre><code>@AgentX full: Add password reset to the account page.\nKeep existing sign-in behavior.</code></pre><p>Without a prefix, a larger change gets a card suggesting Full, with <strong>Start</strong>, <strong>Use Quick instead</strong> and <strong>Just answer</strong>. From a coding tool, ask it to call <code>agentx_start_workflow</code> with <code>workflow_path: \"full\"</code> for your project.</p>"
       },
       {
         "id": "requirements",
         "title": "2. Agree on requirements",
-        "html": "<p>Inspect intended behavior, constraints, non-goals and acceptance scenarios. Use <strong>Request changes</strong> for omissions or wrong assumptions. Approve the current document when it represents the work you want.</p><p>For password reset, discuss expiry, error messages and existing authentication behavior here—not after implementation.</p>"
+        "html": "<p>Inspect intended behavior, constraints, non-goals and acceptance scenarios. On the task page, each of the document’s decisions shows AgentX’s recommendation already picked; choose another option where you disagree, and comment on any claim. Approve the current document when it represents the work you want.</p><p>For password reset, discuss expiry, error messages and existing authentication behavior here, not after implementation.</p>"
       },
       {
         "id": "design",
         "title": "3. Review the design",
-        "html": "<p>Inspect the proposed interfaces, component boundaries, dependencies and failure behavior. Ask for alternatives or corrections before approving this version.</p>"
+        "html": "<p>The design is written from the approved requirements. Inspect the proposed interfaces, component boundaries, dependencies and failure behavior. Ask for alternatives or corrections before approving this version.</p>"
       },
       {
         "id": "plan",
         "title": "4. Approve the coding plan",
-        "html": "<p>Review the implementation steps, dependency order and check choices. Required project checks stay on. Approve this version to authorize implementation.</p>"
+        "html": "<p>The coding plan is written from the approved design. Review the implementation steps and check choices. Required project checks stay on; add the project’s optional checks you want. Approve this version to start coding.</p>"
       },
       {
         "id": "after-approval",
         "title": "5. Review the work",
-        "html": "<p>Implementation follows the approved plan. Inspect the code and candidate-bound checks. Once the task is in <code>REVIEW / WAITING</code> with passing checks, explicitly request initial candidate reviews through <code>agentx_review_workflow_candidate</code> in your coding tool, or the review action supported by your installed environment.</p><p>Inspect the separate code and security reports, then request draft PRs when ready. PR feedback follows the same owner-controlled proposal and fix loop as Quick.</p><a href=\"../tasks/index.html#review\">How to request reviews →</a>"
+        "html": "<p>Coding, checks and reviews run as in Quick, and AgentX opens a draft PR when they pass. PR feedback follows the same owner-controlled proposal and fix loop.</p><a href=\"../tasks/index.html#review\">What happens after approval →</a>"
       },
       {
         "id": "changes",
         "title": "When a document changes",
-        "html": "<p>Revised documents require a decision on the current version. A previous approval does not approve a different scope or stale candidate. Keep the task’s current prompt and next action in view.</p>"
+        "html": "<p><strong>Request changes</strong> needs at least one comment or a note. AgentX writes the next version and answers each comment you sent under it. Comments you send with an Approve are answered by the next document, for example “Done in the coding plan: …”.</p><p>Each comment stays on the same claim, decision or check if it is still there, marked “from v1”; otherwise it moves under “Removed claims”. An approval applies only to the version it names. <a href=\"../task-page/index.html\">Task page guide →</a></p>"
+      }
+    ]
+  },
+  {
+    "slug": "task-page",
+    "title": "Decide on the task page",
+    "group": "Work with Rovara Code",
+    "kind": "Guide",
+    "lead": "Answer the plan’s decisions, comment with your team, and approve or request changes from one page.",
+    "sections": [
+      {
+        "id": "open",
+        "title": "Open the task page",
+        "html": "<div class=\"doc-callout\"><strong>On mainline, not yet released</strong><p>This describes product mainline as of 13 October 2026. The latest published release, v0.3.1, does not include it. Use a deployment and CLI built from mainline, or the next release. <a href=\"../release/index.html#availability\">Release status →</a></p></div><p>Every approval card links the task page (<strong>Open review</strong>). Sign in if asked. The page’s first line says what you can do:</p><ul><li><strong>You’re the task owner.</strong> Answer the plan’s decisions, comment, and press <strong>Approve</strong> or <strong>Request changes</strong>.</li><li><strong>You can read and comment on this task.</strong> You are in the task’s channel and can use its project. Comment, reply and press <strong>Suggest this</strong> on a decision option. Only owners decide.</li><li><strong>You don’t have access to this task.</strong> Also what a link to a task that does not exist says.</li></ul>"
+      },
+      {
+        "id": "decisions",
+        "title": "Answer the plan’s decisions",
+        "html": "<p>Each decision shows its options with AgentX’s recommendation already picked. Pick another option to change the answer. The bar at the bottom counts the decisions you have not looked at yet; press it to jump to the next one.</p><p>You do not have to answer every decision: any you leave keep AgentX’s answer. Teammates’ suggestions show under each decision, for example “Priya and Sam suggest: Above”. The <strong>Approve</strong> and <strong>Request changes</strong> buttons name the document they act on, such as “Approve coding plan v1”.</p>"
+      },
+      {
+        "id": "comments",
+        "title": "Comment and reply",
+        "html": "<p>Press <strong>Comment</strong> under a claim, a decision, a check or the whole document, and <strong>Reply</strong> under a comment. Comments are plain text and can be edited or deleted until they are sent with a decision.</p><p>When a new version arrives, each comment stays on the same claim, decision or check if it is still there, marked “from v1”; otherwise it moves under “Removed claims”. While open, the page checks for new comments and versions every 20 seconds and offers <strong>Show it</strong>.</p>"
+      },
+      {
+        "id": "send",
+        "title": "Approve or request changes",
+        "html": "<p>Both buttons open a short summary before anything is sent: your answers that differ from AgentX’s, the decisions left to AgentX, and the open comments to send (all ticked; untick any to keep for later). You can add a note of up to 500 characters.</p><ul><li><strong>Approve and start coding</strong> (or <strong>Approve and continue</strong> for requirements and design) moves the task on. Comments sent with it are answered by the next document.</li><li><strong>Request changes</strong> needs at least one comment or a note. AgentX writes the next version and answers each comment “Done:” or “Not changed because:”.</li></ul><p>Your answers and comments go to the next step as part of the plan. Comments are passed on as teammates’ quoted words, never as instructions that override your answers. Nothing is coded until the owner approves.</p>"
+      },
+      {
+        "id": "slack",
+        "title": "Slack and the page stay in step",
+        "html": "<p>A decision on the page edits the Slack card the same way a button press does, for example “Approved by @Maya · 1 answer changed · 2 comments included”. <strong>Approve</strong> in Slack uses AgentX’s answers and includes the page’s open comments (up to 25, oldest first). <strong>Request changes</strong> in Slack sends no comments.</p><p>Exactly one decision is recorded however many places it is pressed: the second place says “Already approved by …” and keeps what you typed. A teammate who comments triggers at most one Slack message every 10 minutes, without the comment text.</p>"
+      },
+      {
+        "id": "ask",
+        "title": "Ask AgentX about a comment",
+        "html": "<p>Tick <strong>Ask AgentX to reply to this comment</strong> when you post. AgentX replies under it from what it knows about the task, marked “AgentX (AI) · answering” and the asker’s name. It cannot change code, choose answers or decide.</p><p>This works only on tasks started in Slack. If no answer comes within 10 minutes, the comment says “AgentX couldn’t answer this one.” An answer to a comment edited or deleted in the meantime is not shown.</p>"
+      },
+      {
+        "id": "limits",
+        "title": "Limits",
+        "html": "<div class=\"doc-table-wrap\"><table><thead><tr><th>Limit</th><th>Value</th></tr></thead><tbody><tr><td>Comment length</td><td>2,000 characters</td></tr><tr><td>Per person, per task, in 10 minutes</td><td>30 comments and 60 suggestion changes</td></tr><tr><td>Per task</td><td>300 comments, replies and AgentX answers; 20 replies per comment</td></tr><tr><td>Comments sent with one decision</td><td>25; the rest stay open for the next version</td></tr><tr><td>AgentX answers</td><td>6 per person and 20 per task an hour; 30 per person across tasks an hour; 5 per comment thread</td></tr><tr><td>Decision note</td><td>500 characters</td></tr></tbody></table></div>"
+      },
+      {
+        "id": "phones",
+        "title": "Phones and no JavaScript",
+        "html": "<p>The page is built for Slack’s in-app browser: nothing scrolls sideways, buttons are large enough to tap and the summary opens full screen. Without JavaScript the page still shows the plan, every comment and AgentX’s answers; the buttons that need JavaScript stay hidden. Unsent answers and comment text survive a refresh, but not closing the tab or the end of the sign-in.</p>"
       }
     ]
   },
@@ -244,27 +298,32 @@
       {
         "id": "direct-tasks",
         "title": "3. Start a task",
-        "html": "<p>After connecting, ask your client to list your Rovara projects and start a task in the chosen project, for example “Hand Rovara the navigation fix in &lt;project-name&gt; and run the relevant tests.” The released direct-task path uses <code>agentx_start_task</code>; it does not automatically gain Quick/Full approvals.</p><p>The workflow tutorial above needs native workflow tools in your deployment. <a href=\"https://github.com/PrepLabsAI/Rovara/blob/mainline/docs/mcp-install.md\">Published coding-tool guide →</a></p>"
+        "html": "<p>After connecting, ask your client to list your Rovara projects and start a task in the chosen project, for example “Hand Rovara the navigation fix in &lt;project-name&gt; and run the relevant tests.” This direct-task path uses <code>agentx_start_task</code> and has no plan approvals. It is available in v0.3.1.</p><p><a href=\"https://github.com/PrepLabsAI/Rovara/blob/mainline/docs/mcp-install.md\">Published coding-tool guide →</a></p>"
       },
       {
         "id": "delegate",
-        "title": "Native workflow preview: start with a plan",
-        "html": "<div class=\"doc-callout\"><strong>Requires native workflow tools</strong><p>v0.2.0 exposes the 11 direct-task tools. The workflow steps below describe a separate preview and require a compatible deployment.</p></div><p>Ask your client to find your projects and call the native workflow tool for the chosen project. Quick is the default.</p><pre><code>List my Rovara Code projects.\nStart a Quick workflow in &lt;project-name&gt; to improve the docs Copy button.\nReset its label after copying, announce success accessibly,\nand preserve manual copy on clipboard failure.\nShow me the plan before implementing.</code></pre><p>The client uses <code>agentx_start_workflow</code>. Include the remote task’s needed context; it does not receive your entire local conversation.</p>"
+        "title": "Start a Quick or Full workflow",
+        "html": "<div class=\"doc-callout\"><strong>On mainline, not yet released</strong><p>This describes product mainline as of 13 October 2026. The latest published release, v0.3.1, does not include it. Use a deployment and CLI built from mainline, or the next release. <a href=\"../release/index.html#availability\">Release status →</a></p></div><p>Ask your client to find your projects and start a workflow. <code>workflow_path</code> is required: <code>quick</code> asks once for a coding plan; <code>full</code> asks for requirements, design and the coding plan.</p><pre><code>List my Rovara Code projects.\nStart a Quick workflow in &lt;project-name&gt; to improve the docs Copy button.\nReset its label after copying, announce success accessibly,\nand preserve manual copy on clipboard failure.\nShow me the plan before implementing.</code></pre><p>The client uses <code>agentx_start_workflow</code>. Include the context the remote task needs; it does not receive your local conversation.</p>"
       },
       {
         "id": "inspect",
-        "title": "Preview: read and decide on the plan",
-        "html": "<p>Inspect the task’s current approval document, workflow revision and next action. Ask the client to show the whole document before you decide.</p><p>Your explicit decision calls <code>agentx_decide_workflow</code> with the current revision and artifact digest. An assistant should not approve a plan on your behalf without your instruction.</p><pre><code>Show the current plan for task &lt;task-id&gt;, including checks and scope.</code></pre>"
+        "title": "Read and decide on the plan",
+        "html": "<p><code>agentx_get_task</code> shows the current approval document, its digest and the workflow revision. Ask the client to show the whole document before you decide, or open the task page.</p><p>Your explicit decision calls <code>agentx_decide_workflow</code> with that revision and digest. An assistant should not approve a plan on your behalf without your instruction.</p><pre><code>Show the current plan for task &lt;task-id&gt;, including checks and scope.</code></pre>"
       },
       {
         "id": "continue",
-        "title": "Preview: request reviews, then draft PRs",
-        "html": "<p>Follow the same task ID and inspect the diff and check output. A wait can time out while work continues; get current task state before retrying.</p><p>When the native task is <code>REVIEW / WAITING</code> with passing checks for the current candidate, ask your client to call <code>agentx_review_workflow_candidate</code> with that task ID and review instructions. This explicitly starts the initial read-only code and security reviews.</p><p>Inspect the reports. When the workflow is ready, explicitly request draft PR creation. Use the owner feedback-review controls for subsequent PR comments so the selected changes and fresh evidence stay connected.</p><a href=\"../feedback/index.html\">PR feedback guide →</a>"
+        "title": "Follow checks, reviews and the draft PR",
+        "html": "<p>After approval, checks, reviews and the draft PR follow on their own. A wait can time out while work continues; get the current task before retrying. When a step blocks, the owner chooses:</p><ul><li><code>agentx_send_workflow_back</code>: give the failed checks and findings the change introduced to coding.</li><li><code>agentx_resolve_review_findings</code>: accept each blocking finding with a reason, or have it fixed.</li><li><code>agentx_review_workflow_candidate</code>: retry a blocked review on the same code.</li><li><code>agentx_retry_workflow</code> or <code>agentx_retry_workflow_publish</code>: restart blocked planning, coding or checks, or retry opening the PR.</li></ul><p>For PR comments, read the proposal with <code>agentx_get_pr_feedback</code> and decide with <code>agentx_decide_pr_feedback</code>. <a href=\"../mcp/index.html#workflow-tools\">Tool reference →</a></p>"
       },
       {
         "id": "share",
         "title": "Sharing into Slack",
         "html": "<p>Tasks are private by default unless the project requires sharing. <strong>View</strong> mode lets channel members watch. <strong>Continue</strong> mode, when allowed, lets them send follow-ups in the thread. Check the channel and mode before sharing.</p><p>When finished, close the task to release its workspace. <a href=\"../operations/index.html\">Workspace actions →</a></p>"
+      },
+      {
+        "id": "chatgpt",
+        "title": "Use your own ChatGPT plan",
+        "html": "<p>If your admin turned on Sign in with ChatGPT, connect your Plus or Pro plan so your tasks run on it:</p><pre><code>npx @preplabsai/rovara-code chatgpt connect</code></pre><p><a href=\"../chatgpt/index.html\">Sign in with ChatGPT →</a></p>"
       }
     ]
   },
@@ -288,7 +347,7 @@
       {
         "id": "reviews",
         "title": "Read the separate AI reviews",
-        "html": "<p>Initial candidate reviews require an explicit request after checks pass, while the task is <code>REVIEW / WAITING</code>. <a href=\"../tasks/index.html#review\">Request the reviews →</a></p><p>Code and security reviewers use separate read-only sessions. Inspect their findings, rationale, scope and reviewer/model attribution. A passing review is an AI assessment; it does not replace tests or your team’s judgment.</p>"
+        "html": "<p>Code and security reviews start automatically once the required and chosen checks pass on the current candidate. They run in separate read-only sessions. Inspect their findings, rationale, scope and reviewer/model attribution.</p><p>A finding blocks only when the change introduced it; an older problem outside the changed lines is noted. The owner can send blocking findings back to coding, or accept one with a reason, which the draft PR then lists. A passing review is an AI assessment; it does not replace tests or your team’s judgment.</p>"
       },
       {
         "id": "results",
@@ -298,12 +357,12 @@
       {
         "id": "layers",
         "title": "Know which checks you are looking at",
-        "html": "<dl><dt>Native workflow readiness</dt><dd>Required checks and separate code/security review reports must apply to the current candidate before PR readiness.</dd><dt>Existing direct-task verification</dt><dd>The runtime reruns usable checks and compares before/after where possible. Failed or missing evidence can be described on a draft PR.</dd><dt>Repository CI</dt><dd>Your normal GitHub checks and branch rules govern the repository.</dd><dt>Benchmark grader</dt><dd>A historical grader determines a selected benchmark task’s outcome, not readiness of a current workflow task.</dd></dl><p>Inspect the actual command, environment and candidate attached to each result. These layers have different purposes.</p>"
+        "html": "<dl><dt>Workflow readiness</dt><dd>Required checks and both review reports must apply to the current candidate before AgentX opens the draft PR.</dd><dt>Existing direct-task verification</dt><dd>The runtime reruns usable checks and compares before/after where possible. Failed or missing evidence can be described on a draft PR.</dd><dt>Repository CI</dt><dd>Your normal GitHub checks and branch rules govern the repository.</dd><dt>Benchmark grader</dt><dd>A historical grader determines a selected benchmark task’s outcome, not readiness of a current workflow task.</dd></dl><p>Inspect the actual command, environment and candidate attached to each result. These layers have different purposes.</p>"
       },
       {
         "id": "pull-requests",
         "title": "Review a draft PR",
-        "html": "<p>The native workflow checks readiness before PR creation; your team then reviews the draft PR and repository CI. <strong>You decide what gets merged.</strong></p><details><summary>Using the existing direct-task path?</summary><p>That path can produce draft PRs describing failed or unverified checks. Older publication behavior may refuse a new PR on readiness failure; append/sync of an existing PR also refuses failed readiness. Configured CodeBuild output adds evidence rather than automatically enforcing every merge rule.</p></details>"
+        "html": "<p>A workflow’s draft PR contains exactly the code whose checks and reviews passed. Its description lists what the plan set out to do, the checks and reviews, any findings the owner accepted with their reasons, and a link to the task page. Your team then reviews the draft PR and repository CI. <strong>You decide what gets merged.</strong></p><details><summary>Using the existing direct-task path?</summary><p>That path can produce draft PRs describing failed or unverified checks. Older publication behavior may refuse a new PR on readiness failure; append/sync of an existing PR also refuses failed readiness. Configured CodeBuild output adds evidence rather than automatically enforcing every merge rule.</p></details>"
       },
       {
         "id": "recorded-run",
@@ -327,32 +386,32 @@
       {
         "id": "before-you-start",
         "title": "Before you start",
-        "html": "<p>You need a native workflow with registered, open task PRs and access as its authorized owner. Reviewers leave their original comments in GitHub. The installed environment must include the authenticated feedback review surface.</p>"
+        "html": "<div class=\"doc-callout\"><strong>On mainline, not yet released</strong><p>This describes product mainline as of 13 October 2026. The latest published release, v0.3.1, does not include it. Use a deployment and CLI built from mainline, or the next release. <a href=\"../release/index.html#availability\">Release status →</a></p></div><p>You need a workflow task whose draft PR AgentX opened, and you must be its owner to decide. Reviewers leave their comments in GitHub as usual.</p>"
       },
       {
         "id": "collect",
-        "title": "1. Open the feedback review",
-        "html": "<p>Follow the review link from the Slack task notice. Sign in if prompted; then return to the same review. A link is a route to the task, not permission to view or decide it.</p><p>Rovara Code gathers current comments across the task’s open PRs, groups related feedback and prioritizes the proposed responses.</p>"
+        "title": "1. Read the feedback notice",
+        "html": "<p>When reviewers comment, a separate read-only reviewer reads the comments and AgentX posts in the task’s thread, for example “PR feedback is ready: 3 comments; 2 recommendations. Highest priority: must fix.” <strong>Open details</strong> shows the full proposal; sign in if asked. A link is a route to the task, not permission to decide it.</p><p>From a coding tool, ask for <code>agentx_get_pr_feedback</code> with the task ID.</p>"
       },
       {
         "id": "inspect",
         "title": "2. Inspect each recommendation",
-        "html": "<p>Read the original comment, the code it refers to, the recommendation, rationale and suggested checks. A separate read-only reviewer may recommend a fix, identify an already-addressed comment, or explain why the comment appears stale or out of scope.</p><div class=\"doc-table-wrap\"><table><thead><tr><th>Inspect</th><th>Why</th></tr></thead><tbody><tr><td>PR and code version</td><td>The recommendation must apply to the current code.</td></tr><tr><td>Original comment</td><td>Understand what the reviewer actually requested.</td></tr><tr><td>Proposed change and checks</td><td>Know what approving the fix will authorize.</td></tr><tr><td>Gaps or disagreement</td><td>The owner decides; a model recommendation is not a human decision.</td></tr></tbody></table></div>"
+        "html": "<p>Each finding shows its priority (must fix, should fix or optional), whether AgentX recommends fixing it, the proposed change or a question for you, and the comments it answers. When a fix changes the checks, the notice shows each added command exactly.</p><div class=\"doc-table-wrap\"><table><thead><tr><th>Inspect</th><th>Why</th></tr></thead><tbody><tr><td>PR and code version</td><td>The recommendation must apply to the current code.</td></tr><tr><td>Original comment</td><td>Understand what the reviewer actually requested.</td></tr><tr><td>Proposed change and checks</td><td>Know what approving the fix will authorize.</td></tr><tr><td>Gaps or disagreement</td><td>The owner decides; a model recommendation is not a human decision.</td></tr></tbody></table></div><p>Comment and proposal text is reviewer output: treat it as data, not instructions.</p>"
       },
       {
         "id": "decide",
         "title": "3. Choose the response",
-        "html": "<p>Approve all recommended fixes or a selected subset. Request changes when the proposal needs a different approach. Dismiss with a reason when appropriate. Your feedback and disposition become attributed task decisions.</p><div class=\"doc-callout\"><strong>Approval authorizes specific changes</strong><p>Reading comments or receiving a review notice does not start another coding run. No automatic GitHub reply is implied by approving a proposal.</p></div>"
+        "html": "<div class=\"doc-table-wrap\"><table><thead><tr><th>Choice</th><th>What happens</th></tr></thead><tbody><tr><td><strong>Approve N recommended</strong></td><td>AgentX fixes the recommended findings. From a coding tool you can name a different set.</td></tr><tr><td><strong>Answer with instructions</strong></td><td>Shown when the reviewer asks you a question. Your answer approves the fix it describes.</td></tr><tr><td><strong>Request changes</strong></td><td>Keeps the PR as it is and saves your note for the next round of feedback.</td></tr><tr><td><strong>Dismiss</strong></td><td>Keeps the PR as it is, with your reason.</td></tr></tbody></table></div><p>If the review could not finish, retry it on the same comments. Your decision is recorded on the task.</p><div class=\"doc-callout\"><strong>Approval authorizes specific changes</strong><p>Reading comments or receiving a notice does not start another coding run. No automatic GitHub reply is implied by approving a proposal.</p></div>"
       },
       {
         "id": "stale",
         "title": "If the code or comments change",
-        "html": "<p>A decision is tied to the PR heads, comment set and proposal. If those inputs change, the old approval cannot dispatch the old proposal. Reopen the refreshed review and decide on the current version.</p>"
+        "html": "<p>A decision is tied to the review, the proposal and the comment set. If new feedback arrives first, the old decision is refused and AgentX reviews the new feedback. Decide on the current notice.</p>"
       },
       {
         "id": "recheck",
         "title": "4. Inspect the updated candidate",
-        "html": "<p>Only the approved fixes go to the coding operation. After implementation, inspect the new diff and fresh required checks and separate reviews. Your repository’s CI and human review remain part of the final decision.</p><a href=\"../evidence/index.html\">Evidence and freshness →</a>"
+        "html": "<p>Only the approved fixes go to coding. The checks and reviews run again, and the fix is pushed to the same PR. If an approved fix changed no code, choose <strong>Keep the pull request as it is</strong>; the task waits for the merge again and new comments are reviewed as usual.</p><a href=\"../evidence/index.html\">Evidence and freshness →</a>"
       },
       {
         "id": "finish",
@@ -363,30 +422,30 @@
   },
   {
     "slug": "coordination",
-    "title": "Dependencies and linked PRs",
+    "title": "Linked PRs and dependencies",
     "group": "Work with Rovara Code",
-    "lead": "Understand what can proceed, what is blocked, and which PRs still need your team’s decision.",
+    "lead": "Understand what the task is waiting for, which PRs still need your team’s decision, and what is not built yet.",
     "kind": "Guide",
     "sections": [
       {
         "id": "dependencies",
-        "title": "Read dependency order",
-        "html": "<p>A larger task can have work that depends on an earlier step. Inspect the prerequisite and blocker before retrying a downstream step. The initial workflow sequences dependent work; this guide does not assume concurrent agent execution.</p><ol class=\"doc-flow\"><li>Prerequisite work</li><li>Dependent work</li><li>Checks + reviews</li><li>Required PRs</li></ol>"
+        "title": "Task dependencies are not built yet",
+        "html": "<p>Splitting one task into dependent items, with a visible order and blockers, is a design draft (<a href=\"https://github.com/PrepLabsAI/Rovara/tree/mainline/specs/059-task-dependencies\">spec 059</a>), not current behavior. Today, Full’s requirements → design → coding plan order is the sequencing a workflow task has.</p><p>For a change across several repositories, <a href=\"../loop/index.html#pull-requests\">Rovara loop</a> runs one loop per pull request on your computer.</p>"
       },
       {
         "id": "blocked",
         "title": "When work is blocked",
-        "html": "<p>Inspect the stage, reason and responsible next action. A failed prerequisite prevents its dependent steps from proceeding. Correct the prerequisite or revise the plan through the task’s decision controls.</p>"
+        "html": "<p>A blocked step says why and offers the owner’s options: retry planning, send back to coding, retry reviews, retry opening the PR, or close the task. Inspect the reason before retrying. <a href=\"../operations/index.html#workflow-status\">What to do at each step →</a></p>"
       },
       {
         "id": "linked-prs",
         "title": "Track the complete PR set",
-        "html": "<p>Rovara Code registers PRs against the task and candidate repositories. Unrelated PR events do not advance this task. If the candidate requires several PRs, a successful PR creation in one repository does not mean the rest were created.</p>"
+        "html": "<p>Rovara Code registers the PRs it opens against the task. GitHub events arrive signed, and missed deliveries are recovered; unrelated PR events do not advance this task. GitHub’s API remains the authority on PR state.</p>"
       },
       {
         "id": "merges",
         "title": "Understand partial merges",
-        "html": "<p>The task waits for GitHub to report every required PR merged. A partial merge stays incomplete. If a linked PR reopens, inspect the updated task state rather than relying on an earlier notification.</p>"
+        "html": "<p>The task finishes when GitHub reports every required PR merged; a coding tool then shows it as closed with stage <code>MERGED</code>. A partial merge stays incomplete. If a linked PR reopens, inspect the updated task state rather than relying on an earlier notification.</p>"
       },
       {
         "id": "recovery",
@@ -396,7 +455,61 @@
       {
         "id": "initiation",
         "title": "Work starts with an explicit request",
-        "html": "<p>Ask Rovara Code in Slack or through your coding tool. Creating or updating a GitHub issue does not initiate a task. PR comments propose follow-up work; the owner approves changes before implementation.</p>"
+        "html": "<p>Hosted Rovara Code starts work only when asked in Slack or through your coding tool. Creating or updating a GitHub issue does not start a hosted task. PR comments produce feedback proposals; the owner approves fixes before implementation.</p><p>The separate <a href=\"../loop/index.html\">Rovara loop</a> runs on your own computer and does start work from collaborators’ <code>/rovara</code> comments on issues.</p>"
+      }
+    ]
+  },
+  {
+    "slug": "loop",
+    "title": "Rovara loop on GitHub issues",
+    "group": "Work with Rovara Code",
+    "kind": "Guide",
+    "lead": "Run Rovara’s workflow on your own computer: your GitHub issues drive your own Claude Code or Codex.",
+    "sections": [
+      {
+        "id": "what",
+        "title": "What Rovara loop is",
+        "html": "<p><code>rovara loop</code> turns collaborators’ comments on your GitHub issues into work for your own Claude Code or Codex, and drives that work through plan approval, checks, reviews and a pull request. It needs no Rovara install and no AWS account: only the Rovara CLI, the GitHub CLI (<code>gh</code>, signed in), <code>tmux</code>, <code>git</code>, and Claude Code or Codex.</p><div class=\"doc-callout\"><strong>On mainline, not yet released</strong><p>This describes product mainline as of 13 October 2026. The latest published release, v0.3.1, does not include it. Use a deployment and CLI built from mainline, or the next release. <a href=\"../release/index.html#availability\">Release status →</a></p></div><p>Available today: the Do, Quick, Full, Review and Contribute loops. Webhooks, Slack approvals and Jira come later. The idea is inspired by <a href=\"https://github.com/MadaraUchiha-314/the-loop\">the-loop</a> by Rohith Ramakrishnan; Rovara loop is Rovara’s own implementation.</p>"
+      },
+      {
+        "id": "setup",
+        "title": "Set up a repository",
+        "html": "<p>In a checkout of the repository:</p><pre><code>rovara loop init     # writes .rovara/loop.yaml, with you as its one collaborator\ngit add .rovara/loop.yaml &amp;&amp; git commit -m &quot;chore: rovara loop config&quot;\nrovara loop add      # lets the loop read this repository's issues\nrovara loop start    # runs the daemon in the background</code></pre><p><code>.rovara/loop.yaml</code> says who the loop obeys and how changes are proved:</p><pre><code>version: 1\ncollaborators:      # the only GitHub logins whose comments start, steer or stop a loop\n  - maya\n  - sam\nharness:\n  name: claude-code # or codex\n  args: []\nchecks:             # run before a pull request, in order\n  - name: tests\n    run: npm test\nreviews:\n  enabled: true\n  harness: codex    # a different agent from the one doing the work is a real critic\n  security: true\n  maxRounds: 3</code></pre><p>Comments from anyone else are never read as instructions. A repository is read from the moment it is added; older comments are never replayed.</p>"
+      },
+      {
+        "id": "loops",
+        "title": "Choose a loop",
+        "html": "<div class=\"doc-table-wrap\"><table><thead><tr><th>Comment</th><th>What it does</th></tr></thead><tbody><tr><td><code>/rovara do &lt;instruction&gt;</code></td><td>Works on its own branch with no gates. Commits, but never pushes or opens a PR.</td></tr><tr><td><code>/rovara quick &lt;instruction&gt;</code></td><td>Plan → approval → code → checks → reviews → pull request.</td></tr><tr><td><code>/rovara full &lt;instruction&gt;</code></td><td>Requirements, design and plan, each approved, then as Quick.</td></tr><tr><td><code>/rovara review [brief]</code></td><td>Reviews open PRs against a collaborator’s brief. Changes no code.</td></tr><tr><td><code>/rovara contribute</code></td><td>Joins an existing issue or someone else’s PR to meet a stated goal and success criteria.</td></tr></tbody></table></div><p>Steer with replies on the issue. <code>/rovara approve</code> passes a gate, <code>/rovara changes: …</code> (or any reply) asks for changes, and <code>/rovara stop</code> or closing the issue ends the loop. The issue’s <code>rovara:*</code> label shows where it stands.</p>"
+      },
+      {
+        "id": "quick",
+        "title": "Quick and Full",
+        "html": "<p>Quick: the agent writes <code>docs/rovara/&lt;issue&gt;/plan.md</code> (Summary, Changes, Testing) and changes no code. A collaborator approves it, which locks it. The agent codes, commits and writes a self-review; the loop runs the repository’s checks and reviews. Then the loop itself, never the agent, pushes <code>rovara/&lt;issue&gt;</code> and opens a PR that closes the issue.</p><p>Full adds <code>requirements.md</code> and <code>design.md</code> before the plan, each with its own gate. A later claim that changed an approved document is refused. <code>/rovara full --skip design</code> declares a phase away, and the PR says who declared it. Before publishing, the loop commits <code>checks.md</code> and <code>reviews.md</code> to <code>docs/rovara/&lt;issue&gt;/evidence/</code>.</p><p><strong>Nothing is pushed before the plan is approved, the checks pass and the reviews pass, or a person accepts them.</strong></p>"
+      },
+      {
+        "id": "reviews",
+        "title": "Reviews",
+        "html": "<ol><li><strong>The agent’s own review</strong>, written to <code>evidence/self-review.md</code>. A claim without it is refused.</li><li><strong>A code review and a security review</strong>, run headless and read-only: Claude Code in plan mode, or Codex in its read-only sandbox with <code>reviews.harness: codex</code>.</li><li><strong>The blocking rule.</strong> A finding blocks when the change introduced it; a security finding is never advisory.</li></ol><p>A blocking finding goes back to the agent. After <code>maxRounds</code> rounds that still block, or a review that could not run, a person decides. A review that could not run never counts as a pass.</p>"
+      },
+      {
+        "id": "pull-requests",
+        "title": "Pull requests and several repositories",
+        "html": "<p>Once the loop opens a PR, collaborators’ comments, inline review comments and change-requesting reviews reach the agent like replies on the issue. The loop reruns checks and reviews and pushes to the same PR. Merging closes the issue, which ends the loop.</p><p>When the plan lists a <code>## Repositories</code> section, the loop starts one per-PR loop for each repository, each with its own agent, worktree, branch, checks and reviews under that repository’s <code>.rovara/loop.yaml</code>. Each PR is approved on itself. When every PR is approved, the issue lists them and waits for you to merge.</p>"
+      },
+      {
+        "id": "watch",
+        "title": "Watch and answer the agent",
+        "html": "<p>The agent runs interactively in tmux. <code>tmux attach -t =rovara-&lt;owner&gt;_&lt;repo&gt;-&lt;issue&gt;</code> shows it; detach with <code>Ctrl-b d</code>.</p><ul><li>Claude Code starts in its default permission mode and asks before edits or commands. Pass a permission mode in <code>harness.args</code> to change that.</li><li>Codex starts in its workspace-write sandbox, without network access.</li></ul><p>When the agent has waited on a permission prompt for a minute, the loop says so on the issue. A session that ends while working is resumed up to three times in a row.</p>"
+      },
+      {
+        "id": "commands",
+        "title": "Commands",
+        "html": "<div class=\"doc-table-wrap\"><table><thead><tr><th>Command</th><th>Does</th></tr></thead><tbody><tr><td><code>rovara loop init [path]</code></td><td>Writes <code>.rovara/loop.yaml</code>.</td></tr><tr><td><code>rovara loop add [path]</code> · <code>remove &lt;owner/name&gt;</code></td><td>Starts or stops reading a repository’s issues.</td></tr><tr><td><code>rovara loop start</code> · <code>stop</code> · <code>status</code></td><td>Controls the background daemon. Its log is <code>~/.rovara/loop/daemon.log</code>.</td></tr><tr><td><code>rovara loop do</code> · <code>quick</code> · <code>full --issue &lt;n&gt; &lt;instruction&gt;</code></td><td>Posts the matching <code>/rovara</code> comment on the issue, as you.</td></tr><tr><td><code>rovara loop review</code> · <code>contribute --issue &lt;n&gt; [brief]</code></td><td>Posts <code>/rovara review</code> or <code>contribute</code>, as you.</td></tr><tr><td><code>rovara loop check &lt;issue&gt;</code></td><td>Shows where an issue’s loop stands without running anything.</td></tr></tbody></table></div>"
+      },
+      {
+        "id": "data",
+        "title": "What is kept where",
+        "html": "<ul><li><strong>Your computer:</strong> each work item’s cached state, event log, worktree and the agent’s MCP configuration, under <code>~/.rovara/loop/</code>. Nothing is written into your Claude Code or Codex settings.</li><li><strong>GitHub:</strong> the issue holds the truth: its comments and its <code>rovara:*</code> label.</li><li><strong>Credentials:</strong> the loop uses your own <code>gh</code> login and stores no token.</li></ul><p><a href=\"https://github.com/PrepLabsAI/Rovara/blob/mainline/docs/loop.md\">Full Rovara loop guide →</a></p>"
       }
     ]
   },
@@ -415,27 +528,27 @@
       {
         "id": "actions",
         "title": "Cancel, close or remove",
-        "html": "<div class=\"doc-table-wrap\"><table><thead><tr><th>Action</th><th>What it does</th><th>What to remember</th></tr></thead><tbody><tr><td>Cancel a task</td><td>Stops the current work.</td><td>Inspect status and any partial changes. This is not workspace closure.</td></tr><tr><td>Close a workspace</td><td>Checks for unpublished work before releasing workspace storage.</td><td>Preserve unfinished changes if closure refuses.</td></tr><tr><td>Remove the environment</td><td>A separate operator teardown procedure.</td><td>Use the release-matched instructions when published.</td></tr></tbody></table></div><p><a href=\"../../how-it-works/index.html#continue\">See the workspace lifecycle →</a></p>"
+        "html": "<div class=\"doc-table-wrap\"><table><thead><tr><th>Action</th><th>What it does</th><th>What to remember</th></tr></thead><tbody><tr><td>Stop a task</td><td>Stops the current work.</td><td>In a Slack workflow thread, only the owner can stop, with <code>@AgentX stop</code>. The workspace and changes stay.</td></tr><tr><td>Close a workspace</td><td>Checks for unpublished work before releasing workspace storage.</td><td>Preserve unfinished changes if closure refuses.</td></tr><tr><td>Remove the environment</td><td>A separate operator teardown procedure.</td><td>Use the release-matched instructions.</td></tr></tbody></table></div><p>Each person has a limit of open tasks (3 by default). Closing a task, or a workflow task finishing, frees its place. <a href=\"../../how-it-works/index.html#continue\">See the workspace lifecycle →</a></p>"
       },
       {
         "id": "status",
         "title": "Understand task status",
-        "html": "<p>Coding-tool tasks can be <code>STARTING</code>, <code>RUNNING</code>, <code>SUCCEEDED</code>, <code>FAILED</code>, <code>CANCELLED</code>, <code>INTERRUPTED</code> or <code>CLOSED</code>.</p><p><code>SUCCEEDED</code> describes task execution, not a guarantee that every check passed. A timed-out wait can leave the task running. Read its current status and evidence before retrying.</p>"
+        "html": "<p>Coding-tool tasks can be <code>STARTING</code>, <code>RUNNING</code>, <code>SUCCEEDED</code>, <code>FAILED</code>, <code>CANCELLED</code>, <code>INTERRUPTED</code> or <code>CLOSED</code>. <code>CLOSED</code> also covers a workflow task that finished; its workflow stage says whether its PRs merged (<code>MERGED</code>) or its plan was rejected (<code>CLOSED</code>).</p><p><code>SUCCEEDED</code> describes task execution, not a guarantee that every check passed. A timed-out wait can leave the task running. Read its current status and evidence before retrying.</p>"
       },
       {
         "id": "workflow-status",
         "title": "Understand the next action",
-        "html": "<div class=\"doc-table-wrap\"><table><thead><tr><th>What you see</th><th>What to do</th></tr></thead><tbody><tr><td>Waiting for a plan decision</td><td>Inspect the current document, then approve or request changes.</td></tr><tr><td>Missing, failed or stale evidence</td><td>Read the reason; obtain a current check or review.</td></tr><tr><td>PR feedback proposal</td><td>Open the detailed review and choose the response.</td></tr><tr><td>Waiting for required PRs</td><td>Use GitHub review and merge controls for the remaining PRs.</td></tr><tr><td>Closeout retry needed</td><td>Check preserved artifacts and retry the failed cleanup operation.</td></tr></tbody></table></div><p>Task execution status is distinct from workflow stage and PR merge state.</p>"
+        "html": "<div class=\"doc-table-wrap\"><table><thead><tr><th>What you see</th><th>What to do</th></tr></thead><tbody><tr><td>A Quick/Full suggestion card</td><td>Press Start, switch path, or Just answer. Only the requester can choose.</td></tr><tr><td>Waiting for a plan decision</td><td>Read the current document, then approve or request changes in Slack or on the task page.</td></tr><tr><td>Checks or reviews are running</td><td>Nothing; a draft PR opens when both reviews pass.</td></tr><tr><td>A check or review blocked</td><td>Read the problems; send back to coding, retry reviews, or close the task.</td></tr><tr><td>The draft PR didn’t open</td><td>Retry opening the pull request, or close the task.</td></tr><tr><td>PR feedback is ready</td><td>Open details and choose the response.</td></tr><tr><td>Waiting for merge</td><td>Use GitHub review and merge controls.</td></tr><tr><td>Closeout retry needed</td><td>Check preserved artifacts and retry the failed cleanup.</td></tr></tbody></table></div><p>Task execution status is distinct from workflow stage and PR merge state.</p>"
       },
       {
         "id": "costs",
         "title": "What you pay for",
-        "html": "<p>You pay for AWS services, retained storage and model usage. Task usage telemetry, installer estimates and budget alerts help explain usage. Budget alerts are notifications, not spending caps.</p><div class=\"doc-callout\"><strong>Illustrative estimate: about $211 per month</strong><p>Assumes us-east-1, default Bedrock models, 1,000 turns, 100 worker sessions, 60 instance-hours and 10 retained workspaces. The source pricing calculation returns $211.13. This is an example, not a subscription price; actual usage and prices vary.</p></div>"
+        "html": "<p>You pay for AWS services, retained storage and model usage. Task usage telemetry, installer estimates and budget alerts help explain usage. Budget alerts are notifications, not spending caps. Tasks of developers who <a href=\"../chatgpt/index.html\">connected a ChatGPT plan</a> use that plan instead of the installation’s model where it can.</p><div class=\"doc-callout\"><strong>Illustrative estimate: about $211 per month</strong><p>Assumes us-east-1, default Bedrock models, 1,000 turns, 100 worker sessions, 60 instance-hours and 10 retained workspaces. The source pricing calculation returns $211.13. This is an example, not a subscription price; actual usage and prices vary.</p></div>"
       },
       {
         "id": "health",
         "title": "Check environment health",
-        "html": "<p>With an installed CLI and operator access, use:</p><pre><code>npx @preplabsai/rovara-code --env &lt;env&gt; doctor --region &lt;region&gt;</code></pre><p>Read the reported failures before making changes. <a href=\"../install/index.html#day-two\">Upgrade and teardown instructions →</a></p><p><a href=\"../troubleshooting/index.html\">Troubleshoot a problem →</a></p>"
+        "html": "<p>With an installed CLI and operator access, use:</p><pre><code>npx @preplabsai/rovara-code --env &lt;env&gt; doctor --region &lt;region&gt;</code></pre><p>Read the reported failures before making changes. On mainline, doctor also reports Sign in with ChatGPT when this computer holds the admin sign-in. <a href=\"../install/index.html#day-two\">Upgrade and teardown instructions →</a></p><p><a href=\"../troubleshooting/index.html\">Troubleshoot a problem →</a></p>"
       },
       {
         "id": "closeout",
@@ -464,12 +577,61 @@
       {
         "id": "workflow-checks",
         "title": "Required and optional workflow checks",
-        "html": "<p>Project-required checks remain on in Quick and Full. The owner can select only optional checks registered for that project at plan approval. Those choices are stored with the decision.</p><p>Configure check working directories, executables, arguments and timeouts. A check name should describe its useful coverage. Do not treat optional selection as permission to bypass required checks or change repository merge controls.</p>"
+        "html": "<p>Project readiness checks always run in Quick and Full and cannot be turned off. A project can also offer up to 20 named optional checks; the task owner chooses among them when approving the coding plan. The chosen IDs are saved with the decision, and a new plan starts with none selected.</p><pre><code>developerTasks:\n  enabled: true\n  optionalWorkflowChecks:\n    - id: coverage\n      label: Coverage report\n      command:\n        cwd: repo/payments-api\n        executable: npm\n        args: [run, coverage]\n        timeoutSeconds: 600</code></pre><p>A check name should describe its useful coverage. Optional selection does not bypass required checks or change repository merge controls.</p>"
+      },
+      {
+        "id": "slack-start",
+        "title": "Starting tasks from Slack",
+        "html": "<div class=\"doc-callout\"><strong>On mainline, not yet released</strong><p>This describes product mainline as of 13 October 2026. The latest published release, v0.3.1, does not include it. Use a deployment and CLI built from mainline, or the next release. <a href=\"../release/index.html#availability\">Release status →</a></p></div><p><code>developerTasks.enabled</code> controls whether developers may start tasks on the project from an AI tool or a Slack workflow. Starting from Slack also needs shared tasks (<code>SHARED_TASKS</code>) on for the Slack service; without them, AgentX answers every start asking an admin to turn them on.</p><p>A plain top-level mention is sorted by the classifier model chosen at <code>agentx init</code>. It sees a fixed instruction and the message text only, never repository content, and waits at most 4 seconds. There is no separate routing model setting. Prefixes (<code>quick:</code>, <code>full:</code>, <code>workflow:</code>, <code>chat:</code>) skip the model.</p><p>To save thread replies that do not mention AgentX, the app needs the <code>channels:history</code> and <code>groups:history</code> scopes and the <code>message.channels</code> and <code>message.groups</code> events. Existing installs must update the app from the generated manifest and reinstall it. AgentX ignores, and does not store, channel messages outside task threads.</p>"
+      },
+      {
+        "id": "git-limits",
+        "title": "Repositories AgentX can publish",
+        "html": "<p>When AgentX runs Git itself (to read the agent’s changes or publish them), it ignores what the repository’s Git config asks Git to run:</p><ul><li><strong>Git LFS</strong> repositories are not supported yet; publishing is refused when any file uses <code>filter=lfs</code>.</li><li>Other <strong>filters</strong> are switched off, so an encryption filter such as git-crypt would stage plaintext. Do not register such a repository.</li><li><strong>Submodules</strong> checked out in the workspace, or a nested repository the agent creates, stop publication; the error names the path.</li><li><strong>Hooks, signing and credential helpers</strong> do not run. Pushes go to the registered URL over HTTPS only, and are refused while the repository sets other <code>url.*</code>, <code>http.*</code> or <code>remote.*</code> keys.</li></ul><p>Setup and readiness commands are the project’s own code and run with the worker’s normal Git settings.</p>"
+      },
+      {
+        "id": "devcontainer",
+        "title": "Dev container rules",
+        "html": "<p>The dev container runs on the worker host’s Docker, and the agent can edit its configuration. So AgentX checks the merged configuration before each start, and the running container after, and refuses settings that reach the host:</p><ul><li><code>initializeCommand</code> and <code>dockerComposeFile</code>.</li><li><code>privileged</code>, <code>securityOpt</code>, and added capabilities other than <code>SYS_PTRACE</code>.</li><li><code>runArgs</code> that share the host’s processes, network, devices or namespaces.</li><li>Bind mounts of <code>/</code>, the Docker socket, the workspace root or anything outside the workspace.</li><li>Features AgentX cannot pin to the content it checked, and builds that read outside the workspace.</li></ul><p>Images, builds, features, lifecycle commands, environment variables, named volumes and bind mounts inside the workspace are allowed. <a href=\"https://github.com/PrepLabsAI/Rovara/blob/mainline/docs/project-configuration.md\">Full dev container and publication rules →</a></p>"
       },
       {
         "id": "access",
         "title": "Models, connections and access",
-        "html": "\n            \n            <dl>\n              <dt>Models</dt>\n              <dd>\n                Choose approved provider/model pairs. Worker and orchestration\n                configuration are distinct. External providers receive model\n                requests outside AWS.\n              </dd>\n              <dt>Connectors</dt>\n              <dd>\n                Linear, Jira, Asana, GitHub, and remote MCP tools have\n                configured project scopes and server-side credential handling.\n              </dd>\n              <dt>Action policy</dt>\n              <dd>\n                Rules allow, ask, or deny orchestrator tool calls. They do not\n                gate every shell command or file edit on the coding worker.\n              </dd>\n              <dt>Developer tasks</dt>\n              <dd>\n                Project settings control whether coding-tool tasks are enabled\n                and how they may be shared into Slack.\n              </dd>\n            </dl>\n            <p>\n              Do not place credentials in command environment fields or project\n              YAML. Verify scope and provider availability before enabling a\n              connection.\n            </p>\n          "
+        "html": "<dl><dt>Models</dt><dd>Choose approved provider/model pairs. Worker and orchestration configuration are distinct. External providers receive model requests outside AWS. Developers can also run their own tasks on a <a href=\"../chatgpt/index.html\">connected ChatGPT plan</a> when an admin allows it.</dd><dt>Connectors</dt><dd>Linear, Jira, Asana, GitHub, and remote MCP tools have configured project scopes and server-side credential handling.</dd><dt>Action policy</dt><dd>Rules allow, ask, or deny orchestrator tool calls. They do not gate every shell command or file edit on the coding worker.</dd><dt>Developer tasks</dt><dd>Project settings control whether coding-tool and Slack workflow tasks are enabled and how they may be shared into Slack.</dd></dl><p>Do not place credentials in command environment fields or project YAML. Verify scope and provider availability before enabling a connection.</p>"
+      }
+    ]
+  },
+  {
+    "slug": "chatgpt",
+    "title": "Sign in with ChatGPT",
+    "group": "Configure",
+    "kind": "Guide",
+    "lead": "Let each developer run their own tasks on their own ChatGPT Plus or Pro plan.",
+    "sections": [
+      {
+        "id": "who",
+        "title": "Who can use it",
+        "html": "<div class=\"doc-callout\"><strong>On mainline, not yet released</strong><p>This describes product mainline as of 13 October 2026. The latest published release, v0.3.1, does not include it. Use a deployment and CLI built from mainline, or the next release. <a href=\"../release/index.html#availability\">Release status →</a></p></div><p>A developer connects <strong>their own</strong> ChatGPT plan, and the coding tasks they start run on it instead of the installation’s model. People who have not connected a plan keep using the installation’s model.</p><ul><li>A ChatGPT Plus or Pro plan, under <a href=\"https://developers.openai.com/siwc/quickstart\">OpenAI’s eligibility rules</a>. Rovara checks the plan when you connect.</li><li>One person’s own plan: only their tasks use it, including tasks they share. One plan never serves a team.</li><li>An installation where an admin turned it on. It is off by default.</li></ul>"
+      },
+      {
+        "id": "enable",
+        "title": "Turn it on (admins)",
+        "html": "<p>With the admin sign-in (<code>login --admin</code>):</p><pre><code>npx @preplabsai/rovara-code --env &lt;env&gt; config set models.chatgpt.enabled true</code></pre><p>The change shows its effect and asks first, and is recorded like every admin change. Turning it off stops new connections and sends every task back to the installation’s model; existing connections are kept.</p><p>The preferred model is <code>gpt-6.1-sol</code>; change it with <code>config set models.chatgpt.preferredModel &lt;model&gt;</code>. A task uses it only where the person’s plan allows. <code>doctor</code> shows whether the feature is on, how many people connected, and whether the control plane reaches OpenAI.</p>"
+      },
+      {
+        "id": "connect",
+        "title": "Connect your plan",
+        "html": "<p>From the CLI, which catches the sign-in on <code>127.0.0.1:1455</code> itself:</p><pre><code>npx @preplabsai/rovara-code chatgpt connect</code></pre><p><code>--no-browser</code> prints the link instead. If the port is busy (the Codex CLI uses it while signing in) or your browser is on another computer, the CLI asks you to paste the address. <code>chatgpt status</code> and <code>chatgpt disconnect</code> show and remove the connection.</p><p>From Slack, mention Rovara with <code>connect chatgpt</code> in a project channel (only you see the answer). Press <strong>Sign in with ChatGPT</strong> and allow Rovara. Your browser then shows an error such as <em>can’t connect to 127.0.0.1</em>: that is expected. Copy the whole address, press <strong>Paste the address</strong>, paste it and press <strong>Connect</strong>. The link works for 10 minutes and only for you.</p>"
+      },
+      {
+        "id": "tasks",
+        "title": "When your plan cannot serve a task",
+        "html": "<p>The rest of the task runs on the installation’s model in the same turn, without starting over, when:</p><ul><li>the plan reaches its usage limit (your next tasks use the installation’s model for an hour, then try your plan again);</li><li>the connection was revoked or expired (connect again);</li><li>the plan no longer allows the model (your next task picks one it allows).</li></ul><p>AgentX says so once in the task’s Slack thread. An OpenAI outage does not trigger the fallback: the task fails as on any provider.</p>"
+      },
+      {
+        "id": "security",
+        "title": "How the connection is kept",
+        "html": "<ul><li>The control plane keeps your ChatGPT tokens encrypted with a key only it can use. The refresh token never leaves the control plane.</li><li>The machine running your task gets a short-lived access token, kept only in memory.</li><li>No Slack message, CLI output or API answer includes the tokens.</li></ul><p>Disconnecting deletes the stored tokens. To also withdraw the permission at OpenAI, remove Rovara under ChatGPT’s <strong>Settings → Connected apps</strong>. <a href=\"https://github.com/PrepLabsAI/Rovara/blob/mainline/docs/chatgpt.md\">Full Sign in with ChatGPT guide →</a></p>"
       }
     ]
   },
@@ -483,17 +645,17 @@
       {
         "id": "overview",
         "title": "A task record connects the surfaces",
-        "html": "<p>Slack, the coding-tool MCP client and the authenticated feedback page are entry and review surfaces. The Rovara Code task/workflow record connects plans, operations, decisions, candidate evidence and linked PRs.</p><figure class=\"doc-system-figure\"><img src=\"../../assets/diagrams/architecture.svg\" width=\"1100\" height=\"770\" alt=\"Outside AWS: Slack, coding clients, browser and GitHub. Inside AWS: authorized control plane, worker operations, task state and artifact storage.\"><figcaption><a href=\"../../assets/diagrams/architecture.svg\" target=\"_blank\" rel=\"noopener\">Open the architecture diagram full size</a></figcaption></figure>"
+        "html": "<p>Slack, the coding-tool MCP client and the authenticated task page are entry and review surfaces. The Rovara Code task/workflow record connects plans, operations, decisions, candidate evidence and linked PRs.</p><figure class=\"doc-system-figure\"><img src=\"../../assets/diagrams/architecture.svg\" width=\"1100\" height=\"770\" alt=\"Outside AWS: Slack, coding clients, browser and GitHub. Inside AWS: authorized control plane, worker operations, task state and artifact storage.\"><figcaption><a href=\"../../assets/diagrams/architecture.svg\" target=\"_blank\" rel=\"noopener\">Open the architecture diagram full size</a></figcaption></figure>"
       },
       {
         "id": "entry",
         "title": "Entry and authorization",
-        "html": "<div class=\"doc-table-wrap\"><table><thead><tr><th>Surface</th><th>Role</th></tr></thead><tbody><tr><td>Slack</td><td>Project-bound task thread; plan Canvas; concise updates and owner controls.</td></tr><tr><td>Coding tool</td><td>Local agentx MCP client calls the authorized developer task API.</td></tr><tr><td>Feedback page</td><td>Authenticated task-scoped view and owner decisions through the API.</td></tr><tr><td>GitHub</td><td>Repository access, comments, CI and authoritative PR/merge state.</td></tr></tbody></table></div>"
+        "html": "<div class=\"doc-table-wrap\"><table><thead><tr><th>Surface</th><th>Role</th></tr></thead><tbody><tr><td>Slack</td><td>Request routing card; task thread; approval cards and owner buttons; thread replies saved for the next step.</td></tr><tr><td>Coding tool</td><td>Local agentx MCP client calls the authorized developer task API.</td></tr><tr><td>Task page</td><td>Authenticated, task-scoped plan decisions, comments, Ask AgentX and PR feedback details.</td></tr><tr><td>GitHub</td><td>Repository access, signed webhooks, comments, CI and authoritative PR/merge state.</td></tr></tbody></table></div>"
       },
       {
         "id": "worker",
         "title": "Coding, checks and reviewers",
-        "html": "<p>EC2 provides the coding workspace with encrypted EBS storage. The configured devcontainer supplies the project environment. Coding tools read/edit files and run shell commands.</p><p>Runtime check execution does not accept the coding agent’s success prose as test output. Code and security AI reviewers run in separate read-only sessions or operations. Separate review roles do not imply separate physical hosts.</p>"
+        "html": "<p>EC2 provides the coding workspace with encrypted EBS storage. The configured devcontainer supplies the project environment. Coding tools read/edit files and run shell commands.</p><p>Runtime check execution does not accept the coding agent’s success prose as test output. Code and security AI reviewers run in separate read-only sessions or operations. Separate review roles do not imply separate physical hosts.</p><p>Coding, check and review runs never receive a push token. A separate publish step stops the task’s processes and containers, then pushes the checked commit from an isolated temporary repository. Known limitation: without a dev container, the coding step on EC2 currently has the worker’s Docker access (<a href=\"https://github.com/PrepLabsAI/Rovara/issues/325\">#325</a>).</p>"
       },
       {
         "id": "state",
@@ -503,7 +665,7 @@
       {
         "id": "boundary",
         "title": "Account and external services",
-        "html": "<p>Your AWS account is the documented security boundary. Environments in the same account are not separate security boundaries. Bedrock is AWS-hosted; configured external model providers and vendor MCP servers receive their respective requests outside the account.</p><p>Action policy can allow, ask or deny orchestrator tool calls. It does not gate every worker shell command or edit.</p>"
+        "html": "<p>Your AWS account is the documented security boundary. Environments in the same account are not separate security boundaries. Bedrock is AWS-hosted; configured external model providers, connected ChatGPT plans and vendor MCP servers receive their respective requests outside the account. ChatGPT tokens stay encrypted in the control plane.</p><p>Action policy can allow, ask or deny orchestrator tool calls. It does not gate every worker shell command or edit.</p>"
       },
       {
         "id": "retention",
@@ -526,18 +688,23 @@
       },
       {
         "id": "tools",
-        "title": "Released developer tools (v0.2.0)",
+        "title": "Direct-task tools (v0.3.1)",
         "html": "<div class=\"doc-table-wrap\"><table><thead><tr><th>Tool</th><th>Use</th></tr></thead><tbody><tr><td><code>agentx_whoami</code></td><td><strong>Check your environment and sign-in</strong><br>Returns developer identity, environment and API versions.</td></tr><tr><td><code>agentx_list_projects</code></td><td><strong>Find projects you can use</strong><br>Returns authorized projects and their task/sharing policies.</td></tr><tr><td><code>agentx_start_task</code></td><td><strong>Delegate a task</strong><br>Give the exact project name and complete instructions. Returns a task ID; wait_seconds is optional.</td></tr><tr><td><code>agentx_get_task</code></td><td><strong>Inspect status and results</strong><br>Returns progress, changed files, artifacts and PR links when available.</td></tr><tr><td><code>agentx_wait_for_task</code></td><td><strong>Wait for work to end</strong><br>Waits 1–600 seconds. A timeout does not stop the task.</td></tr><tr><td><code>agentx_list_tasks</code></td><td><strong>Find your existing tasks</strong><br>Lists tasks; use the returned IDs to inspect or continue them.</td></tr><tr><td><code>agentx_continue_task</code></td><td><strong>Send a follow-up</strong><br>Requires the task ID and complete new instructions. Reuses the workspace and branch after the current run ends.</td></tr><tr><td><code>agentx_cancel_task</code></td><td><strong>Stop current work</strong><br>Cancels the task; cancelling a wait alone does not do this.</td></tr><tr><td><code>agentx_close_task</code></td><td><strong>Release the workspace</strong><br>Checks for unpublished work; inspect the result if closure refuses.</td></tr><tr><td><code>agentx_share_task</code></td><td><strong>Share into the project’s Slack channel</strong><br>View lets others watch; continue permits follow-ups when project policy allows.</td></tr><tr><td><code>agentx_open_pull_request</code></td><td><strong>Request a PR</strong><br>Requires task ID and title. Draft defaults to true; inspect the task later for the PR URL.</td></tr></tbody></table></div>"
       },
       {
         "id": "workflow-tools",
-        "title": "Native workflow tools (preview)",
-        "html": "<p>These four tools were inspected in a separate native-workflow implementation. They are not in the v0.2.0 developer tool list. Use them only with a deployment that provides them.</p><div class=\"doc-table-wrap\"><table><thead><tr><th>Tool</th><th>Use</th></tr></thead><tbody><tr><td><code>agentx_start_workflow</code></td><td>Start Quick or Full with project and complete instructions. workflow_path defaults to quick. Returns the task and workflow state.</td></tr><tr><td><code>agentx_decide_workflow</code></td><td>Decide on the current document using task_id, expected_revision, artifact_digest, decision, reason and a retry-safe request_id.</td></tr><tr><td><code>agentx_review_workflow_candidate</code></td><td>Start the initial candidate review only in REVIEW / WAITING, with all required verification checks passing for the current candidate. Supply task_id and instructions; this is not a general re-review or feedback tool.</td></tr><tr><td><code>agentx_retry_workflow</code></td><td>Restart read-only planning only in PLAN / BLOCKED with an actionable workspace. Supply task_id and instructions; this does not retry arbitrary check, review, webhook or closeout operations.</td></tr></tbody></table></div><p>Use the tools your deployed server advertises. This reference covers the inspected native-workflow tool additions; an older server may only expose the direct-task tools.</p>"
+        "title": "Workflow tools (mainline)",
+        "html": "<p>Mainline adds these tools for Quick/Full workflow tasks. They are not in v0.3.1. Use the tools your deployed server advertises.</p><div class=\"doc-table-wrap\"><table><thead><tr><th>Tool</th><th>Use</th></tr></thead><tbody><tr><td><code>agentx_start_workflow</code></td><td>Start a workflow with project, complete instructions and a required <code>workflow_path</code> (<code>quick</code> or <code>full</code>). Returns the task and workflow state.</td></tr><tr><td><code>agentx_decide_workflow</code></td><td>Decide on the current document with task_id, expected_revision, artifact_digest, decision, reason and a retry-safe request_id.</td></tr><tr><td><code>agentx_review_workflow_candidate</code></td><td>Reviews start on their own after checks pass. Use this to retry a blocked review, with the exact expected_revision and candidate_digest; refused if the code or checks changed.</td></tr><tr><td><code>agentx_retry_workflow</code></td><td>Restart blocked read-only planning or blocked coding, or rerun checks for a blocked VERIFY stage. Rerunning checks needs expected_revision.</td></tr><tr><td><code>agentx_send_workflow_back</code></td><td>Send a blocked change back to coding with the failed checks and findings the change introduced, plus your instructions. Owner only.</td></tr><tr><td><code>agentx_resolve_review_findings</code></td><td>Answer every blocking finding: <code>accept</code> with a reason (listed in the draft PR) or <code>fix</code> with optional instructions. At most 20 per call. Owner only.</td></tr><tr><td><code>agentx_retry_workflow_publish</code></td><td>Retry opening the draft PR for the code whose checks and reviews passed. Owner only.</td></tr><tr><td><code>agentx_get_pr_feedback</code></td><td>Read AgentX’s proposal for PR comments: each finding’s ID, priority, recommendation, proposed change or question, and the comments it answers. Owner only.</td></tr><tr><td><code>agentx_decide_pr_feedback</code></td><td>Decide that proposal: APPROVE (optionally naming finding_ids), REQUEST_CHANGES, DISMISS or RETRY_REVIEW. Copy the digests from <code>agentx_get_pr_feedback</code>. Owner only.</td></tr><tr><td><code>agentx_keep_pull_request</code></td><td>After an approved feedback fix changed no code, keep the PR as it is and wait for the merge again. Owner only.</td></tr></tbody></table></div>"
+      },
+      {
+        "id": "people-tools",
+        "title": "Task People tools (mainline)",
+        "html": "<p>These tools show and propose changes to who can use a task. Role changes and invitations are behind environment settings that default to off.</p><div class=\"doc-table-wrap\"><table><thead><tr><th>Tool</th><th>Use</th></tr></thead><tbody><tr><td><code>agentx_get_task_people</code></td><td>Show the current People revision and who can use the task. Use person_id, not names, for changes.</td></tr><tr><td><code>agentx_get_task_people_request</code></td><td>Check the receipt of a People request. It never confirms a pending request.</td></tr><tr><td><code>agentx_set_task_person</code></td><td>Propose a role change. A human must confirm before it commits.</td></tr><tr><td><code>agentx_take_task_ownership</code></td><td>Propose taking ownership of an orphaned task. A human must confirm before it commits.</td></tr></tbody></table></div>"
       },
       {
         "id": "decisions",
         "title": "Decision inputs",
-        "html": "<div class=\"doc-table-wrap\"><table><thead><tr><th>Field</th><th>Meaning</th></tr></thead><tbody><tr><td>task_id</td><td>The existing workflow task.</td></tr><tr><td>expected_revision</td><td>The current positive workflow revision from the task.</td></tr><tr><td>artifact_digest</td><td>The SHA-256 of the current approval document.</td></tr><tr><td>decision</td><td>APPROVE, REQUEST_CHANGES, REJECT or SKIP. Not every decision is valid at every stage.</td></tr><tr><td>reason</td><td>A non-empty reason for the decision (maximum 500 characters).</td></tr><tr><td>request_id</td><td>A UUID for safe retry. Repeat the same request unchanged after a timeout.</td></tr></tbody></table></div><p>The server validates identity, state and freshness. Never reuse an older document digest to approve a revised plan. Feedback subset controls belong to the authenticated review surface; this table does not invent a feedback MCP API.</p>"
+        "html": "<div class=\"doc-table-wrap\"><table><thead><tr><th>Field</th><th>Meaning</th></tr></thead><tbody><tr><td>task_id</td><td>The existing workflow task.</td></tr><tr><td>expected_revision</td><td>The current positive workflow revision from the task.</td></tr><tr><td>artifact_digest</td><td>The SHA-256 of the current approval document.</td></tr><tr><td>decision</td><td>APPROVE, REQUEST_CHANGES, REJECT or SKIP. SKIP is refused unless the project allows it.</td></tr><tr><td>reason</td><td>A non-empty reason for the decision (maximum 500 characters).</td></tr><tr><td>request_id</td><td>A UUID for safe retry. Repeat the same request unchanged after a timeout.</td></tr></tbody></table></div><p>The server validates identity, state and freshness. Never reuse an older document digest to approve a revised plan. Workflow and feedback calls that carry an expected revision or digest are refused when the task has moved on; read the task again and decide on the current state.</p>"
       },
       {
         "id": "retry",
@@ -593,6 +760,21 @@
         "html": "<p>Confirm you used the installed app mention in a project-bound channel. Ask the administrator to check the channel binding and the registered project. A newly registered project revision applies to new threads.</p>"
       },
       {
+        "id": "chat-agent",
+        "title": "My mention got a card instead of an answer",
+        "html": "<p>On mainline, a plain top-level mention is routed and a change gets a Quick/Full card. Press <strong>Just answer</strong>, or start the request with <code>chat:</code> to always reach the chat agent. Mentions inside a thread the chat agent already answers need no prefix.</p>"
+      },
+      {
+        "id": "slack-start",
+        "title": "AgentX asks an admin to turn on shared tasks",
+        "html": "<p>Starting tasks from Slack needs shared tasks (<code>SHARED_TASKS</code>) on for the Slack service, and the project’s developer tasks enabled. Other refusals name the reason: the open-task limit, a thread that already has a task, or a channel not connected to a project you can use. Anything else comes with a reference to give an admin.</p>"
+      },
+      {
+        "id": "replies",
+        "title": "Thread replies are not reaching the task",
+        "html": "<p>Replies without an <code>@AgentX</code> mention need the Slack app’s <code>channels:history</code> and <code>groups:history</code> scopes and the <code>message.channels</code> and <code>message.groups</code> events. Ask an admin to update the app from the manifest <code>agentx init</code> generates and reinstall it. Until then only <code>@AgentX</code> replies are saved.</p>"
+      },
+      {
         "id": "sign-in",
         "title": "The coding tool asks me to sign in",
         "html": "<p>Complete the installed client’s sign-in flow. Ask the client to use <code>agentx_whoami</code> to confirm the environment and identity. If a tool reports a version mismatch, use the CLI version matched to that deployment.</p>"
@@ -623,6 +805,16 @@
         "html": "<p>Inspect the unpublished-work report and preserve the remaining changes. Close again after the work is published or otherwise safely kept. Do not confuse cancel with close.</p>"
       },
       {
+        "id": "publish-refused",
+        "title": "Publishing is refused for my repository",
+        "html": "<p>Read the refusal: it names the cause. Git LFS files, checked-out submodules, extra <code>url.*</code>, <code>http.*</code> or <code>remote.*</code> keys, and dev container settings that reach the host are refused. <a href=\"../configuration/index.html#git-limits\">Repository and dev container rules →</a></p>"
+      },
+      {
+        "id": "chatgpt",
+        "title": "My task did not use my ChatGPT plan",
+        "html": "<p>Check <code>chatgpt status</code>. The task falls back to the installation’s model when your plan hits its usage limit (for an hour), the connection was revoked or expired, or the plan no longer allows the model. AgentX says so in the task’s Slack thread. Admins can check <code>doctor</code>. <a href=\"../chatgpt/index.html#tasks\">Fallback rules →</a></p>"
+      },
+      {
         "id": "operator",
         "title": "The environment itself is unhealthy",
         "html": "<p>An operator with access can run:</p><pre><code>npx @preplabsai/rovara-code --env &lt;env&gt; doctor --region &lt;region&gt;</code></pre><p>When asking for help, include the CLI version, task ID, exact error and relevant redacted output. Keep credentials out of reports.</p>"
@@ -634,18 +826,23 @@
       },
       {
         "id": "blocked-review",
-        "title": "The workflow is waiting for evidence",
-        "html": "<p>Inspect the named check or missing reviewer report, current candidate and block reason. <code>agentx_review_workflow_candidate</code> starts the initial review only in <code>REVIEW / WAITING</code>, after all required verification checks pass for that candidate. It is not a generic re-review action.</p><p><code>agentx_retry_workflow</code> restarts blocked read-only planning only in <code>PLAN / BLOCKED</code> with an actionable workspace. For other failures, use the operation-specific recovery supported by the installed version or ask the operator. A missing report does not mean the review passed.</p>"
+        "title": "Checks or reviews blocked the task",
+        "html": "<p>Read the failed check or blocking finding and the current candidate. Only problems the change introduced block. Send the change back to coding, retry the reviews on the same code, or accept a finding with a reason from a coding tool (<code>agentx_resolve_review_findings</code>).</p><p>A review that could not run or be read never counts as a pass. <code>agentx_retry_workflow</code> restarts blocked planning or coding, or reruns checks. If the draft PR did not open, retry opening it.</p>"
       },
       {
         "id": "feedback-signin",
-        "title": "The feedback link asks me to sign in",
-        "html": "<p>Sign in with the task-authorized identity and return to the same review. If access is refused, confirm task ownership with the operator. Possessing the link does not grant approval rights.</p>"
+        "title": "The task page asks me to sign in",
+        "html": "<p>Sign in with the identity the task authorizes and return to the same page. “You don’t have access to this task” means you are not the owner or in the task’s channel with access to its project, or the task does not exist. Possessing the link does not grant decision rights.</p>"
       },
       {
         "id": "pr-state",
         "title": "A merged PR did not finish the task",
         "html": "<p>Check the full required PR set and current GitHub state. Other required PRs may still be open or reopened. Inspect any delivery/reconciliation blocker before repeating work.</p>"
+      },
+      {
+        "id": "loop",
+        "title": "Rovara loop ignores my comment",
+        "html": "<p>Check that your GitHub login is in the repository’s <code>.rovara/loop.yaml</code> collaborators, that the repository was added with <code>rovara loop add</code> on the computer running the loop, and that <code>rovara loop status</code> shows the daemon running. Comments made before the repository was added are never replayed. <code>rovara loop check &lt;issue&gt;</code> shows where the loop stands.</p>"
       }
     ]
   },
@@ -653,13 +850,13 @@
     "slug": "release",
     "title": "Release and licence",
     "group": "Help",
-    "lead": "Where the project stands and where to find the technical details.",
+    "lead": "What is published, what is on mainline, and how these docs are checked.",
     "kind": "Status",
     "sections": [
       {
         "id": "availability",
-        "title": "Public source and published installer",
-        "html": "<p><a href=\"https://github.com/PrepLabsAI/Rovara\">PrepLabsAI/Rovara</a> is public. The npm package <a href=\"https://www.npmjs.com/package/@preplabsai/rovara-code\">@preplabsai/rovara-code</a> v0.3.1 (MIT) and <a href=\"https://github.com/PrepLabsAI/Rovara/releases/tag/v0.3.1\">v0.3.1 GitHub release</a> were checked on 6 October 2026. Earlier v0.3.0 artifacts retain their Apache 2.0 terms and grant.</p><p><a href=\"../install/index.html\">Install using Launch in AWS or the terminal →</a></p><p>Publication is separate from a fresh installation acceptance run. This website update checked release availability and documentation, and did not deploy a new AWS environment.</p>"
+        "title": "Published release and mainline",
+        "html": "<p><a href=\"https://github.com/PrepLabsAI/Rovara\">PrepLabsAI/Rovara</a> is public. The latest published release is still npm <a href=\"https://www.npmjs.com/package/@preplabsai/rovara-code\">@preplabsai/rovara-code</a> v0.3.1 (MIT) and the <a href=\"https://github.com/PrepLabsAI/Rovara/releases/tag/v0.3.1\">v0.3.1 GitHub release</a>, rechecked on 13 October 2026. Earlier v0.3.0 artifacts retain their Apache 2.0 terms and grant.</p><p>Product mainline has moved on since v0.3.1. Pages marked <strong>On mainline, not yet released</strong> describe:</p><ul><li>Quick and Full workflows started from Slack, with request routing and saved thread replies.</li><li>Plan decisions and comments on the task page.</li><li>Automatic checks, code and security reviews, and draft PRs; PR feedback proposals.</li><li>Sign in with ChatGPT.</li><li>Rovara loop on GitHub issues.</li><li>Workflow and Task People MCP tools (People changes default to off).</li></ul><p>They need a deployment and CLI built from mainline, or the next release. Task dependencies remain a design draft. <a href=\"../install/index.html\">Install using Launch in AWS or the terminal →</a></p><p>Publication is separate from a fresh installation acceptance run. This website update did not deploy a new AWS environment.</p>"
       },
       {
         "id": "names",
@@ -679,7 +876,7 @@
       {
         "id": "documentation",
         "title": "How these docs are maintained",
-        "html": "<p>Installation commands and release availability were checked against <a href=\"https://github.com/PrepLabsAI/Rovara/blob/1a1c4a555fc672b4558341005b99ee84dedcde41/README.md\">README revision <code>1a1c4a555fc672b4558341005b99ee84dedcde41</code></a> and the v0.3.1 package/release artifacts on 6 October 2026. npm v0.3.1 declares MIT; v0.3.0 remains the earlier Apache 2.0 release. See the <a href=\"../../data/installation.json\">installation source record →</a></p><p>Existing architecture and direct-task references retain their historical mainline pin <code>8acb7ac00c97e3e5ff547cb13af07e5ff160bc86</code>. Native workflow guides retain local implementation pin <code>3455a367005972659875667b82d7b5d28a2da727</code> and remain preview documentation. Publishing the CLI does not establish that those preview capabilities are included in v0.3.1.</p><p>The <a href=\"../../data/workflow-preview.json\">workflow preview record</a> identifies that separate source. Historical benchmarks retain their own dates and candidates. A website build does not prove a live installation.</p>"
+        "html": "<p>Workflow, Slack, task page, ChatGPT, Rovara loop, configuration and MCP references were checked against product mainline <a href=\"https://github.com/PrepLabsAI/Rovara/tree/b18fe4ebde93dc4c872e84ef65bc723367d79b2f\"><code>b18fe4ebde93dc4c872e84ef65bc723367d79b2f</code></a> on 13 October 2026. The MCP reference matches that commit’s tool definitions. See the <a href=\"../../data/claims.json\">source claim record</a> and the <a href=\"../../data/workflow-preview.json\">workflow source record</a>.</p><p>Installation commands follow the public README and the v0.3.1 package and release. npm v0.3.1 declares MIT; v0.3.0 remains the earlier Apache 2.0 release. See the <a href=\"../../data/installation.json\">installation source record</a>.</p><p>Earlier preview pages were checked against native-workflow branch <code>3455a367005972659875667b82d7b5d28a2da727</code>, since merged. Historical benchmarks retain their own dates and candidates. A website build does not prove a live installation.</p>"
       }
     ]
   }

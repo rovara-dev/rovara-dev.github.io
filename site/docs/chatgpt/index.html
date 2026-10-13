@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f8f5ef">
+<title>Sign in with ChatGPT — Rovara Code</title>
+<meta name="description" content="Let each developer run their own tasks on their own ChatGPT Plus or Pro plan.">
+<link rel="canonical" href="https://rovara-dev.github.io/docs/chatgpt/">
+<link rel="icon" href="../../assets/icons/git-pull-request.svg">
+<link rel="preload" href="../../assets/fonts/inter-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/site.css">
+<link rel="stylesheet" href="../../assets/refined.css">
+<link rel="stylesheet" href="../../assets/docs.css">
+<script src="../../assets/docs.js" defer>
+</script>
+</head>
+<body class="docs-page">
+<noscript>
+<style>.docs-search-trigger{display:none}</style>
+</noscript>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="docs-header">
+<div class="docs-brand">
+<a href="../../index.html" aria-label="Rovara Code home">Rovara Code</a>
+<span>Docs</span>
+</div>
+<button class="docs-search-trigger" data-doc-search aria-label="Search documentation" aria-haspopup="dialog">
+<img src="../../assets/icons/magnifying-glass.svg" width="18" height="18" alt="">
+<span>Search documentation</span>
+<kbd>⌘ K</kbd>
+</button>
+<nav aria-label="Main navigation">
+<a href="../../index.html">Product</a>
+<a href="../release/index.html" class="docs-status" title="Published release and mainline status">Release status</a>
+</nav>
+</header>
+<div class="docs-layout">
+<aside class="docs-sidebar">
+<details class="docs-nav-disclosure" open>
+<summary>Browse documentation</summary>
+<nav aria-label="Documentation">
+<div class="docs-nav-group">
+<p>Start here</p>
+<a href="../index.html" >Rovara Code documentation</a>
+<a href="../install/index.html" >Install Rovara</a>
+<a href="../concepts/index.html" >Core concepts</a>
+</div>
+<div class="docs-nav-group">
+<p>Work with Rovara Code</p>
+<a href="../tasks/index.html" >Your first Quick task</a>
+<a href="../planning/index.html" >Plan a larger feature</a>
+<a href="../task-page/index.html" >Decide on the task page</a>
+<a href="../coding-tools/index.html" >Connect your coding tool</a>
+<a href="../evidence/index.html" >Inspect changes, checks and reviews</a>
+<a href="../feedback/index.html" >Respond to PR feedback</a>
+<a href="../coordination/index.html" >Linked PRs and dependencies</a>
+<a href="../loop/index.html" >Rovara loop on GitHub issues</a>
+<a href="../operations/index.html" >Workspaces and costs</a>
+</div>
+<div class="docs-nav-group">
+<p>Configure</p>
+<a href="../configuration/index.html" >Projects and checks</a>
+<a href="index.html" aria-current="page">Sign in with ChatGPT</a>
+</div>
+<div class="docs-nav-group">
+<p>Reference</p>
+<a href="../architecture/index.html" >System architecture</a>
+<a href="../mcp/index.html" >MCP tool reference</a>
+<a href="../benchmarks/index.html" >Benchmarks and recorded runs</a>
+</div>
+<div class="docs-nav-group">
+<p>Help</p>
+<a href="../troubleshooting/index.html" >Troubleshooting</a>
+<a href="../release/index.html" >Release and licence</a>
+</div>
+</nav>
+</details>
+</aside>
+<main id="main" class="docs-content">
+<div class="docs-breadcrumb">
+<a href="../index.html">Documentation</a>
+<span>/</span>Configure</div>
+<header class="docs-title">
+<p class="docs-kind">Guide</p>
+<h1>Sign in with ChatGPT</h1>
+<p>Let each developer run their own tasks on their own ChatGPT Plus or Pro plan.</p>
+</header>
+<details class="docs-mobile-toc">
+<summary>On this page</summary>
+<nav aria-label="Page sections">
+<a href="#who">Who can use it</a>
+<a href="#enable">Turn it on (admins)</a>
+<a href="#connect">Connect your plan</a>
+<a href="#tasks">When your plan cannot serve a task</a>
+<a href="#security">How the connection is kept</a>
+</nav>
+</details>
+<article class="docs-article">
+<section id="who">
+<h2>Who can use it<a class="doc-heading-link" href="#who" aria-label="Link to section Who can use it">#</a>
+</h2>
+<div class="doc-callout">
+<strong>On mainline, not yet released</strong>
+<p>This describes product mainline as of 13 October 2026. The latest published release, v0.3.1, does not include it. Use a deployment and CLI built from mainline, or the next release. <a href="../release/index.html#availability">Release status →</a>
+</p>
+</div>
+<p>A developer connects <strong>their own</strong> ChatGPT plan, and the coding tasks they start run on it instead of the installation’s model. People who have not connected a plan keep using the installation’s model.</p>
+<ul>
+<li>A ChatGPT Plus or Pro plan, under <a href="https://developers.openai.com/siwc/quickstart">OpenAI’s eligibility rules</a>. Rovara checks the plan when you connect.</li>
+<li>One person’s own plan: only their tasks use it, including tasks they share. One plan never serves a team.</li>
+<li>An installation where an admin turned it on. It is off by default.</li>
+</ul>
+</section>
+<section id="enable">
+<h2>Turn it on (admins)<a class="doc-heading-link" href="#enable" aria-label="Link to section Turn it on (admins)">#</a>
+</h2>
+<p>With the admin sign-in (<code>login --admin</code>):</p>
+<pre>
+<code>npx @preplabsai/rovara-code --env &lt;env&gt; config set models.chatgpt.enabled true</code>
+</pre>
+<p>The change shows its effect and asks first, and is recorded like every admin change. Turning it off stops new connections and sends every task back to the installation’s model; existing connections are kept.</p>
+<p>The preferred model is <code>gpt-6.1-sol</code>; change it with <code>config set models.chatgpt.preferredModel &lt;model&gt;</code>. A task uses it only where the person’s plan allows. <code>doctor</code> shows whether the feature is on, how many people connected, and whether the control plane reaches OpenAI.</p>
+</section>
+<section id="connect">
+<h2>Connect your plan<a class="doc-heading-link" href="#connect" aria-label="Link to section Connect your plan">#</a>
+</h2>
+<p>From the CLI, which catches the sign-in on <code>127.0.0.1:1455</code> itself:</p>
+<pre>
+<code>npx @preplabsai/rovara-code chatgpt connect</code>
+</pre>
+<p>
+<code>--no-browser</code> prints the link instead. If the port is busy (the Codex CLI uses it while signing in) or your browser is on another computer, the CLI asks you to paste the address. <code>chatgpt status</code> and <code>chatgpt disconnect</code> show and remove the connection.</p>
+<p>From Slack, mention Rovara with <code>connect chatgpt</code> in a project channel (only you see the answer). Press <strong>Sign in with ChatGPT</strong> and allow Rovara. Your browser then shows an error such as <em>can’t connect to 127.0.0.1</em>: that is expected. Copy the whole address, press <strong>Paste the address</strong>, paste it and press <strong>Connect</strong>. The link works for 10 minutes and only for you.</p>
+</section>
+<section id="tasks">
+<h2>When your plan cannot serve a task<a class="doc-heading-link" href="#tasks" aria-label="Link to section When your plan cannot serve a task">#</a>
+</h2>
+<p>The rest of the task runs on the installation’s model in the same turn, without starting over, when:</p>
+<ul>
+<li>the plan reaches its usage limit (your next tasks use the installation’s model for an hour, then try your plan again);</li>
+<li>the connection was revoked or expired (connect again);</li>
+<li>the plan no longer allows the model (your next task picks one it allows).</li>
+</ul>
+<p>AgentX says so once in the task’s Slack thread. An OpenAI outage does not trigger the fallback: the task fails as on any provider.</p>
+</section>
+<section id="security">
+<h2>How the connection is kept<a class="doc-heading-link" href="#security" aria-label="Link to section How the connection is kept">#</a>
+</h2>
+<ul>
+<li>The control plane keeps your ChatGPT tokens encrypted with a key only it can use. The refresh token never leaves the control plane.</li>
+<li>The machine running your task gets a short-lived access token, kept only in memory.</li>
+<li>No Slack message, CLI output or API answer includes the tokens.</li>
+</ul>
+<p>Disconnecting deletes the stored tokens. To also withdraw the permission at OpenAI, remove Rovara under ChatGPT’s <strong>Settings → Connected apps</strong>. <a href="https://github.com/PrepLabsAI/Rovara/blob/mainline/docs/chatgpt.md">Full Sign in with ChatGPT guide →</a>
+</p>
+</section>
+</article>
+<div class="docs-maintenance">
+<span>Docs updated 13 October 2026</span>
+<a href="../release/index.html#documentation">How these docs are maintained</a>
+<a href="https://github.com/rovara-dev/rovara-dev.github.io/issues/new">Report a docs issue</a>
+</div>
+<nav class="docs-pager" aria-label="Next and previous pages">
+<a href="../configuration/index.html">
+<span>Previous</span>Projects and checks</a>
+<a href="../architecture/index.html">
+<span>Next</span>System architecture →</a>
+</nav>
+<footer class="docs-footer">
+<span>Rovara Code · Coding agents in your AWS account.</span>
+<a href="https://github.com/PrepLabsAI/Rovara">Product source</a>
+<a href="../release/index.html#license">Licence</a>
+</footer>
+</main>
+<aside class="docs-toc">
+<nav aria-label="On this page">
+<p>On this page</p>
+<a href="#who">Who can use it</a>
+<a href="#enable">Turn it on (admins)</a>
+<a href="#connect">Connect your plan</a>
+<a href="#tasks">When your plan cannot serve a task</a>
+<a href="#security">How the connection is kept</a>
+</nav>
+</aside>
+</div>
+<dialog class="docs-search-dialog" aria-labelledby="docs-search-title" data-index="../../data/docs-search.json">
+<div class="docs-search-heading">
+<h2 id="docs-search-title">Search documentation</h2>
+<button data-search-close aria-label="Close search">Esc</button>
+</div>
+<label class="sr-only" for="docs-search-input">Search terms</label>
+<input id="docs-search-input" type="search" placeholder="Try plan approval, PR feedback or checks…" autocomplete="off">
+<p class="docs-search-status" aria-live="polite">
+</p>
+<ul class="docs-search-results">
+</ul>
+<p class="docs-search-help">↑ ↓ Navigate · Enter Open · Esc Close</p>
+</dialog>
+</body>
+</html>

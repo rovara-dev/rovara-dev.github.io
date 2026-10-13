@@ -32,7 +32,7 @@
 </button>
 <nav aria-label="Main navigation">
 <a href="../../index.html">Product</a>
-<a href="../release/index.html" class="docs-status" title="Published installer and native workflow preview">Release &amp; preview status</a>
+<a href="../release/index.html" class="docs-status" title="Published release and mainline status">Release status</a>
 </nav>
 </header>
 <div class="docs-layout">
@@ -50,15 +50,18 @@
 <p>Work with Rovara Code</p>
 <a href="../tasks/index.html" >Your first Quick task</a>
 <a href="../planning/index.html" >Plan a larger feature</a>
+<a href="../task-page/index.html" >Decide on the task page</a>
 <a href="../coding-tools/index.html" >Connect your coding tool</a>
 <a href="../evidence/index.html" >Inspect changes, checks and reviews</a>
 <a href="../feedback/index.html" >Respond to PR feedback</a>
-<a href="../coordination/index.html" >Dependencies and linked PRs</a>
+<a href="../coordination/index.html" >Linked PRs and dependencies</a>
+<a href="../loop/index.html" >Rovara loop on GitHub issues</a>
 <a href="../operations/index.html" >Workspaces and costs</a>
 </div>
 <div class="docs-nav-group">
 <p>Configure</p>
 <a href="../configuration/index.html" >Projects and checks</a>
+<a href="../chatgpt/index.html" >Sign in with ChatGPT</a>
 </div>
 <div class="docs-nav-group">
 <p>Reference</p>
@@ -87,17 +90,23 @@
 <summary>On this page</summary>
 <nav aria-label="Page sections">
 <a href="#channel">The Slack channel does not respond</a>
+<a href="#chat-agent">My mention got a card instead of an answer</a>
+<a href="#slack-start">AgentX asks an admin to turn on shared tasks</a>
+<a href="#replies">Thread replies are not reaching the task</a>
 <a href="#sign-in">The coding tool asks me to sign in</a>
 <a href="#projects">My project is missing</a>
 <a href="#wait">The wait timed out</a>
 <a href="#busy">A follow-up says TASK_BUSY</a>
 <a href="#unverified">The result says not verified</a>
 <a href="#close">The workspace will not close</a>
+<a href="#publish-refused">Publishing is refused for my repository</a>
+<a href="#chatgpt">My task did not use my ChatGPT plan</a>
 <a href="#operator">The environment itself is unhealthy</a>
 <a href="#plan-stale">The approval says it is stale</a>
-<a href="#blocked-review">The workflow is waiting for evidence</a>
-<a href="#feedback-signin">The feedback link asks me to sign in</a>
+<a href="#blocked-review">Checks or reviews blocked the task</a>
+<a href="#feedback-signin">The task page asks me to sign in</a>
 <a href="#pr-state">A merged PR did not finish the task</a>
+<a href="#loop">Rovara loop ignores my comment</a>
 </nav>
 </details>
 <article class="docs-article">
@@ -105,6 +114,21 @@
 <h2>The Slack channel does not respond<a class="doc-heading-link" href="#channel" aria-label="Link to section The Slack channel does not respond">#</a>
 </h2>
 <p>Confirm you used the installed app mention in a project-bound channel. Ask the administrator to check the channel binding and the registered project. A newly registered project revision applies to new threads.</p>
+</section>
+<section id="chat-agent">
+<h2>My mention got a card instead of an answer<a class="doc-heading-link" href="#chat-agent" aria-label="Link to section My mention got a card instead of an answer">#</a>
+</h2>
+<p>On mainline, a plain top-level mention is routed and a change gets a Quick/Full card. Press <strong>Just answer</strong>, or start the request with <code>chat:</code> to always reach the chat agent. Mentions inside a thread the chat agent already answers need no prefix.</p>
+</section>
+<section id="slack-start">
+<h2>AgentX asks an admin to turn on shared tasks<a class="doc-heading-link" href="#slack-start" aria-label="Link to section AgentX asks an admin to turn on shared tasks">#</a>
+</h2>
+<p>Starting tasks from Slack needs shared tasks (<code>SHARED_TASKS</code>) on for the Slack service, and the project’s developer tasks enabled. Other refusals name the reason: the open-task limit, a thread that already has a task, or a channel not connected to a project you can use. Anything else comes with a reference to give an admin.</p>
+</section>
+<section id="replies">
+<h2>Thread replies are not reaching the task<a class="doc-heading-link" href="#replies" aria-label="Link to section Thread replies are not reaching the task">#</a>
+</h2>
+<p>Replies without an <code>@AgentX</code> mention need the Slack app’s <code>channels:history</code> and <code>groups:history</code> scopes and the <code>message.channels</code> and <code>message.groups</code> events. Ask an admin to update the app from the manifest <code>agentx init</code> generates and reinstall it. Until then only <code>@AgentX</code> replies are saved.</p>
 </section>
 <section id="sign-in">
 <h2>The coding tool asks me to sign in<a class="doc-heading-link" href="#sign-in" aria-label="Link to section The coding tool asks me to sign in">#</a>
@@ -136,6 +160,18 @@
 </h2>
 <p>Inspect the unpublished-work report and preserve the remaining changes. Close again after the work is published or otherwise safely kept. Do not confuse cancel with close.</p>
 </section>
+<section id="publish-refused">
+<h2>Publishing is refused for my repository<a class="doc-heading-link" href="#publish-refused" aria-label="Link to section Publishing is refused for my repository">#</a>
+</h2>
+<p>Read the refusal: it names the cause. Git LFS files, checked-out submodules, extra <code>url.*</code>, <code>http.*</code> or <code>remote.*</code> keys, and dev container settings that reach the host are refused. <a href="../configuration/index.html#git-limits">Repository and dev container rules →</a>
+</p>
+</section>
+<section id="chatgpt">
+<h2>My task did not use my ChatGPT plan<a class="doc-heading-link" href="#chatgpt" aria-label="Link to section My task did not use my ChatGPT plan">#</a>
+</h2>
+<p>Check <code>chatgpt status</code>. The task falls back to the installation’s model when your plan hits its usage limit (for an hour), the connection was revoked or expired, or the plan no longer allows the model. AgentX says so in the task’s Slack thread. Admins can check <code>doctor</code>. <a href="../chatgpt/index.html#tasks">Fallback rules →</a>
+</p>
+</section>
 <section id="operator">
 <h2>The environment itself is unhealthy<a class="doc-heading-link" href="#operator" aria-label="Link to section The environment itself is unhealthy">#</a>
 </h2>
@@ -151,25 +187,29 @@
 <p>Open the latest task prompt and document. The workflow revision or document digest has changed; decide on the current version. Do not keep submitting the old approval.</p>
 </section>
 <section id="blocked-review">
-<h2>The workflow is waiting for evidence<a class="doc-heading-link" href="#blocked-review" aria-label="Link to section The workflow is waiting for evidence">#</a>
+<h2>Checks or reviews blocked the task<a class="doc-heading-link" href="#blocked-review" aria-label="Link to section Checks or reviews blocked the task">#</a>
 </h2>
-<p>Inspect the named check or missing reviewer report, current candidate and block reason. <code>agentx_review_workflow_candidate</code> starts the initial review only in <code>REVIEW / WAITING</code>, after all required verification checks pass for that candidate. It is not a generic re-review action.</p>
-<p>
-<code>agentx_retry_workflow</code> restarts blocked read-only planning only in <code>PLAN / BLOCKED</code> with an actionable workspace. For other failures, use the operation-specific recovery supported by the installed version or ask the operator. A missing report does not mean the review passed.</p>
+<p>Read the failed check or blocking finding and the current candidate. Only problems the change introduced block. Send the change back to coding, retry the reviews on the same code, or accept a finding with a reason from a coding tool (<code>agentx_resolve_review_findings</code>).</p>
+<p>A review that could not run or be read never counts as a pass. <code>agentx_retry_workflow</code> restarts blocked planning or coding, or reruns checks. If the draft PR did not open, retry opening it.</p>
 </section>
 <section id="feedback-signin">
-<h2>The feedback link asks me to sign in<a class="doc-heading-link" href="#feedback-signin" aria-label="Link to section The feedback link asks me to sign in">#</a>
+<h2>The task page asks me to sign in<a class="doc-heading-link" href="#feedback-signin" aria-label="Link to section The task page asks me to sign in">#</a>
 </h2>
-<p>Sign in with the task-authorized identity and return to the same review. If access is refused, confirm task ownership with the operator. Possessing the link does not grant approval rights.</p>
+<p>Sign in with the identity the task authorizes and return to the same page. “You don’t have access to this task” means you are not the owner or in the task’s channel with access to its project, or the task does not exist. Possessing the link does not grant decision rights.</p>
 </section>
 <section id="pr-state">
 <h2>A merged PR did not finish the task<a class="doc-heading-link" href="#pr-state" aria-label="Link to section A merged PR did not finish the task">#</a>
 </h2>
 <p>Check the full required PR set and current GitHub state. Other required PRs may still be open or reopened. Inspect any delivery/reconciliation blocker before repeating work.</p>
 </section>
+<section id="loop">
+<h2>Rovara loop ignores my comment<a class="doc-heading-link" href="#loop" aria-label="Link to section Rovara loop ignores my comment">#</a>
+</h2>
+<p>Check that your GitHub login is in the repository’s <code>.rovara/loop.yaml</code> collaborators, that the repository was added with <code>rovara loop add</code> on the computer running the loop, and that <code>rovara loop status</code> shows the daemon running. Comments made before the repository was added are never replayed. <code>rovara loop check &lt;issue&gt;</code> shows where the loop stands.</p>
+</section>
 </article>
 <div class="docs-maintenance">
-<span>Installation updated 6 October 2026</span>
+<span>Docs updated 13 October 2026</span>
 <a href="../release/index.html#documentation">How these docs are maintained</a>
 <a href="https://github.com/rovara-dev/rovara-dev.github.io/issues/new">Report a docs issue</a>
 </div>
@@ -189,17 +229,23 @@
 <nav aria-label="On this page">
 <p>On this page</p>
 <a href="#channel">The Slack channel does not respond</a>
+<a href="#chat-agent">My mention got a card instead of an answer</a>
+<a href="#slack-start">AgentX asks an admin to turn on shared tasks</a>
+<a href="#replies">Thread replies are not reaching the task</a>
 <a href="#sign-in">The coding tool asks me to sign in</a>
 <a href="#projects">My project is missing</a>
 <a href="#wait">The wait timed out</a>
 <a href="#busy">A follow-up says TASK_BUSY</a>
 <a href="#unverified">The result says not verified</a>
 <a href="#close">The workspace will not close</a>
+<a href="#publish-refused">Publishing is refused for my repository</a>
+<a href="#chatgpt">My task did not use my ChatGPT plan</a>
 <a href="#operator">The environment itself is unhealthy</a>
 <a href="#plan-stale">The approval says it is stale</a>
-<a href="#blocked-review">The workflow is waiting for evidence</a>
-<a href="#feedback-signin">The feedback link asks me to sign in</a>
+<a href="#blocked-review">Checks or reviews blocked the task</a>
+<a href="#feedback-signin">The task page asks me to sign in</a>
 <a href="#pr-state">A merged PR did not finish the task</a>
+<a href="#loop">Rovara loop ignores my comment</a>
 </nav>
 </aside>
 </div>

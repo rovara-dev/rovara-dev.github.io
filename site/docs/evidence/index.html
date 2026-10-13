@@ -32,7 +32,7 @@
 </button>
 <nav aria-label="Main navigation">
 <a href="../../index.html">Product</a>
-<a href="../release/index.html" class="docs-status" title="Published installer and native workflow preview">Release &amp; preview status</a>
+<a href="../release/index.html" class="docs-status" title="Published release and mainline status">Release status</a>
 </nav>
 </header>
 <div class="docs-layout">
@@ -50,15 +50,18 @@
 <p>Work with Rovara Code</p>
 <a href="../tasks/index.html" >Your first Quick task</a>
 <a href="../planning/index.html" >Plan a larger feature</a>
+<a href="../task-page/index.html" >Decide on the task page</a>
 <a href="../coding-tools/index.html" >Connect your coding tool</a>
 <a href="index.html" aria-current="page">Inspect changes, checks and reviews</a>
 <a href="../feedback/index.html" >Respond to PR feedback</a>
-<a href="../coordination/index.html" >Dependencies and linked PRs</a>
+<a href="../coordination/index.html" >Linked PRs and dependencies</a>
+<a href="../loop/index.html" >Rovara loop on GitHub issues</a>
 <a href="../operations/index.html" >Workspaces and costs</a>
 </div>
 <div class="docs-nav-group">
 <p>Configure</p>
 <a href="../configuration/index.html" >Projects and checks</a>
+<a href="../chatgpt/index.html" >Sign in with ChatGPT</a>
 </div>
 <div class="docs-nav-group">
 <p>Reference</p>
@@ -116,9 +119,8 @@
 <section id="reviews">
 <h2>Read the separate AI reviews<a class="doc-heading-link" href="#reviews" aria-label="Link to section Read the separate AI reviews">#</a>
 </h2>
-<p>Initial candidate reviews require an explicit request after checks pass, while the task is <code>REVIEW / WAITING</code>. <a href="../tasks/index.html#review">Request the reviews →</a>
-</p>
-<p>Code and security reviewers use separate read-only sessions. Inspect their findings, rationale, scope and reviewer/model attribution. A passing review is an AI assessment; it does not replace tests or your team’s judgment.</p>
+<p>Code and security reviews start automatically once the required and chosen checks pass on the current candidate. They run in separate read-only sessions. Inspect their findings, rationale, scope and reviewer/model attribution.</p>
+<p>A finding blocks only when the change introduced it; an older problem outside the changed lines is noted. The owner can send blocking findings back to coding, or accept one with a reason, which the draft PR then lists. A passing review is an AI assessment; it does not replace tests or your team’s judgment.</p>
 </section>
 <section id="results">
 <h2>Read the result<a class="doc-heading-link" href="#results" aria-label="Link to section Read the result">#</a>
@@ -167,8 +169,8 @@
 <h2>Know which checks you are looking at<a class="doc-heading-link" href="#layers" aria-label="Link to section Know which checks you are looking at">#</a>
 </h2>
 <dl>
-<dt>Native workflow readiness</dt>
-<dd>Required checks and separate code/security review reports must apply to the current candidate before PR readiness.</dd>
+<dt>Workflow readiness</dt>
+<dd>Required checks and both review reports must apply to the current candidate before AgentX opens the draft PR.</dd>
 <dt>Existing direct-task verification</dt>
 <dd>The runtime reruns usable checks and compares before/after where possible. Failed or missing evidence can be described on a draft PR.</dd>
 <dt>Repository CI</dt>
@@ -181,7 +183,7 @@
 <section id="pull-requests">
 <h2>Review a draft PR<a class="doc-heading-link" href="#pull-requests" aria-label="Link to section Review a draft PR">#</a>
 </h2>
-<p>The native workflow checks readiness before PR creation; your team then reviews the draft PR and repository CI. <strong>You decide what gets merged.</strong>
+<p>A workflow’s draft PR contains exactly the code whose checks and reviews passed. Its description lists what the plan set out to do, the checks and reviews, any findings the owner accepted with their reasons, and a link to the task page. Your team then reviews the draft PR and repository CI. <strong>You decide what gets merged.</strong>
 </p>
 <details>
 <summary>Using the existing direct-task path?</summary>
@@ -208,7 +210,7 @@
 </section>
 </article>
 <div class="docs-maintenance">
-<span>Installation updated 6 October 2026</span>
+<span>Docs updated 13 October 2026</span>
 <a href="../release/index.html#documentation">How these docs are maintained</a>
 <a href="https://github.com/rovara-dev/rovara-dev.github.io/issues/new">Report a docs issue</a>
 </div>

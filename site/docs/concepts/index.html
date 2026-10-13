@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#f8f5ef">
 <title>Core concepts — Rovara Code</title>
-<meta name="description" content="Five ideas help you understand where work happens and what comes back.">
+<meta name="description" content="The ideas that explain where work happens, who decides, and what comes back.">
 <link rel="canonical" href="https://rovara-dev.github.io/docs/concepts/">
 <link rel="icon" href="../../assets/icons/git-pull-request.svg">
 <link rel="preload" href="../../assets/fonts/inter-600.woff2" as="font" type="font/woff2" crossorigin>
@@ -32,7 +32,7 @@
 </button>
 <nav aria-label="Main navigation">
 <a href="../../index.html">Product</a>
-<a href="../release/index.html" class="docs-status" title="Published installer and native workflow preview">Release &amp; preview status</a>
+<a href="../release/index.html" class="docs-status" title="Published release and mainline status">Release status</a>
 </nav>
 </header>
 <div class="docs-layout">
@@ -50,15 +50,18 @@
 <p>Work with Rovara Code</p>
 <a href="../tasks/index.html" >Your first Quick task</a>
 <a href="../planning/index.html" >Plan a larger feature</a>
+<a href="../task-page/index.html" >Decide on the task page</a>
 <a href="../coding-tools/index.html" >Connect your coding tool</a>
 <a href="../evidence/index.html" >Inspect changes, checks and reviews</a>
 <a href="../feedback/index.html" >Respond to PR feedback</a>
-<a href="../coordination/index.html" >Dependencies and linked PRs</a>
+<a href="../coordination/index.html" >Linked PRs and dependencies</a>
+<a href="../loop/index.html" >Rovara loop on GitHub issues</a>
 <a href="../operations/index.html" >Workspaces and costs</a>
 </div>
 <div class="docs-nav-group">
 <p>Configure</p>
 <a href="../configuration/index.html" >Projects and checks</a>
+<a href="../chatgpt/index.html" >Sign in with ChatGPT</a>
 </div>
 <div class="docs-nav-group">
 <p>Reference</p>
@@ -81,7 +84,7 @@
 <header class="docs-title">
 <p class="docs-kind">Concepts</p>
 <h1>Core concepts</h1>
-<p>Five ideas help you understand where work happens and what comes back.</p>
+<p>The ideas that explain where work happens, who decides, and what comes back.</p>
 </header>
 <details class="docs-mobile-toc">
 <summary>On this page</summary>
@@ -89,6 +92,7 @@
 <a href="#project">Project</a>
 <a href="#task">Task and workflow</a>
 <a href="#plan">Plan and owner decision</a>
+<a href="#task-page">Task page</a>
 <a href="#workspace">Workspace</a>
 <a href="#candidate">Candidate</a>
 <a href="#evidence">Checks and AI review</a>
@@ -104,12 +108,18 @@
 <section id="task">
 <h2>Task and workflow<a class="doc-heading-link" href="#task" aria-label="Link to section Task and workflow">#</a>
 </h2>
-<p>The unit connecting a request, plan versions, operations, decisions, evidence and PR links. Native Quick/Full workflows add explicit planning and review stages. Existing direct tasks are a separate entry path.</p>
+<p>The unit connecting a request, plan versions, operations, decisions, evidence and PR links. A workflow task follows Quick (one coding plan) or Full (requirements, design, then a coding plan). Direct tasks (<code>chat:</code> in Slack, <code>agentx_start_task</code> in a coding tool) are a separate path without plan approvals.</p>
 </section>
 <section id="plan">
 <h2>Plan and owner decision<a class="doc-heading-link" href="#plan" aria-label="Link to section Plan and owner decision">#</a>
 </h2>
-<p>A saved document describes approved scope and approach. Its version and digest identify what the owner decided. A revised document requires a current decision.</p>
+<p>A saved document describes approved scope and approach. Its version and digest identify what the owner decided. A revised document requires a current decision. Only the task owner decides; teammates in the channel can reply, comment and suggest.</p>
+</section>
+<section id="task-page">
+<h2>Task page<a class="doc-heading-link" href="#task-page" aria-label="Link to section Task page">#</a>
+</h2>
+<p>The authenticated web page for one task, linked from every approval card. The owner answers the plan’s decisions and approves or requests changes there; teammates comment and suggest. <a href="../task-page/index.html">Task page guide →</a>
+</p>
 </section>
 <section id="workspace">
 <h2>Workspace<a class="doc-heading-link" href="#workspace" aria-label="Link to section Workspace">#</a>
@@ -124,16 +134,16 @@
 <section id="evidence">
 <h2>Checks and AI review<a class="doc-heading-link" href="#evidence" aria-label="Link to section Checks and AI review">#</a>
 </h2>
-<p>Named command results are evidence of those checks in their recorded environment. Separate code/security AI review reports are attributed findings, not a guarantee of correctness.</p>
+<p>Named command results are evidence of those checks in their recorded environment. Separate code and security AI reviews start once the checks pass; only problems the change introduced block. Review reports are attributed findings, not a guarantee of correctness.</p>
 </section>
 <section id="pull-request">
 <h2>Pull request and feedback<a class="doc-heading-link" href="#pull-request" aria-label="Link to section Pull request and feedback">#</a>
 </h2>
-<p>GitHub hosts the proposed change, repository CI, comments and merge decision. Rovara Code connects registered PRs to the task and proposes feedback fixes for owner approval.</p>
+<p>GitHub hosts the proposed change, repository CI, comments and merge decision. Rovara Code opens a draft PR of exactly the checked and reviewed code, follows it through signed GitHub events, and proposes feedback fixes for owner approval.</p>
 </section>
 </article>
 <div class="docs-maintenance">
-<span>Installation updated 6 October 2026</span>
+<span>Docs updated 13 October 2026</span>
 <a href="../release/index.html#documentation">How these docs are maintained</a>
 <a href="https://github.com/rovara-dev/rovara-dev.github.io/issues/new">Report a docs issue</a>
 </div>
@@ -155,6 +165,7 @@
 <a href="#project">Project</a>
 <a href="#task">Task and workflow</a>
 <a href="#plan">Plan and owner decision</a>
+<a href="#task-page">Task page</a>
 <a href="#workspace">Workspace</a>
 <a href="#candidate">Candidate</a>
 <a href="#evidence">Checks and AI review</a>

@@ -32,7 +32,7 @@
 </button>
 <nav aria-label="Main navigation">
 <a href="../index.html">Product</a>
-<a href="release/index.html" class="docs-status" title="Published installer and native workflow preview">Release &amp; preview status</a>
+<a href="release/index.html" class="docs-status" title="Published release and mainline status">Release status</a>
 </nav>
 </header>
 <div class="docs-layout">
@@ -50,15 +50,18 @@
 <p>Work with Rovara Code</p>
 <a href="tasks/index.html" >Your first Quick task</a>
 <a href="planning/index.html" >Plan a larger feature</a>
+<a href="task-page/index.html" >Decide on the task page</a>
 <a href="coding-tools/index.html" >Connect your coding tool</a>
 <a href="evidence/index.html" >Inspect changes, checks and reviews</a>
 <a href="feedback/index.html" >Respond to PR feedback</a>
-<a href="coordination/index.html" >Dependencies and linked PRs</a>
+<a href="coordination/index.html" >Linked PRs and dependencies</a>
+<a href="loop/index.html" >Rovara loop on GitHub issues</a>
 <a href="operations/index.html" >Workspaces and costs</a>
 </div>
 <div class="docs-nav-group">
 <p>Configure</p>
 <a href="configuration/index.html" >Projects and checks</a>
+<a href="chatgpt/index.html" >Sign in with ChatGPT</a>
 </div>
 <div class="docs-nav-group">
 <p>Reference</p>
@@ -97,13 +100,13 @@
 <section id="what-is-rovara">
 <h2>A coding agent with a workflow you control<a class="doc-heading-link" href="#what-is-rovara" aria-label="Link to section A coding agent with a workflow you control">#</a>
 </h2>
-<p>Rovara Code provides a coding workflow: remote implementation in your AWS account, plan approvals, named checks, separate code and security AI reviews, and help responding to PR feedback. Your team owns the final merge.</p>
+<p>Rovara Code is a coding workflow that runs in your AWS account. Ask in Slack or from your coding tool. Rovara Code suggests a Quick or Full path, writes a plan for you to approve, codes it, runs named checks and separate code and security AI reviews, and opens a draft PR. It also proposes fixes for PR feedback. Your team owns the final merge.</p>
 <ol class="doc-flow">
 <li>Request</li>
 <li>Approve plan</li>
-<li>Code + evidence</li>
-<li>PR + feedback</li>
-<li>Your review</li>
+<li>Code, checks + reviews</li>
+<li>Draft PR + feedback</li>
+<li>Your merge</li>
 </ol>
 </section>
 <section id="start">
@@ -138,6 +141,10 @@
 <span>Requirements, design and coding-plan approvals in Full.</span>
 </li>
 <li>
+<a href="task-page/index.html">Decide on the task page</a>
+<span>Answer the plan’s decisions, comment and ask AgentX.</span>
+</li>
+<li>
 <a href="evidence/index.html">Inspect changes, checks and reviews</a>
 <span>Read actual output and identify gaps or stale evidence.</span>
 </li>
@@ -146,8 +153,12 @@
 <span>Review proposals and approve the fixes you want.</span>
 </li>
 <li>
-<a href="coordination/index.html">Follow dependencies and linked PRs</a>
-<span>Understand blockers and what the task is waiting for.</span>
+<a href="loop/index.html">Run Rovara loop on GitHub issues</a>
+<span>The same workflow, run on your computer by your own Claude Code or Codex.</span>
+</li>
+<li>
+<a href="coordination/index.html">Follow linked PRs</a>
+<span>Understand what the task is waiting for.</span>
 </li>
 </ul>
 </section>
@@ -162,6 +173,10 @@
 <li>
 <a href="configuration/index.html">Projects and checks</a>
 <span>Repository setup, required checks and optional check choices.</span>
+</li>
+<li>
+<a href="chatgpt/index.html">Sign in with ChatGPT</a>
+<span>Run each developer’s tasks on their own ChatGPT plan.</span>
 </li>
 <li>
 <a href="operations/index.html">Workspaces and costs</a>
@@ -205,7 +220,7 @@
 </span>
 </div>
 <div class="docs-maintenance">
-<span>Installation updated 6 October 2026</span>
+<span>Docs updated 13 October 2026</span>
 <a href="release/index.html#documentation">How these docs are maintained</a>
 <a href="https://github.com/rovara-dev/rovara-dev.github.io/issues/new">Report a docs issue</a>
 </div>

@@ -61,7 +61,10 @@ const toolDoc = readFileSync(resolve("site/docs/mcp/index.html"), "utf8");
 const documentedTools = [...toolDoc.matchAll(/<td>\s*<code>(agentx_[a-z_]+)<\/code>\s*<\/td>/g)].map(x => x[1]).sort();
 const preview = JSON.parse(readFileSync(resolve("site/data/workflow-preview.json"), "utf8"));
 let nativeTools = [];
-if (process.env.AGENTX_WORKFLOW_SOURCE) {
+if (preview.nativeWorkflowSource === commit) {
+  // The workflow merged into mainline: its tools are already in sourceTools.
+  if (!docsHtml.includes(commit.toLowerCase())) failures.push("workflow source pin missing in release documentation");
+} else if (process.env.AGENTX_WORKFLOW_SOURCE) {
   try {
     const nativeSource = execFileSync("git", ["-C", resolve(process.env.AGENTX_WORKFLOW_SOURCE), "show", `${preview.nativeWorkflowSource}:packages/mcp/src/tools.ts`], {encoding: "utf8"});
     nativeTools = [...nativeSource.matchAll(/name:\s*"(agentx_[a-z_]+)"/g)].map(x => x[1]).sort();
@@ -72,7 +75,7 @@ if (process.env.AGENTX_WORKFLOW_SOURCE) {
 }
 const expectedTools = [...new Set([...sourceTools, ...nativeTools])].sort();
 if (JSON.stringify(expectedTools) !== JSON.stringify(documentedTools)) failures.push("MCP tool reference differs from the combined pinned mainline and native workflow sources");
-else console.log(`MCP reference reconciles: ${sourceTools.length} direct-task tools; ${nativeTools.length - sourceTools.length} native workflow additions`);
+else console.log(`MCP reference reconciles: ${documentedTools.length} tools at the pinned source`);
 
 // Derive the advertised figure from the actual source formula and sample load.
 const cost = readSource("packages/cli/src/init/cost.ts");

@@ -32,7 +32,7 @@
 </button>
 <nav aria-label="Main navigation">
 <a href="../../index.html">Product</a>
-<a href="../release/index.html" class="docs-status" title="Published installer and native workflow preview">Release &amp; preview status</a>
+<a href="../release/index.html" class="docs-status" title="Published release and mainline status">Release status</a>
 </nav>
 </header>
 <div class="docs-layout">
@@ -50,15 +50,18 @@
 <p>Work with Rovara Code</p>
 <a href="../tasks/index.html" >Your first Quick task</a>
 <a href="../planning/index.html" >Plan a larger feature</a>
+<a href="../task-page/index.html" >Decide on the task page</a>
 <a href="index.html" aria-current="page">Connect your coding tool</a>
 <a href="../evidence/index.html" >Inspect changes, checks and reviews</a>
 <a href="../feedback/index.html" >Respond to PR feedback</a>
-<a href="../coordination/index.html" >Dependencies and linked PRs</a>
+<a href="../coordination/index.html" >Linked PRs and dependencies</a>
+<a href="../loop/index.html" >Rovara loop on GitHub issues</a>
 <a href="../operations/index.html" >Workspaces and costs</a>
 </div>
 <div class="docs-nav-group">
 <p>Configure</p>
 <a href="../configuration/index.html" >Projects and checks</a>
+<a href="../chatgpt/index.html" >Sign in with ChatGPT</a>
 </div>
 <div class="docs-nav-group">
 <p>Reference</p>
@@ -90,10 +93,11 @@
 <a href="#sign-in">1. Sign in</a>
 <a href="#connect">2. Add the MCP connection</a>
 <a href="#direct-tasks">3. Start a task</a>
-<a href="#delegate">Native workflow preview: start with a plan</a>
-<a href="#inspect">Preview: read and decide on the plan</a>
-<a href="#continue">Preview: request reviews, then draft PRs</a>
+<a href="#delegate">Start a Quick or Full workflow</a>
+<a href="#inspect">Read and decide on the plan</a>
+<a href="#continue">Follow checks, reviews and the draft PR</a>
 <a href="#share">Sharing into Slack</a>
+<a href="#chatgpt">Use your own ChatGPT plan</a>
 </nav>
 </details>
 <article class="docs-article">
@@ -137,18 +141,20 @@
 <section id="direct-tasks">
 <h2>3. Start a task<a class="doc-heading-link" href="#direct-tasks" aria-label="Link to section 3. Start a task">#</a>
 </h2>
-<p>After connecting, ask your client to list your Rovara projects and start a task in the chosen project, for example “Hand Rovara the navigation fix in &lt;project-name&gt; and run the relevant tests.” The released direct-task path uses <code>agentx_start_task</code>; it does not automatically gain Quick/Full approvals.</p>
-<p>The workflow tutorial above needs native workflow tools in your deployment. <a href="https://github.com/PrepLabsAI/Rovara/blob/mainline/docs/mcp-install.md">Published coding-tool guide →</a>
+<p>After connecting, ask your client to list your Rovara projects and start a task in the chosen project, for example “Hand Rovara the navigation fix in &lt;project-name&gt; and run the relevant tests.” This direct-task path uses <code>agentx_start_task</code> and has no plan approvals. It is available in v0.3.1.</p>
+<p>
+<a href="https://github.com/PrepLabsAI/Rovara/blob/mainline/docs/mcp-install.md">Published coding-tool guide →</a>
 </p>
 </section>
 <section id="delegate">
-<h2>Native workflow preview: start with a plan<a class="doc-heading-link" href="#delegate" aria-label="Link to section Native workflow preview: start with a plan">#</a>
+<h2>Start a Quick or Full workflow<a class="doc-heading-link" href="#delegate" aria-label="Link to section Start a Quick or Full workflow">#</a>
 </h2>
 <div class="doc-callout">
-<strong>Requires native workflow tools</strong>
-<p>v0.2.0 exposes the 11 direct-task tools. The workflow steps below describe a separate preview and require a compatible deployment.</p>
+<strong>On mainline, not yet released</strong>
+<p>This describes product mainline as of 13 October 2026. The latest published release, v0.3.1, does not include it. Use a deployment and CLI built from mainline, or the next release. <a href="../release/index.html#availability">Release status →</a>
+</p>
 </div>
-<p>Ask your client to find your projects and call the native workflow tool for the chosen project. Quick is the default.</p>
+<p>Ask your client to find your projects and start a workflow. <code>workflow_path</code> is required: <code>quick</code> asks once for a coding plan; <code>full</code> asks for requirements, design and the coding plan.</p>
 <pre>
 <code>List my Rovara Code projects.
 Start a Quick workflow in &lt;project-name&gt; to improve the docs Copy button.
@@ -156,24 +162,34 @@ Reset its label after copying, announce success accessibly,
 and preserve manual copy on clipboard failure.
 Show me the plan before implementing.</code>
 </pre>
-<p>The client uses <code>agentx_start_workflow</code>. Include the remote task’s needed context; it does not receive your entire local conversation.</p>
+<p>The client uses <code>agentx_start_workflow</code>. Include the context the remote task needs; it does not receive your local conversation.</p>
 </section>
 <section id="inspect">
-<h2>Preview: read and decide on the plan<a class="doc-heading-link" href="#inspect" aria-label="Link to section Preview: read and decide on the plan">#</a>
+<h2>Read and decide on the plan<a class="doc-heading-link" href="#inspect" aria-label="Link to section Read and decide on the plan">#</a>
 </h2>
-<p>Inspect the task’s current approval document, workflow revision and next action. Ask the client to show the whole document before you decide.</p>
-<p>Your explicit decision calls <code>agentx_decide_workflow</code> with the current revision and artifact digest. An assistant should not approve a plan on your behalf without your instruction.</p>
+<p>
+<code>agentx_get_task</code> shows the current approval document, its digest and the workflow revision. Ask the client to show the whole document before you decide, or open the task page.</p>
+<p>Your explicit decision calls <code>agentx_decide_workflow</code> with that revision and digest. An assistant should not approve a plan on your behalf without your instruction.</p>
 <pre>
 <code>Show the current plan for task &lt;task-id&gt;, including checks and scope.</code>
 </pre>
 </section>
 <section id="continue">
-<h2>Preview: request reviews, then draft PRs<a class="doc-heading-link" href="#continue" aria-label="Link to section Preview: request reviews, then draft PRs">#</a>
+<h2>Follow checks, reviews and the draft PR<a class="doc-heading-link" href="#continue" aria-label="Link to section Follow checks, reviews and the draft PR">#</a>
 </h2>
-<p>Follow the same task ID and inspect the diff and check output. A wait can time out while work continues; get current task state before retrying.</p>
-<p>When the native task is <code>REVIEW / WAITING</code> with passing checks for the current candidate, ask your client to call <code>agentx_review_workflow_candidate</code> with that task ID and review instructions. This explicitly starts the initial read-only code and security reviews.</p>
-<p>Inspect the reports. When the workflow is ready, explicitly request draft PR creation. Use the owner feedback-review controls for subsequent PR comments so the selected changes and fresh evidence stay connected.</p>
-<a href="../feedback/index.html">PR feedback guide →</a>
+<p>After approval, checks, reviews and the draft PR follow on their own. A wait can time out while work continues; get the current task before retrying. When a step blocks, the owner chooses:</p>
+<ul>
+<li>
+<code>agentx_send_workflow_back</code>: give the failed checks and findings the change introduced to coding.</li>
+<li>
+<code>agentx_resolve_review_findings</code>: accept each blocking finding with a reason, or have it fixed.</li>
+<li>
+<code>agentx_review_workflow_candidate</code>: retry a blocked review on the same code.</li>
+<li>
+<code>agentx_retry_workflow</code> or <code>agentx_retry_workflow_publish</code>: restart blocked planning, coding or checks, or retry opening the PR.</li>
+</ul>
+<p>For PR comments, read the proposal with <code>agentx_get_pr_feedback</code> and decide with <code>agentx_decide_pr_feedback</code>. <a href="../mcp/index.html#workflow-tools">Tool reference →</a>
+</p>
 </section>
 <section id="share">
 <h2>Sharing into Slack<a class="doc-heading-link" href="#share" aria-label="Link to section Sharing into Slack">#</a>
@@ -182,15 +198,26 @@ Show me the plan before implementing.</code>
 <p>When finished, close the task to release its workspace. <a href="../operations/index.html">Workspace actions →</a>
 </p>
 </section>
+<section id="chatgpt">
+<h2>Use your own ChatGPT plan<a class="doc-heading-link" href="#chatgpt" aria-label="Link to section Use your own ChatGPT plan">#</a>
+</h2>
+<p>If your admin turned on Sign in with ChatGPT, connect your Plus or Pro plan so your tasks run on it:</p>
+<pre>
+<code>npx @preplabsai/rovara-code chatgpt connect</code>
+</pre>
+<p>
+<a href="../chatgpt/index.html">Sign in with ChatGPT →</a>
+</p>
+</section>
 </article>
 <div class="docs-maintenance">
-<span>Installation updated 6 October 2026</span>
+<span>Docs updated 13 October 2026</span>
 <a href="../release/index.html#documentation">How these docs are maintained</a>
 <a href="https://github.com/rovara-dev/rovara-dev.github.io/issues/new">Report a docs issue</a>
 </div>
 <nav class="docs-pager" aria-label="Next and previous pages">
-<a href="../planning/index.html">
-<span>Previous</span>Plan a larger feature</a>
+<a href="../task-page/index.html">
+<span>Previous</span>Decide on the task page</a>
 <a href="../evidence/index.html">
 <span>Next</span>Inspect changes, checks and reviews →</a>
 </nav>
@@ -207,10 +234,11 @@ Show me the plan before implementing.</code>
 <a href="#sign-in">1. Sign in</a>
 <a href="#connect">2. Add the MCP connection</a>
 <a href="#direct-tasks">3. Start a task</a>
-<a href="#delegate">Native workflow preview: start with a plan</a>
-<a href="#inspect">Preview: read and decide on the plan</a>
-<a href="#continue">Preview: request reviews, then draft PRs</a>
+<a href="#delegate">Start a Quick or Full workflow</a>
+<a href="#inspect">Read and decide on the plan</a>
+<a href="#continue">Follow checks, reviews and the draft PR</a>
 <a href="#share">Sharing into Slack</a>
+<a href="#chatgpt">Use your own ChatGPT plan</a>
 </nav>
 </aside>
 </div>

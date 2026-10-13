@@ -2,9 +2,9 @@
   "source": {
     "repository": "PrepLabsAI/Rovara",
     "ref": "origin/mainline",
-    "commit": "1a1c4a555fc672b4558341005b99ee84dedcde41",
-    "checkedAt": "2026-10-06",
-    "note": "Reviewed against the MIT license change and retained Apache 2.0 grant. Historical workflow and architecture references retain their own pins; the source pin does not prove live installation or runtime acceptance."
+    "commit": "b18fe4ebde93dc4c872e84ef65bc723367d79b2f",
+    "checkedAt": "2026-10-13",
+    "note": "Reviewed against product mainline after the native workflow, plan review page, Sign in with ChatGPT and Rovara loop merges. Mainline is ahead of the latest published release (v0.3.1); the source pin does not prove live installation or runtime acceptance."
   },
   "claims": [
     {
@@ -148,6 +148,86 @@
         {
           "file": "package.json",
           "contains": "\"node\": \">=22.19.0 <23\""
+        }
+      ]
+    },
+    {
+      "id": "slack-routing",
+      "claim": "On mainline, a plain top-level Slack mention is routed: a question is answered, and a change gets a card suggesting Quick or Full. Nothing that changes code starts without a click.",
+      "evidence": [
+        {
+          "file": "README.md",
+          "contains": "Nothing that changes code starts without a click."
+        },
+        {
+          "file": "docs/project-configuration.md",
+          "contains": "Prefixes skip routing and never call the model"
+        }
+      ]
+    },
+    {
+      "id": "automatic-review-and-pr",
+      "claim": "On mainline, after the coding plan is approved, checks run, then code and security reviews start automatically, and a draft PR of exactly the checked code opens when they pass.",
+      "evidence": [
+        {
+          "file": "docs/project-configuration.md",
+          "contains": "then starts the code and security reviews by itself"
+        },
+        {
+          "file": "packages/broker/src/aws/developer-tasks.ts",
+          "contains": "Started automatically after the selected checks passed."
+        }
+      ]
+    },
+    {
+      "id": "task-page",
+      "claim": "On mainline, the task owner can decide and teammates can comment on the task page; one decision is recorded however many places it is pressed.",
+      "evidence": [
+        {
+          "file": "docs/slack.md",
+          "contains": "## Deciding and commenting on the task page"
+        },
+        {
+          "file": "docs/how-it-works.md",
+          "contains": "exactly one decision is recorded however many"
+        }
+      ]
+    },
+    {
+      "id": "chatgpt",
+      "claim": "On mainline, admins can let developers run their own tasks on their own ChatGPT Plus or Pro plan; it is off by default.",
+      "evidence": [
+        {
+          "file": "docs/chatgpt.md",
+          "contains": "It's off until an admin turns it on"
+        },
+        {
+          "file": "docs/day-two.md",
+          "contains": "models.chatgpt.enabled"
+        }
+      ]
+    },
+    {
+      "id": "rovara-loop",
+      "claim": "On mainline, rovara loop runs Do, Quick, Full, Review and Contribute loops locally from GitHub issue comments, with no Rovara install or AWS account.",
+      "evidence": [
+        {
+          "file": "docs/loop.md",
+          "contains": "It needs no Rovara install and no AWS account"
+        },
+        {
+          "file": "packages/cli/src/main.ts",
+          "contains": "rovara loop"
+        }
+      ]
+    },
+    {
+      "id": "task-dependencies-design",
+      "claim": "Task dependencies remain a design draft.",
+      "evidence": [
+        {
+          "file": "specs/059-task-dependencies/spec.md",
+          "contains": "**Status**: Design draft for owner review"
         }
       ]
     }

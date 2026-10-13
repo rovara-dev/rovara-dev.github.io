@@ -32,7 +32,7 @@
 </button>
 <nav aria-label="Main navigation">
 <a href="../../index.html">Product</a>
-<a href="../release/index.html" class="docs-status" title="Published installer and native workflow preview">Release &amp; preview status</a>
+<a href="../release/index.html" class="docs-status" title="Published release and mainline status">Release status</a>
 </nav>
 </header>
 <div class="docs-layout">
@@ -50,15 +50,18 @@
 <p>Work with Rovara Code</p>
 <a href="../tasks/index.html" >Your first Quick task</a>
 <a href="index.html" aria-current="page">Plan a larger feature</a>
+<a href="../task-page/index.html" >Decide on the task page</a>
 <a href="../coding-tools/index.html" >Connect your coding tool</a>
 <a href="../evidence/index.html" >Inspect changes, checks and reviews</a>
 <a href="../feedback/index.html" >Respond to PR feedback</a>
-<a href="../coordination/index.html" >Dependencies and linked PRs</a>
+<a href="../coordination/index.html" >Linked PRs and dependencies</a>
+<a href="../loop/index.html" >Rovara loop on GitHub issues</a>
 <a href="../operations/index.html" >Workspaces and costs</a>
 </div>
 <div class="docs-nav-group">
 <p>Configure</p>
 <a href="../configuration/index.html" >Projects and checks</a>
+<a href="../chatgpt/index.html" >Sign in with ChatGPT</a>
 </div>
 <div class="docs-nav-group">
 <p>Reference</p>
@@ -99,61 +102,64 @@
 <section id="before-you-start">
 <h2>Before you start<a class="doc-heading-link" href="#before-you-start" aria-label="Link to section Before you start">#</a>
 </h2>
-<p>You need an environment with the native workflow enabled, access to a registered project, and the project’s installed Slack app or coding-tool connection. <a href="../install/index.html">Install Rovara</a> before following this preview workflow.</p>
-<p>Use Slack’s mention picker to select the app installed in your channel. Existing CLI commands still use <code>agentx</code>.</p>
-<p>Choose Full when behavior, interfaces or implementation choices need discussion. Full changes planning depth; it does not relax project-required checks or review requirements.</p>
+<div class="doc-callout">
+<strong>On mainline, not yet released</strong>
+<p>This describes product mainline as of 13 October 2026. The latest published release, v0.3.1, does not include it. Use a deployment and CLI built from mainline, or the next release. <a href="../release/index.html#availability">Release status →</a>
+</p>
+</div>
+<p>You need access to a registered project and its Slack channel, or a coding-tool connection. Choose Full when behavior, interfaces or implementation choices need discussion. Full changes planning depth; it does not relax project-required checks or reviews.</p>
 </section>
 <section id="request">
 <h2>1. Choose Full at task start<a class="doc-heading-link" href="#request" aria-label="Link to section 1. Choose Full at task start">#</a>
 </h2>
-<p>Select the Full workflow through your installed workflow surface. In a coding tool, explicitly ask it to call <code>agentx_start_workflow</code> with <code>workflow_path: "full"</code> for your project.</p>
+<p>Start the request with <code>full:</code> in the bound channel:</p>
 <pre>
-<code>Start a Full Rovara Code workflow in &lt;project-name&gt;.
-Add password reset to the account page.
-Show me requirements, design and the coding plan for approval
-before implementation. Keep existing sign-in behavior.</code>
+<code>@AgentX full: Add password reset to the account page.
+Keep existing sign-in behavior.</code>
 </pre>
-<p>Use your project’s actual name. If your Slack app does not expose Full selection, use the workflow MCP path or ask the operator which installed version supports it.</p>
+<p>Without a prefix, a larger change gets a card suggesting Full, with <strong>Start</strong>, <strong>Use Quick instead</strong> and <strong>Just answer</strong>. From a coding tool, ask it to call <code>agentx_start_workflow</code> with <code>workflow_path: "full"</code> for your project.</p>
 </section>
 <section id="requirements">
 <h2>2. Agree on requirements<a class="doc-heading-link" href="#requirements" aria-label="Link to section 2. Agree on requirements">#</a>
 </h2>
-<p>Inspect intended behavior, constraints, non-goals and acceptance scenarios. Use <strong>Request changes</strong> for omissions or wrong assumptions. Approve the current document when it represents the work you want.</p>
-<p>For password reset, discuss expiry, error messages and existing authentication behavior here—not after implementation.</p>
+<p>Inspect intended behavior, constraints, non-goals and acceptance scenarios. On the task page, each of the document’s decisions shows AgentX’s recommendation already picked; choose another option where you disagree, and comment on any claim. Approve the current document when it represents the work you want.</p>
+<p>For password reset, discuss expiry, error messages and existing authentication behavior here, not after implementation.</p>
 </section>
 <section id="design">
 <h2>3. Review the design<a class="doc-heading-link" href="#design" aria-label="Link to section 3. Review the design">#</a>
 </h2>
-<p>Inspect the proposed interfaces, component boundaries, dependencies and failure behavior. Ask for alternatives or corrections before approving this version.</p>
+<p>The design is written from the approved requirements. Inspect the proposed interfaces, component boundaries, dependencies and failure behavior. Ask for alternatives or corrections before approving this version.</p>
 </section>
 <section id="plan">
 <h2>4. Approve the coding plan<a class="doc-heading-link" href="#plan" aria-label="Link to section 4. Approve the coding plan">#</a>
 </h2>
-<p>Review the implementation steps, dependency order and check choices. Required project checks stay on. Approve this version to authorize implementation.</p>
+<p>The coding plan is written from the approved design. Review the implementation steps and check choices. Required project checks stay on; add the project’s optional checks you want. Approve this version to start coding.</p>
 </section>
 <section id="after-approval">
 <h2>5. Review the work<a class="doc-heading-link" href="#after-approval" aria-label="Link to section 5. Review the work">#</a>
 </h2>
-<p>Implementation follows the approved plan. Inspect the code and candidate-bound checks. Once the task is in <code>REVIEW / WAITING</code> with passing checks, explicitly request initial candidate reviews through <code>agentx_review_workflow_candidate</code> in your coding tool, or the review action supported by your installed environment.</p>
-<p>Inspect the separate code and security reports, then request draft PRs when ready. PR feedback follows the same owner-controlled proposal and fix loop as Quick.</p>
-<a href="../tasks/index.html#review">How to request reviews →</a>
+<p>Coding, checks and reviews run as in Quick, and AgentX opens a draft PR when they pass. PR feedback follows the same owner-controlled proposal and fix loop.</p>
+<a href="../tasks/index.html#review">What happens after approval →</a>
 </section>
 <section id="changes">
 <h2>When a document changes<a class="doc-heading-link" href="#changes" aria-label="Link to section When a document changes">#</a>
 </h2>
-<p>Revised documents require a decision on the current version. A previous approval does not approve a different scope or stale candidate. Keep the task’s current prompt and next action in view.</p>
+<p>
+<strong>Request changes</strong> needs at least one comment or a note. AgentX writes the next version and answers each comment you sent under it. Comments you send with an Approve are answered by the next document, for example “Done in the coding plan: …”.</p>
+<p>Each comment stays on the same claim, decision or check if it is still there, marked “from v1”; otherwise it moves under “Removed claims”. An approval applies only to the version it names. <a href="../task-page/index.html">Task page guide →</a>
+</p>
 </section>
 </article>
 <div class="docs-maintenance">
-<span>Installation updated 6 October 2026</span>
+<span>Docs updated 13 October 2026</span>
 <a href="../release/index.html#documentation">How these docs are maintained</a>
 <a href="https://github.com/rovara-dev/rovara-dev.github.io/issues/new">Report a docs issue</a>
 </div>
 <nav class="docs-pager" aria-label="Next and previous pages">
 <a href="../tasks/index.html">
 <span>Previous</span>Your first Quick task</a>
-<a href="../coding-tools/index.html">
-<span>Next</span>Connect your coding tool →</a>
+<a href="../task-page/index.html">
+<span>Next</span>Decide on the task page →</a>
 </nav>
 <footer class="docs-footer">
 <span>Rovara Code · Coding agents in your AWS account.</span>

@@ -32,7 +32,7 @@
 </button>
 <nav aria-label="Main navigation">
 <a href="../../index.html">Product</a>
-<a href="../release/index.html" class="docs-status" title="Published installer and native workflow preview">Release &amp; preview status</a>
+<a href="../release/index.html" class="docs-status" title="Published release and mainline status">Release status</a>
 </nav>
 </header>
 <div class="docs-layout">
@@ -50,15 +50,18 @@
 <p>Work with Rovara Code</p>
 <a href="../tasks/index.html" >Your first Quick task</a>
 <a href="../planning/index.html" >Plan a larger feature</a>
+<a href="../task-page/index.html" >Decide on the task page</a>
 <a href="../coding-tools/index.html" >Connect your coding tool</a>
 <a href="../evidence/index.html" >Inspect changes, checks and reviews</a>
 <a href="../feedback/index.html" >Respond to PR feedback</a>
-<a href="../coordination/index.html" >Dependencies and linked PRs</a>
+<a href="../coordination/index.html" >Linked PRs and dependencies</a>
+<a href="../loop/index.html" >Rovara loop on GitHub issues</a>
 <a href="index.html" aria-current="page">Workspaces and costs</a>
 </div>
 <div class="docs-nav-group">
 <p>Configure</p>
 <a href="../configuration/index.html" >Projects and checks</a>
+<a href="../chatgpt/index.html" >Sign in with ChatGPT</a>
 </div>
 <div class="docs-nav-group">
 <p>Reference</p>
@@ -116,9 +119,9 @@
 </thead>
 <tbody>
 <tr>
-<td>Cancel a task</td>
+<td>Stop a task</td>
 <td>Stops the current work.</td>
-<td>Inspect status and any partial changes. This is not workspace closure.</td>
+<td>In a Slack workflow thread, only the owner can stop, with <code>@AgentX stop</code>. The workspace and changes stay.</td>
 </tr>
 <tr>
 <td>Close a workspace</td>
@@ -128,19 +131,18 @@
 <tr>
 <td>Remove the environment</td>
 <td>A separate operator teardown procedure.</td>
-<td>Use the release-matched instructions when published.</td>
+<td>Use the release-matched instructions.</td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>
-<a href="../../how-it-works/index.html#continue">See the workspace lifecycle →</a>
+<p>Each person has a limit of open tasks (3 by default). Closing a task, or a workflow task finishing, frees its place. <a href="../../how-it-works/index.html#continue">See the workspace lifecycle →</a>
 </p>
 </section>
 <section id="status">
 <h2>Understand task status<a class="doc-heading-link" href="#status" aria-label="Link to section Understand task status">#</a>
 </h2>
-<p>Coding-tool tasks can be <code>STARTING</code>, <code>RUNNING</code>, <code>SUCCEEDED</code>, <code>FAILED</code>, <code>CANCELLED</code>, <code>INTERRUPTED</code> or <code>CLOSED</code>.</p>
+<p>Coding-tool tasks can be <code>STARTING</code>, <code>RUNNING</code>, <code>SUCCEEDED</code>, <code>FAILED</code>, <code>CANCELLED</code>, <code>INTERRUPTED</code> or <code>CLOSED</code>. <code>CLOSED</code> also covers a workflow task that finished; its workflow stage says whether its PRs merged (<code>MERGED</code>) or its plan was rejected (<code>CLOSED</code>).</p>
 <p>
 <code>SUCCEEDED</code> describes task execution, not a guarantee that every check passed. A timed-out wait can leave the task running. Read its current status and evidence before retrying.</p>
 </section>
@@ -157,24 +159,36 @@
 </thead>
 <tbody>
 <tr>
+<td>A Quick/Full suggestion card</td>
+<td>Press Start, switch path, or Just answer. Only the requester can choose.</td>
+</tr>
+<tr>
 <td>Waiting for a plan decision</td>
-<td>Inspect the current document, then approve or request changes.</td>
+<td>Read the current document, then approve or request changes in Slack or on the task page.</td>
 </tr>
 <tr>
-<td>Missing, failed or stale evidence</td>
-<td>Read the reason; obtain a current check or review.</td>
+<td>Checks or reviews are running</td>
+<td>Nothing; a draft PR opens when both reviews pass.</td>
 </tr>
 <tr>
-<td>PR feedback proposal</td>
-<td>Open the detailed review and choose the response.</td>
+<td>A check or review blocked</td>
+<td>Read the problems; send back to coding, retry reviews, or close the task.</td>
 </tr>
 <tr>
-<td>Waiting for required PRs</td>
-<td>Use GitHub review and merge controls for the remaining PRs.</td>
+<td>The draft PR didn’t open</td>
+<td>Retry opening the pull request, or close the task.</td>
+</tr>
+<tr>
+<td>PR feedback is ready</td>
+<td>Open details and choose the response.</td>
+</tr>
+<tr>
+<td>Waiting for merge</td>
+<td>Use GitHub review and merge controls.</td>
 </tr>
 <tr>
 <td>Closeout retry needed</td>
-<td>Check preserved artifacts and retry the failed cleanup operation.</td>
+<td>Check preserved artifacts and retry the failed cleanup.</td>
 </tr>
 </tbody>
 </table>
@@ -184,7 +198,7 @@
 <section id="costs">
 <h2>What you pay for<a class="doc-heading-link" href="#costs" aria-label="Link to section What you pay for">#</a>
 </h2>
-<p>You pay for AWS services, retained storage and model usage. Task usage telemetry, installer estimates and budget alerts help explain usage. Budget alerts are notifications, not spending caps.</p>
+<p>You pay for AWS services, retained storage and model usage. Task usage telemetry, installer estimates and budget alerts help explain usage. Budget alerts are notifications, not spending caps. Tasks of developers who <a href="../chatgpt/index.html">connected a ChatGPT plan</a> use that plan instead of the installation’s model where it can.</p>
 <div class="doc-callout">
 <strong>Illustrative estimate: about $211 per month</strong>
 <p>Assumes us-east-1, default Bedrock models, 1,000 turns, 100 worker sessions, 60 instance-hours and 10 retained workspaces. The source pricing calculation returns $211.13. This is an example, not a subscription price; actual usage and prices vary.</p>
@@ -197,7 +211,7 @@
 <pre>
 <code>npx @preplabsai/rovara-code --env &lt;env&gt; doctor --region &lt;region&gt;</code>
 </pre>
-<p>Read the reported failures before making changes. <a href="../install/index.html#day-two">Upgrade and teardown instructions →</a>
+<p>Read the reported failures before making changes. On mainline, doctor also reports Sign in with ChatGPT when this computer holds the admin sign-in. <a href="../install/index.html#day-two">Upgrade and teardown instructions →</a>
 </p>
 <p>
 <a href="../troubleshooting/index.html">Troubleshoot a problem →</a>
@@ -211,13 +225,13 @@
 </section>
 </article>
 <div class="docs-maintenance">
-<span>Installation updated 6 October 2026</span>
+<span>Docs updated 13 October 2026</span>
 <a href="../release/index.html#documentation">How these docs are maintained</a>
 <a href="https://github.com/rovara-dev/rovara-dev.github.io/issues/new">Report a docs issue</a>
 </div>
 <nav class="docs-pager" aria-label="Next and previous pages">
-<a href="../coordination/index.html">
-<span>Previous</span>Dependencies and linked PRs</a>
+<a href="../loop/index.html">
+<span>Previous</span>Rovara loop on GitHub issues</a>
 <a href="../configuration/index.html">
 <span>Next</span>Projects and checks →</a>
 </nav>

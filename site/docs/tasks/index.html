@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#f8f5ef">
 <title>Your first Quick task — Rovara Code</title>
-<meta name="description" content="Approve one plan, let Rovara Code implement the change, and inspect the evidence before requesting a PR.">
+<meta name="description" content="Approve one plan, let Rovara Code code, check and review the change, then review its draft PR.">
 <link rel="canonical" href="https://rovara-dev.github.io/docs/tasks/">
 <link rel="icon" href="../../assets/icons/git-pull-request.svg">
 <link rel="preload" href="../../assets/fonts/inter-600.woff2" as="font" type="font/woff2" crossorigin>
@@ -32,7 +32,7 @@
 </button>
 <nav aria-label="Main navigation">
 <a href="../../index.html">Product</a>
-<a href="../release/index.html" class="docs-status" title="Published installer and native workflow preview">Release &amp; preview status</a>
+<a href="../release/index.html" class="docs-status" title="Published release and mainline status">Release status</a>
 </nav>
 </header>
 <div class="docs-layout">
@@ -50,15 +50,18 @@
 <p>Work with Rovara Code</p>
 <a href="index.html" aria-current="page">Your first Quick task</a>
 <a href="../planning/index.html" >Plan a larger feature</a>
+<a href="../task-page/index.html" >Decide on the task page</a>
 <a href="../coding-tools/index.html" >Connect your coding tool</a>
 <a href="../evidence/index.html" >Inspect changes, checks and reviews</a>
 <a href="../feedback/index.html" >Respond to PR feedback</a>
-<a href="../coordination/index.html" >Dependencies and linked PRs</a>
+<a href="../coordination/index.html" >Linked PRs and dependencies</a>
+<a href="../loop/index.html" >Rovara loop on GitHub issues</a>
 <a href="../operations/index.html" >Workspaces and costs</a>
 </div>
 <div class="docs-nav-group">
 <p>Configure</p>
 <a href="../configuration/index.html" >Projects and checks</a>
+<a href="../chatgpt/index.html" >Sign in with ChatGPT</a>
 </div>
 <div class="docs-nav-group">
 <p>Reference</p>
@@ -81,7 +84,7 @@
 <header class="docs-title">
 <p class="docs-kind">Tutorial</p>
 <h1>Your first Quick task</h1>
-<p>Approve one plan, let Rovara Code implement the change, and inspect the evidence before requesting a PR.</p>
+<p>Approve one plan, let Rovara Code code, check and review the change, then review its draft PR.</p>
 </header>
 <details class="docs-mobile-toc">
 <summary>On this page</summary>
@@ -90,8 +93,8 @@
 <a href="#request">1. Request a bounded change</a>
 <a href="#plan">2. Read the plan</a>
 <a href="#approve">3. Approve the current version</a>
-<a href="#review">4. Inspect checks and request reviews</a>
-<a href="#pull-request">5. Request draft PRs</a>
+<a href="#review">4. Let the checks and reviews run</a>
+<a href="#pull-request">5. Review the draft PR</a>
 <a href="#continue">6. Handle reviewer feedback</a>
 <a href="#finish">7. Finish and preserve the work</a>
 </nav>
@@ -100,77 +103,78 @@
 <section id="before-you-start">
 <h2>Before you start<a class="doc-heading-link" href="#before-you-start" aria-label="Link to section Before you start">#</a>
 </h2>
-<p>You need an environment with the native workflow enabled, access to a registered project, and the project’s installed Slack app or coding-tool connection. <a href="../install/index.html">Install Rovara</a> before following this preview workflow.</p>
-<p>Use Slack’s mention picker to select the app installed in your channel. Existing CLI commands still use <code>agentx</code>.</p>
+<div class="doc-callout">
+<strong>On mainline, not yet released</strong>
+<p>This describes product mainline as of 13 October 2026. The latest published release, v0.3.1, does not include it. Use a deployment and CLI built from mainline, or the next release. <a href="../release/index.html#availability">Release status →</a>
+</p>
+</div>
+<p>You need access to a registered project and its Slack channel, or a <a href="../coding-tools/index.html">coding-tool connection</a>. Starting tasks from Slack needs shared tasks turned on for the Slack service; if AgentX asks an admin to turn them on, see <a href="../configuration/index.html#slack-start">Starting tasks from Slack</a>.</p>
+<p>Use Slack’s mention picker to select the app installed in your channel. Its default name still uses <code>AgentX</code>.</p>
 <div class="doc-callout">
 <strong>Quick is the simplest planning path</strong>
-<p>Use it for a well-defined fix. For ambiguous or larger work, <a href="../planning/index.html">choose Full</a>. Ordinary direct tasks remain a separate path.</p>
+<p>Use it for a well-defined fix. For ambiguous or larger work, <a href="../planning/index.html">choose Full</a>.</p>
 </div>
 </section>
 <section id="request">
 <h2>1. Request a bounded change<a class="doc-heading-link" href="#request" aria-label="Link to section 1. Request a bounded change">#</a>
 </h2>
-<p>In the project-bound channel, select the app installed in your channel and send:</p>
+<p>In the project-bound channel, start the request with <code>quick:</code> to go straight to Quick:</p>
 <pre>
-<code>@your-installed-app workflow: Make the docs Copy button reset its label after copying.
+<code>@AgentX quick: Make the docs Copy button reset its label after copying.
 Announce success accessibly, preserve manual copy if the clipboard fails,
 and add checks for success, reset and failure.</code>
 </pre>
-<p>This is an example request; replace it with work for your project. Expect a task thread and then a plan ready for your decision. Do not start another task because planning takes time.</p>
+<p>Without a prefix, AgentX sorts the request first. A question is answered in the thread. A small change gets a card, “Looks like a small change. I’ll use Quick.”, with <strong>Start</strong>, <strong>Use Full instead</strong> and <strong>Just answer</strong>. An unclear request offers all three. You can also reply <code>quick</code>, <code>full</code> or <code>answer</code> in the thread.</p>
+<p>Only the person who asked can choose, and the card waits for a day. Nothing that changes code starts without that click. Other prefixes: <code>full:</code> starts Full, <code>workflow:</code> asks Quick or Full with no suggestion, and <code>chat:</code> goes to the chat agent.</p>
 </section>
 <section id="plan">
 <h2>2. Read the plan<a class="doc-heading-link" href="#plan" aria-label="Link to section 2. Read the plan">#</a>
 </h2>
-<p>Open the linked Canvas. Check the intended behavior, files or areas involved, scope exclusions and proposed checks. Rovara Code has inspected the request with read-only tools at this stage.</p>
+<p>AgentX inspects the request with read-only tools and posts an approval card: what is waiting, up to three summary lines and a link to the plan (a Slack Canvas, or the task page when the workspace cannot create Canvases). <strong>Open review</strong> opens the <a href="../task-page/index.html">task page</a>.</p>
 <ul>
 <li>Does it describe the change you actually want?</li>
 <li>Are the acceptance checks useful?</li>
 <li>Are assumptions or dependencies missing?</li>
 </ul>
-<p>If the plan needs correction, use <strong>Request changes</strong> and explain the adjustment. Review the revised version.</p>
+<p>Reply in the thread with anything the plan should know. Every reply, yours or a teammate’s, is saved for the task’s next step. Replies never move the task; only the owner’s buttons do.</p>
 </section>
 <section id="approve">
 <h2>3. Approve the current version<a class="doc-heading-link" href="#approve" aria-label="Link to section 3. Approve the current version">#</a>
 </h2>
-<p>Use <strong>Approve</strong> on the current decision prompt. Required project checks are locked on; choose from project-configured optional checks when offered.</p>
-<p>Your decision applies to that plan version. A comment in the thread is feedback, not approval. An old prompt cannot authorize a revised plan.</p>
+<p>Press <strong>Approve</strong> on the card or the task page. The project’s readiness checks always run; you can add any optional checks the project offers. Your choices are saved with the decision.</p>
+<p>To change the plan, press <strong>Request changes</strong> on the task page with at least one comment or a note. AgentX writes the next version and answers each comment “Done:” or “Not changed because:”. A decision applies to the version it names; an old card cannot approve a newer plan.</p>
 </section>
 <section id="review">
-<h2>4. Inspect checks and request reviews<a class="doc-heading-link" href="#review" aria-label="Link to section 4. Inspect checks and request reviews">#</a>
+<h2>4. Let the checks and reviews run<a class="doc-heading-link" href="#review" aria-label="Link to section 4. Let the checks and reviews run">#</a>
 </h2>
-<p>Rovara Code implements in the project’s remote workspace and runs the configured checks. Inspect the diff, raw output and candidate reference. Failed or missing required checks remain a visible blocker.</p>
-<p>When the task reaches <code>REVIEW / WAITING</code> with passing checks for that candidate, explicitly request the separate code and security reviews. In your connected coding tool, ask:</p>
-<pre>
-<code>Use agentx_review_workflow_candidate for &lt;task-id&gt;.
-Review the current candidate against the approved plan.
-Do not edit code.</code>
-</pre>
-<p>Use the existing task ID. The tool starts the initial read-only reviews; it is not a generic retry. Inspect their reports before requesting draft PRs. If working only in Slack, use the review action supported by your installed version or ask the operator how to request it.</p>
-<a href="../evidence/index.html">Review guide →</a>
+<p>After approval, AgentX codes the plan in the project’s remote workspace and runs the required and chosen checks on that exact code. When they pass, it starts the separate code and security reviews by itself.</p>
+<p>Only problems the change introduced block. An older problem outside the changed lines is noted but does not block. If a check or review blocks, the thread lists the problems with <strong>Send back to coding</strong>, <strong>Retry reviews</strong> and <strong>Close task</strong>. Send back gives the problems to coding, and the checks and reviews run again on the new code.</p>
+<p>From a coding tool, the owner can also accept a blocking finding with a reason, which the draft PR then lists. <a href="../evidence/index.html#reviews">How to read the reviews →</a>
+</p>
 </section>
 <section id="pull-request">
-<h2>5. Request draft PRs<a class="doc-heading-link" href="#pull-request" aria-label="Link to section 5. Request draft PRs">#</a>
+<h2>5. Review the draft PR<a class="doc-heading-link" href="#pull-request" aria-label="Link to section 5. Review the draft PR">#</a>
 </h2>
-<p>When the workflow is ready, ask Rovara Code to open draft PRs for review. Inspect the task to find their GitHub links. PR creation is a separate request; readiness does not merge the code.</p>
+<p>When the checks and both reviews pass, AgentX opens a draft PR of exactly the checked code and posts the link in the thread. Its description says what the approved plan set out to do and which checks and reviews passed, and links the task page. If the PR did not open, the thread offers <strong>Retry opening the pull request</strong>.</p>
 <p>Review repository CI and the diff in GitHub. <strong>You decide what gets merged.</strong>
 </p>
 </section>
 <section id="continue">
 <h2>6. Handle reviewer feedback<a class="doc-heading-link" href="#continue" aria-label="Link to section 6. Handle reviewer feedback">#</a>
 </h2>
-<p>Rovara Code gathers feedback on the task’s linked PRs and proposes responses. Open the detailed review, choose the fixes you want, and approve them or request changes. Approved fixes produce a new candidate and fresh evidence.</p>
+<p>When reviewers comment on the PR, AgentX reviews the comments and posts “PR feedback is ready” in the thread, with its recommendations and the highest priority. Approve the fixes you want, answer its questions, or dismiss. Approved fixes go through checks and reviews again and are pushed to the same PR.</p>
 <a href="../feedback/index.html">Follow the feedback tutorial →</a>
 </section>
 <section id="finish">
 <h2>7. Finish and preserve the work<a class="doc-heading-link" href="#finish" aria-label="Link to section 7. Finish and preserve the work">#</a>
 </h2>
-<p>A task with several required PRs waits until all are observed merged. Inspect the task’s next action and closeout state. Canonical artifacts and decisions remain in Rovara Code under configured retention; Canvas copies are cleaned up after preservation is verified.</p>
-<p>Workspace closure is a separate action and can refuse if unpublished changes remain. <a href="../operations/index.html">Workspace and closeout guide →</a>
+<p>The task finishes when GitHub reports its PRs merged. It gives back its workspace, frees its place in your open-task limit, and shows as closed. Canvas copies are cleaned up after the task’s documents and decisions are saved.</p>
+<p>To stop a running task from its Slack thread, the owner sends <code>@AgentX stop</code>. A plain <code>stop</code> without the mention is saved as a reply. <a href="../operations/index.html">Workspace and closeout guide →</a>
 </p>
 </section>
 </article>
 <div class="docs-maintenance">
-<span>Installation updated 6 October 2026</span>
+<span>Docs updated 13 October 2026</span>
 <a href="../release/index.html#documentation">How these docs are maintained</a>
 <a href="https://github.com/rovara-dev/rovara-dev.github.io/issues/new">Report a docs issue</a>
 </div>
@@ -193,8 +197,8 @@ Do not edit code.</code>
 <a href="#request">1. Request a bounded change</a>
 <a href="#plan">2. Read the plan</a>
 <a href="#approve">3. Approve the current version</a>
-<a href="#review">4. Inspect checks and request reviews</a>
-<a href="#pull-request">5. Request draft PRs</a>
+<a href="#review">4. Let the checks and reviews run</a>
+<a href="#pull-request">5. Review the draft PR</a>
 <a href="#continue">6. Handle reviewer feedback</a>
 <a href="#finish">7. Finish and preserve the work</a>
 </nav>
