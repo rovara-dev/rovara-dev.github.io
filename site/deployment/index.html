@@ -31,9 +31,9 @@
     <link rel="stylesheet" href="../assets/explanations.css" />
     <link rel="stylesheet" href="../assets/refined.css" />
 <link rel="stylesheet" href="../assets/installation.css" />
-  <link rel="stylesheet" href="../assets/scroll-story.css">
+  <link rel="stylesheet" href="../assets/scroll-story.css"><link rel="stylesheet" href="../assets/guided-story.css">
 </head>
-  <body>
+  <body class="install-home">
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header shell">
       <a class="wordmark" href="../index.html" aria-label="Rovara home"
@@ -73,11 +73,11 @@
       </nav>
     </header>
     <main id="main">
-<div class="compact-intro shell"><p class="eyebrow">Self-hosted. In your AWS account.</p><h1>Install Rovara.</h1><p class="intro-text">Launch in AWS or start from a terminal. The guided setup connects GitHub, Slack and your first project.</p></div>
+<div class="compact-intro shell"><p class="eyebrow">Self-hosted. In your AWS account.</p><h1>Install Rovara.</h1><p class="intro-text">Launch a workspace in your AWS account, connect GitHub and Slack, then bring your team’s first ticket. The guided setup takes you through each connection.</p></div>
 <section class="shell installation-options" aria-label="Installation options">
-<article><p class="eyebrow">Recommended · No local setup</p><h2>Launch in AWS</h2><p>Enter your email, GitHub owner and install name. Follow the setup page through the build and your first Slack reply.</p><a class="button primary" href="https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https%3A%2F%2Frovara-installer-us-east-1.s3.us-east-1.amazonaws.com%2Flatest%2Finstaller.template.json&amp;stackName=agentx-installer">Launch in AWS ↗</a><p>US East (N. Virginia) · AWS admin access required.</p><a href="../docs/install/index.html#aws">Read the AWS setup steps →</a></article>
-<article><p class="eyebrow">For your terminal</p><h2>Use the npm CLI</h2><p>Node.js 22.19 or newer (Node 22 LTS recommended), with an authenticated AWS admin profile.</p><pre><code>export AWS_PROFILE=&lt;an admin profile for the target account&gt;
-npx @preplabsai/rovara-code init --env &lt;name&gt;</code></pre><a class="button" href="../docs/install/index.html#terminal">Follow terminal setup →</a></article>
+<article class="aws-install-route"><p class="eyebrow">Recommended · No local setup</p><h2>Launch in AWS</h2><p>Enter your email, GitHub owner and install name. Follow the setup page through the build and your first Slack reply.</p><a class="button primary" href="https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https%3A%2F%2Frovara-installer-us-east-1.s3.us-east-1.amazonaws.com%2Flatest%2Finstaller.template.json&amp;stackName=agentx-installer">Launch in AWS ↗</a><p>US East (N. Virginia) · AWS admin access required.</p><a href="../docs/install/index.html#aws">Read the AWS setup steps →</a></article>
+<details class="terminal-route"><summary>Prefer to set up from your terminal?</summary><article><p class="eyebrow">For your terminal</p><h2>Use the npm CLI</h2><p>Node.js 22.19 or newer (Node 22 LTS recommended), with an authenticated AWS admin profile.</p><pre><code>export AWS_PROFILE=&lt;an admin profile for the target account&gt;
+npx @preplabsai/rovara-code init --env &lt;name&gt;</code></pre><a class="button" href="../docs/install/index.html#terminal">Follow terminal setup →</a></article></details>
 </section>
 <section class="shell installation-details"><h2>Before you begin</h2><p>Have your AWS account, GitHub owner, Slack workspace and model access ready. AWS and model usage are billed to you. The current supported install region is <code>us-east-1</code>.</p><div class="pitch-actions"><a class="button primary" href="../docs/install/index.html">Read the complete installation guide →</a><a class="button" href="https://github.com/PrepLabsAI/Rovara#quickstart">README quickstart ↗</a></div><p class="release-note">Package: <code>@preplabsai/rovara-code</code> · v0.3.4 checked 14 October 2026.</p><p>Already have an environment? <a href="../docs/coding-tools/index.html">Connect Claude Code, Codex or Cursor →</a></p></section>
 </main>

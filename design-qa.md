@@ -1,3 +1,57 @@
+# Rovara guided task story — design QA
+
+final result: passed
+
+## Latest revision — 14 October 2026
+
+User-approved scope: preserve the indigo/lavender/yellow visual direction and accurate claims, follow ENG-142 through one conversation, and give the viewer one focal point at a time. Implementation QA covers `codex/rovara-guided-task-story`, based on `1b1a49295de8633c16a7e5d67b62c2eed983a5cc`. The owner subsequently authorized push and deployment on 14 October 2026; publication evidence is recorded separately from these local implementation checks.
+
+### Visual comparison and story
+
+The previous live Plan scene (`design-evidence/live-audit-2026-10-14-motion/04-plan-v2-natural-scroll.jpg`) and final implementation (`design-evidence/guided-story-2026-10-14/18-plan-final.jpg`) were presented together and inspected at 1440×900 CSS/image pixels, 1× density. The old workspace transition (`10-workspace-transition.jpg` in the same audit folder) and final same-task workspace scene (`20-return-final.jpg`) were also inspected together at 1440×900. The changed structure is intentional: one dominant Slack frame replaces simultaneous narrative, conversation and artifact columns. Typography, palette, portraits and licensed icons remain recognizable.
+
+- Typography: self-hosted Inter retained. Desktop scene headings are 28–34px; thread body 14–15px; artifact headings 22–25px. Short laptops use tighter spacing while preserving readable body text. Small qualifications were darkened after independent review.
+- Spacing: the frame, ticket and chapter caption remain stable during the guided sequence. Sam's clarification, the revised plan and Maya's approval occupy separate reading intervals. No current beat clips at the tested enhanced sizes. Installation aligns with the frame and continues the guide.
+- Color: existing indigo, lavender-white and yellow are retained. One yellow guide point moves at the handoff; the current artifact or message has one quiet focus treatment. No autonomous looping or timed scene advancement. Failure/pass labels include words, and mock scope stays explicit.
+- Assets: existing Maya/Sam fictional portraits and licensed icons reused. No new generated imagery or screenshot substitute illustrations. Tables, code and receipts are semantic illustrative UI.
+- Copy: one task, repository, branch and file set persist from request through return. Failure A remains inspectable after correction B. The draft PR shows a concrete illustrative diff, three mock-scoped checks and separate code/security receipts. Humans retain plan approval and GitHub merge decisions. The historical Django benchmark remains separately qualified below setup.
+
+### Browser verification
+
+Native browser testing used the local preview at `http://127.0.0.1:63914/`.
+
+- All ten beats fit with exactly one focal element at 832×867. All ten also fit at 1366×768 after adding a compact spacing profile and a fractional-height breathing-room check. The browser's normal 1280×720 window was verified after clearing the viewport override; all ten beats fit there too. Receipt files: `medium-scene-receipts.json`, `short-laptop-receipts.json` and `normal-window-receipts.json` in the guided-story evidence folder. `normal-step-2.jpg`, `normal-step-8.jpg` and `normal-step-9.jpg` record the normal-window presentation.
+- 1440×900 final Plan, PR, return and installation handoff were inspected. Final captures: `18-plan-final.jpg`, `19-pr-final.jpg`, `20-return-final.jpg`, `21-install-handoff-final.jpg`. The guide holds at each reading moment before moving near the next boundary; final return has its own reading hold before the layout releases into setup.
+- At 390×844, all ten messages/artifacts become one ordered transcript with the same task ticket. Plan, retained workspace and setup were inspected. At 320×844, page width equals viewport width; no page-level horizontal overflow. Compact code blocks can scroll within their own area.
+- Proposed-plan and approved-plan inspectors report the correct state. Failed-result inspector hides the future passing run; retest inspector exposes both runs. Keyboard Enter opens the plan inspector; Escape closes it and restores visible focus. Scrolling away from an inspected beat parks focus on the visible chapter link before making earlier content inert.
+- Native manual reduced-motion control and system reduced-motion emulation preserved phase 7. The system preference disables the override. The first Playwright click attempt auto-scrolled the sticky region, so it was not accepted as content-state evidence; native input was used for the actual check. Emulation was cleared afterward.
+- Full-thread mode exposes all ten beats and preserves the current reading context; returning to guided mode works. No-JavaScript mode exposes all ten beats without inert/hidden future content, hides nonfunctional inspectors and retains chapter anchors. Script execution was restored afterward.
+- Setup CTA reaches the installation route. AWS setup dominates; the CLI disclosure expands/collapses its published `npx` instructions. AWS launch was not executed. Final installation capture: `22-install-route-final.jpg`.
+- Direct same-page chapter hash navigation was checked in both directions: copied request and PR anchors select phases 0 and 8 with the matching headings. The runtime synchronizes the phase on hash changes, using the actual sticky inset for positioning.
+- Browser warning/error logs are empty. These are selected desktop browser checks, not a complete WCAG, assistive-technology or physical-device certification.
+
+### Findings and fixes
+
+1. [P2] Initial fallback transition could leave the active plan above the viewport. Mode changes now preserve the reading position when the story is in view; resizing outside it does not jump into it.
+2. [P2] The last workspace beat could release before its caption was readable. Its marker now includes a final reading hold and the sticky layout's own height.
+3. [P2] Short laptops lacked enough reading room, and rounded height measurements could clip the PR note by a fraction of a pixel. Added a short-screen spacing profile, ceiling of actual element height, and an 8px fit buffer. All ten compact beats passed the fresh visibility check.
+4. [P2] Independent review found qualification text at 3.99:1 and footer disclosure at 4.33:1. Updated muted text to `#71647d`. Reviewer independently verified 5.25:1 for source/mock qualifications and 5.50:1 for the white footer; other corrected metadata exceeds 4.5:1. Final Plan/PR/workspace captures reflect the correction.
+5. [P2] Resetting the temporary viewport revealed a shorter 1280×720 normal preview window. Added a further short-height spacing profile, preserving 14px body text, and derive the reading budget from actual caption spacing and sticky inset. All ten beats remain enhanced and fully visible. The browser's normal viewport is restored for handoff.
+
+Independent code review and correction re-review reported no remaining Critical or Important issue and readiness for local preview handoff. No unresolved actionable P0/P1/P2 finding in this revision's scope.
+
+### Automated verification and claim boundary
+
+Fresh `npm run check` passes five resolver/reading-hold tests, generated documentation checks and the 22-route static checker. It reconciles source pins, release status and recorded benchmark hashes/counts. `npm run check:claims` passes all 16 claims against pinned mainline `2deee3d70d3aa4c410e1bee030110c9d01858ef5`. Fresh static build, both module syntax checks and `git diff --check` pass. The normal CI check now includes the resolver tests.
+
+During implementation QA, no new product runtime, AWS installation, live Slack-to-PR task, customer result or production publication was performed. The owner-assumed E2E work is represented by qualified source/mock checks; browser interaction remains explicitly unexercised in the illustrative task.
+
+Postflight: executed against `MSDLC-OBJ-001@0.4`; objective digest `707543b940253c8e068da55af87b81b4c57dd8d0e82f83436be13f5391cdf0c2` rechecked and matched; alignment pass; result verified as local frontend preview; evidence added in the guided-story folder; no objective proposal, assumption change, product-boundary change or production-authority change; scope delta none; contradictions none; objective change attempted false.
+
+## Prior implementation records (superseded by the revision above)
+
+The following records describe earlier local and published revisions. Their controls, beat counts and layouts are historical, not descriptions of the current implementation.
+
 # Rovara continuous Slack story — design QA
 
 final result: passed
