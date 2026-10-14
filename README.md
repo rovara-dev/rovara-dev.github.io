@@ -55,7 +55,9 @@ npm run build
 
 ## Publication
 
-Live URL: https://rovara-dev.github.io/. `.github/workflows/pages.yml` checks and deploys from `main` or an explicitly dispatched workflow. Review branches run PR checks and do not automatically publish. The owner explicitly authorized pushing and deploying this redesign on 14 October 2026.
+Live URL: https://rovara.dev/. `.github/workflows/pages.yml` checks and deploys from `main` or an explicitly dispatched workflow. Review branches run PR checks and do not automatically publish. The owner explicitly authorized pushing and deploying this redesign on 14 October 2026.
+
+GitHub Pages serves the custom domain; Squarespace remains the registrar and the existing Route 53 hosted zone manages DNS. The apex A/AAAA records point to GitHub Pages, and `www` points to `rovara-dev.github.io`. The custom domain is configured in repository Pages settings because this site publishes through GitHub Actions. Preserve the domain-verification TXT record and existing email records when editing DNS.
 
 Display branding does not rename CLI commands, MCP IDs, configuration, authorization or evidence identities. The product repository is `PrepLabsAI/Rovara`, the package is `@preplabsai/rovara-code`, and `agentx` compatibility commands remain. MIT is the current grant for PrepLabsAI-owned code; the previously issued Apache-2.0 grant remains available.
 
