@@ -3,20 +3,20 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="theme-color" content="#faf9f6" />
-    <title>Give it a task. Get the work back. — Rovara Code</title>
+    <meta name="theme-color" content="#20265f" />
+    <title>Cloud coding agents. Work with them in Slack. — Rovara</title>
     <meta
       name="description"
-      content="A coding agent with a workflow you control. Approve the plan, inspect the evidence and keep the final merge with your team."
+      content="Cloud coding agents with persistent workspaces in your AWS account. Plan in Slack, follow the build, inspect the checks and review the draft PR."
     />
     <link rel="canonical" href="https://rovara-dev.github.io/" />
     <meta
       property="og:title"
-      content="Give it a task. Get the work back. — Rovara Code"
+      content="Cloud coding agents. Work with them in Slack. — Rovara"
     />
     <meta
       property="og:description"
-      content="A coding agent with a workflow you control. Approve the plan, inspect the evidence and keep the final merge with your team."
+      content="Cloud coding agents with persistent workspaces in your AWS account. Plan in Slack, follow the build, inspect the checks and review the draft PR."
     />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary" />
@@ -36,747 +36,86 @@
     <link rel="stylesheet" href="assets/explanations.css" />
     <link rel="stylesheet" href="assets/refined.css" />
 <link rel="stylesheet" href="assets/native-workflow.css" />
-  </head>
-  <body class="refined-home">
-    <a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header shell">
-      <a class="wordmark" href="index.html" aria-label="Rovara Code home">Rovara Code</a
-      >
-<button
-        class="menu-toggle"
-        aria-expanded="false"
-        aria-controls="primary-nav"
-        aria-label="Open navigation"
-      >
-        <img
-          class="icon"
-          src="assets/icons/list.svg"
-          alt=""
-          width="24"
-          height="24"
-          aria-hidden="true"
-        />
-      </button>
-      <nav class="primary-nav" id="primary-nav" aria-label="Main navigation">
-        <a href="index.html#product">Product</a
-        >
-<a href="how-it-works/index.html">How it works</a
-        >
-<a href="docs/index.html">Docs</a
-        >
-<a class="button primary" href="deployment/index.html"
-          >Install Rovara
-          <img
-            class="icon white"
-            src="assets/icons/arrow-up-right.svg"
-            alt=""
-            width="24"
-            height="24"
-            aria-hidden="true"
-        />
-</a>
-      </nav>
-    </header>
-<main id="main">
-<section class="product-hero shell" id="product">
-<div class="product-pitch">
-<p class="eyebrow">Your task. Your AWS. Your call.</p>
-<h1>
-<span>Give it a task.</span>
-<span>Get the work back.</span>
-</h1>
-<p class="pitch-description">Give Rovara Code a coding task from Slack or your coding tool. Approve the plan. It writes the code in your AWS account, brings back changes and check evidence, and helps address PR feedback.</p>
-<p class="authority">You decide what gets merged.</p>
-<div class="pitch-actions">
-<a class="button primary" href="deployment/index.html">Install in your AWS account →</a>
-<a class="button" href="#workflow">Explore the workflow →</a>
-</div>
-<p class="release-note">Public source · Published npm CLI · Your AWS account.</p>
-</div>
-<figure class="handoff-figure native-snapshot">
-<figcaption>Illustrative native workflow preview<span>From request through review</span>
-</figcaption>
-<div class="snapshot-request">
-<img src="assets/icons/slack-icon.svg" width="28" height="28" alt="Slack">
-<div>
-<span class="sample-label">A useful task</span>
-<p>Improve the docs Copy button.</p>
-</div>
-</div>
-<div class="snapshot-plan">
-<span class="snapshot-number">01</span>
-<div>
-<b>Review the plan</b>
-<span>Scope, approach and checks. Your approval.</span>
-</div>
-<img src="assets/icons/file-text.svg" width="23" height="23" alt="">
-</div>
-<div class="snapshot-account">
-<header>
-<img src="assets/icons/aws.svg" width="44" height="30" alt="AWS">
-<b>Your AWS account</b>
-</header>
-<div>
-<span>02</span>
-<p>
-<b>Rovara Code writes the code</b>
-<small>Persistent project workspace</small>
-</p>
-</div>
-<div>
-<span>03</span>
-<p>
-<b>Checks + separate AI reviews</b>
-<small>Evidence for the code you inspect</small>
-</p>
-</div>
-</div>
-<div class="snapshot-plan">
-<span class="snapshot-number">04</span>
-<div>
-<b>Review the PR and feedback</b>
-<span>Approve fixes. Refresh the evidence.</span>
-</div>
-<img src="assets/icons/git-pull-request.svg" width="23" height="23" alt="">
-</div>
-<p class="snapshot-authority">Your team owns the final merge.</p>
-</figure>
+  <link rel="stylesheet" href="assets/scroll-story.css"><script src="assets/scroll-story.js" defer></script>
+</head>
+<body class="scroll-home"><a class="skip-link" href="#main">Skip to content</a><div class="story-top"><header class="site-header shell"><a class="wordmark" href="index.html" aria-label="Rovara home">Rovara</a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open navigation"><img src="assets/icons/list.svg" width="24" height="24" alt=""></button><nav class="primary-nav" id="primary-nav" aria-label="Main navigation"><a href="#workflow">How it works</a><a href="docs/index.html">Docs</a><a class="story-button sun" href="deployment/index.html">Install</a></nav></header></div><main id="main"><div class="story-top"><section class="story-hero shell" id="product"><p class="eyebrow">Cloud coding agents · Your AWS account</p><h1><span>Give your agents a ticket.</span> <span>Work with them in Slack.</span></h1><p class="hero-description">Persistent cloud workspaces for coding agents. Shape the plan together in Slack, follow the build, and inspect the test results before reviewing the draft PR.</p><div class="hero-actions"><a class="story-button sun" href="#workflow">Watch one task unfold <img src="assets/icons/arrow-right.svg" width="18" height="18" alt=""></a><a href="deployment/index.html">Install in your AWS account</a></div><div class="hero-stage"><aside class="hero-ticket"><div class="ticket-title"><img src="assets/icons/linear-icon.svg" width="32" height="32" alt=""><div><span>ENG-142</span><b>Export filtered orders</b></div></div><p>Add CSV export for orders with date filters, company scope and viewer restrictions.</p><div class="ticket-meta"><span>Team ticket</span><span>Feature</span></div></aside><div class="slack-window">
+    <aside class="slack-sidebar" aria-hidden="true"><div class="workspace-name">Demo workspace</div>
+    <div class="sidebar-row"><img src="assets/icons/magnifying-glass.svg" width="13" height="13" alt="">Threads</div><div class="sidebar-row"><img src="assets/icons/file-text.svg" width="13" height="13" alt="">Drafts</div>
+    <div class="sidebar-label">Channels</div><div class="channel selected"># engineering</div><div class="channel"># product</div><div class="channel"># design</div>
+    <div class="sidebar-label">People</div><div class="sidebar-person"><img src="assets/story/maya.png" width="17" height="17" alt="">Maya</div><div class="sidebar-person"><img src="assets/story/sam.png" width="17" height="17" alt="">Sam</div><div class="sidebar-person">AgentX · app</div></aside>
+    <div class="slack-main"><header class="slack-header"><b># engineering <small> · Thread</small></b><div class="people" aria-label="Maya and Sam"><img src="assets/story/maya.png" width="20" height="20" alt=""><img src="assets/story/sam.png" width="20" height="20" alt=""><span>2</span></div></header>
+    <div class="slack-messages"><div class="slack-message"><img class="slack-avatar" src="assets/story/maya.png" width="31" height="31" alt=""><div><div class="message-meta"><b>Maya</b></div><p><span class="mention">@AgentX</span> take ENG-142. Export only the selected dates and our company’s orders.</p></div></div><div class="slack-message"><img class="slack-avatar bot" src="assets/icons/cloud.svg" width="31" height="31" alt=""><div><div class="message-meta"><b>AgentX</b><small>APP</small></div><p>I’ll help you choose the workflow, then propose the plan and checks.</p></div></div><div class="slack-message"><img class="slack-avatar" src="assets/story/sam.png" width="31" height="31" alt=""><div><div class="message-meta"><b>Sam</b></div><p>Viewers must be blocked, including direct API requests.</p></div></div></div><div class="slack-composer" aria-hidden="true"><span>Message #engineering…</span><img src="assets/icons/plus.svg" width="16" height="16" alt=""></div></div></div><aside class="hero-cloud"><header><img src="assets/icons/cloud.svg" width="32" height="32" alt=""><div><b>app-api</b><small>Persistent cloud workspace</small></div></header><div class="cloud-row"><img src="assets/icons/aws.svg" width="24" height="24" alt=""><span>Your AWS account</span></div><div class="cloud-row"><img src="assets/icons/file-text.svg" width="20" height="20" alt=""><span>Repository connected</span></div><div class="cloud-state">Your thread keeps its files and conversation.</div></aside></div><p class="hero-stage-note">Illustrative task · Public source · Mainline capability preview</p></section></div><section class="story-intro shell" id="workflow"><p class="eyebrow">One task, from request to review</p><h2>One ticket. A working conversation.</h2><p>The team shapes the plan. Cloud agents do the work. The thread brings it all together.</p></section>
+<section class="scroll-story continuous-story shell" data-scroll-story aria-label="Illustrative Slack task walkthrough">
+<div class="story-layout"><aside class="story-aside"><nav class="story-nav" aria-label="Walkthrough chapters"><a href="#chapter-request" data-chapter-link="0"><span class="chapter-number">01</span><span>Request</span></a><a href="#chapter-plan" data-chapter-link="1"><span class="chapter-number">02</span><span>Plan</span></a><a href="#chapter-build" data-chapter-link="2"><span class="chapter-number">03</span><span>Build</span></a><a href="#chapter-test" data-chapter-link="3"><span class="chapter-number">04</span><span>Test</span></a><a href="#chapter-fix" data-chapter-link="4"><span class="chapter-number">05</span><span>Fix + retest</span></a><a href="#chapter-pr" data-chapter-link="5"><span class="chapter-number">06</span><span>Draft PR</span></a></nav><div class="story-narrations"><article class="story-narration" data-story-narration="0"><p class="chapter-kind">01 / Request</p><h3>Give the work a clear starting point.</h3><p>One ticket, one task owner. Share the change in Slack and explicitly start the suggested planning path.</p></article><article class="story-narration" data-story-narration="1"><p class="chapter-kind">02 / Plan</p><h3>A better plan comes from the team.</h3><p>Sam clarifies the date rule. Maya requests a revision. The updated approach and check scope are proposed before Maya approves.</p></article><article class="story-narration" data-story-narration="2"><p class="chapter-kind">03 / Build</p><h3>The work carries on in the cloud.</h3><p>The coding agent works in a persistent workspace in your AWS account. Your team follows the work through the same thread.</p></article><article class="story-narration" data-story-narration="3"><p class="chapter-kind">04 / Test</p><h3>See the behavior behind the result.</h3><p>Selected source checks compare the approved expectation with the candidate output. The unexpected row makes the failure concrete.</p></article><article class="story-narration" data-story-narration="4"><p class="chapter-kind">05 / Fix + retest</p><h3>Keep the failure. Check the correction.</h3><p>Maya sends back the failed expectation. The changed revision gets fresh checks, then separate code and security reviews.</p></article><article class="story-narration" data-story-narration="5"><p class="chapter-kind">06 / Draft PR</p><h3>A change your team can actually review.</h3><p>The draft PR brings together the change, scoped results and review reports. Your team inspects the change and decides what gets merged.</p></article></div><div class="story-controls" aria-label="Walkthrough preferences"><button class="quiet-button" type="button" data-motion-toggle aria-pressed="false" title="Turn off animated movement and smooth scrolling">Reduce motion</button><a class="quiet-button" href="#chapter-request" data-go-chapter="0" title="Return to the first chapter">Back to start</a></div></aside>
+<div class="story-stage"><div class="conversation-and-proof"><div class="slack-window conversation-frame"><div class="slack-main"><header class="slack-header"><b># engineering <small>· One task thread</small></b><div class="people" aria-label="Maya and Sam"><img src="assets/story/maya.png" width="20" height="20" alt=""><img src="assets/story/sam.png" width="20" height="20" alt=""></div></header><div class="thread-ticket"><img src="assets/icons/linear-icon.svg" width="20" height="20" alt=""><div><b>ENG-142 · Export filtered orders</b><span>Finance’s date-scoped CSV · app-api</span></div><span class="task-state" data-task-state>Request</span></div><div class="conversation-log"><article class="thread-beat" id="chapter-request" data-anchor="chapter-request" data-thread-beat="0">
+<div class="beat-heading"><p class="chapter-kind">01 / Request</p><h3>Give the work a clear starting point.</h3><p>One ticket, one task owner. Share the change in Slack and explicitly start the suggested planning path.</p></div>
+<a class="beat-memory" href="#chapter-request" data-go-chapter="0"><img src="assets/icons/check.svg" width="14" height="14" alt=""><span>Maya requested ENG-142 · Quick started</span><span class="memory-action">Revisit</span></a>
+<div class="beat-content"><div class="slack-message "><img class="slack-avatar" src="assets/story/maya.png" width="36" height="36" alt=""><div><div class="message-meta"><b>Maya</b><small>Task owner</small></div><p><span class="mention">@AgentX</span> take ENG-142. Finance needs a CSV of our company’s orders for the dates they select.</p></div></div><div class="slack-message "><img class="slack-avatar bot" src="assets/icons/cloud.svg" width="36" height="36" alt=""><div><div class="message-meta"><b>AgentX</b><small>APP · Planning</small></div><p>A scoped export change. I suggest Quick: inspect the repo, propose one coding plan, then wait for your approval.</p><div class="message-actions"><a class="story-button sun" href="#chapter-plan" data-go-chapter="1">Start Quick workflow</a></div></div></div><div class="inline-proof-slot" data-proof-slot="0"><article class="proof-panel" data-proof-panel="0" aria-label="Export filtered orders"><div class="proof-kicker">The ticket behind this thread</div><h3>Export filtered orders</h3><div class="ticket-reference"><img src="assets/icons/linear-icon.svg" width="22" height="22" alt=""><b>ENG-142</b><span>Feature</span></div><p>Finance needs a CSV for the selected dates, limited to their company’s orders.</p><dl class="task-facts"><div><dt>Task owner</dt><dd>Maya</dd></div><div><dt>Collaborator</dt><dd>Sam</dd></div><div><dt>Repository</dt><dd>app-api</dd></div></dl><div class="path-card"><b>Quick</b><p>One coding-plan approval before implementation.</p><small>Full adds requirements and design approvals for larger changes.</small></div></article></div></div></article><article class="thread-beat" id="chapter-plan" data-anchor="chapter-plan" data-thread-beat="1">
+<div class="beat-heading"><p class="chapter-kind">02 / Plan</p><h3>A better plan comes from the team.</h3><p>Sam clarifies the date rule. Maya requests a revision. The updated approach and check scope are proposed before Maya approves.</p></div>
+<a class="beat-memory" href="#chapter-plan" data-go-chapter="1"><img src="assets/icons/check.svg" width="14" height="14" alt=""><span>Sam’s date rule → Plan v2 · Maya approved</span><span class="memory-action">Revisit</span></a>
+<div class="beat-content"><div class="slack-message "><img class="slack-avatar bot" src="assets/icons/cloud.svg" width="36" height="36" alt=""><div><div class="message-meta"><b>AgentX</b><small>APP · Planning</small></div><p>I’ll extend the existing orders service for CSV and check viewer access in the export handler.</p><div class="draft-assumption"><b>Plan v1 · proposed</b><span>Assumption: date filters use UTC.</span></div></div></div><div class="slack-message "><img class="slack-avatar" src="assets/story/sam.png" width="36" height="36" alt=""><div><div class="message-meta"><b>Sam</b><small>Teammate</small></div><p>Use the <strong>company timezone</strong>, including the whole last day. Viewers must be blocked even if they call the handler directly.</p></div></div><p class="owner-decision"><img src="assets/icons/arrow-u-up-left.svg" width="16" height="16" alt="">Maya requested a plan revision with Sam’s date rule.</p><button class="story-button sun revision-continue" type="button" data-reveal-plan>See revised Plan v2</button><div class="slack-message revision-reply"><img class="slack-avatar bot" src="assets/icons/cloud.svg" width="36" height="36" alt=""><div><div class="message-meta"><b>AgentX</b><small>APP · Planning</small></div><p><strong>Plan v2</strong> now uses company-timezone boundaries before CSV generation. The checks will inspect the rows and the viewer response.</p><div class="message-actions"><a class="story-button sun" href="#chapter-build" data-go-chapter="2">Approve example plan</a><button class="story-button " type="button" data-story-dialog="plan-dialog">View plan</button><button class="story-button " type="button" data-story-dialog="change-dialog">Request changes</button></div></div></div><div class="demo-comments" data-demo-comments></div><div class="inline-proof-slot" data-proof-slot="1"><article class="proof-panel" data-proof-panel="1" aria-label="Plan v2 · proposed"><div class="proof-kicker">A visible plan revision</div><h3>Plan v2 · proposed</h3><p class="artifact-intro">Reuse the orders service. Apply the date and company constraints before generating CSV. Reject viewers in the export handler.</p><div class="plan-delta"><span>Sam’s clarification</span><s>UTC date boundaries</s><strong>Company timezone · whole last day</strong></div><ol class="acceptance-list"><li>October 1–2 returns exactly a1 and a2.</li><li>Alpha’s export contains no Beta orders.</li><li>A viewer’s direct handler call returns 403.</li></ol><div class="coverage-label">Source checks · synthetic rows · mocked database</div><p class="proof-note">Browser interaction is not exercised.</p><button class="story-button " type="button" data-story-dialog="plan-dialog">Inspect plan and scenarios</button></article></div></div></article><article class="thread-beat" id="chapter-build" data-anchor="chapter-build" data-thread-beat="2">
+<div class="beat-heading"><p class="chapter-kind">03 / Build</p><h3>The work carries on in the cloud.</h3><p>The coding agent works in a persistent workspace in your AWS account. Your team follows the work through the same thread.</p></div>
+<a class="beat-memory" href="#chapter-build" data-go-chapter="2"><img src="assets/icons/check.svg" width="14" height="14" alt=""><span>Export implemented in the cloud · Revision A</span><span class="memory-action">Revisit</span></a>
+<div class="beat-content"><p class="owner-decision good"><img src="assets/icons/check.svg" width="16" height="16" alt="">Maya approved Plan v2 and its source/mock check scope.</p><div class="slack-message "><img class="slack-avatar bot" src="assets/icons/cloud.svg" width="36" height="36" alt=""><div><div class="message-meta"><b>AgentX</b><small>APP · Coding</small></div><p>The export is taking shape on <code>task/eng-142</code>: company and date filters, the viewer guard, and matching source checks.</p><p class="thread-secondary">The files and task context stay in the cloud workspace.</p></div></div><div class="time-divider"><img src="assets/icons/clock.svg" width="16" height="16" alt=""><span>The team gets on with other work</span></div><div class="slack-message "><img class="slack-avatar" src="assets/story/maya.png" width="36" height="36" alt=""><div><div class="message-meta"><b>Maya</b><small>Task owner</small></div><p>I’ll pick this up here when the checks are ready.</p></div></div><div class="inline-proof-slot" data-proof-slot="2"><article class="proof-panel" data-proof-panel="2" aria-label="app-api · cloud workspace"><div class="proof-kicker">Coding in the cloud</div><h3>app-api · cloud workspace</h3><div class="workspace-identity"><img src="assets/icons/cloud.svg" width="28" height="28" alt=""><div><b>Your AWS account</b><span>Persistent files and task context</span></div></div><div class="branch-pill">task/eng-142</div><ol class="cloud-activity"><li><img src="assets/icons/check.svg" width="16" height="16" alt=""><div><b>Plan v2 approved</b><span>Date rule and check scope retained</span></div></li><li><img src="assets/icons/file-text.svg" width="16" height="16" alt=""><div><b>Export implementation</b><span>Date range, company filter and viewer guard</span></div></li><li><img src="assets/icons/terminal.svg" width="16" height="16" alt=""><div><b>Selected code checks</b><span>Source scenarios run after implementation</span></div></li></ol><div class="cloud-continuity"><b>Work lives beyond your laptop.</b><p>Idle compute stops; the workspace retains its files and conversation for the next turn.</p></div></article></div></div></article><article class="thread-beat" id="chapter-test" data-anchor="chapter-test" data-thread-beat="3">
+<div class="beat-heading"><p class="chapter-kind">04 / Test</p><h3>See the behavior behind the result.</h3><p>Selected source checks compare the approved expectation with the candidate output. The unexpected row makes the failure concrete.</p></div>
+<a class="beat-memory" href="#chapter-test" data-go-chapter="3"><img src="assets/icons/check.svg" width="14" height="14" alt=""><span>Date check failed · a3 was outside the range</span><span class="memory-action">Revisit</span></a>
+<div class="beat-content"><div class="slack-message "><img class="slack-avatar bot" src="assets/icons/check.svg" width="36" height="36" alt=""><div><div class="message-meta"><b>Checks</b><small>Source check run</small></div><p>The export included <strong>a3 · September 30</strong>, outside the approved October 1–2 range. The required date check failed.</p><div class="thread-result failed-result"><b>Revision A · date check failed</b><span>Expected a1, a2 · observed a3, a1, a2</span></div><div class="message-actions"><button class="story-button " type="button" data-story-dialog="results-dialog">Inspect failed result</button><a class="story-button sun" href="#chapter-fix" data-go-chapter="4">Send back to fix</a></div></div></div><div class="inline-proof-slot" data-proof-slot="3"><article class="proof-panel" data-proof-panel="3" aria-label="One row tells the story."><div class="proof-kicker">Selected source checks</div><h3>One row tells the story.</h3><div class="run-header"><b>Run 1 · Revision A</b><span class="status-failed">Failed</span></div><p><b>Expected:</b> October 1–2, company Alpha.</p><table class="orders-table"><thead><tr><th>Order</th><th>Date</th><th>Result</th></tr></thead><tbody><tr class="unexpected-row"><td>a3</td><td>Sep 30</td><td>Outside range</td></tr><tr><td>a1</td><td>Oct 1</td><td>Expected</td></tr><tr><td>a2</td><td>Oct 2</td><td>Expected</td></tr></tbody></table><p class="failure-explanation">a3 is outside the selected dates. The required assertion blocks the draft PR.</p><div class="mini-checks"><p>Company isolation <b>Passed · source/mock</b></p><p>Viewer restriction <b>Passed · handler</b></p></div><div class="coverage-label">Source checks · synthetic rows · mocked database</div><p class="proof-note">Browser interaction is not exercised.</p><button class="story-button " type="button" data-story-dialog="results-dialog">Inspect assertion and run history</button></article></div></div></article><article class="thread-beat" id="chapter-fix" data-anchor="chapter-fix" data-thread-beat="4">
+<div class="beat-heading"><p class="chapter-kind">05 / Fix + retest</p><h3>Keep the failure. Check the correction.</h3><p>Maya sends back the failed expectation. The changed revision gets fresh checks, then separate code and security reviews.</p></div>
+<a class="beat-memory" href="#chapter-fix" data-go-chapter="4"><img src="assets/icons/check.svg" width="14" height="14" alt=""><span>Correction checked · Revision B · reviews passed</span><span class="memory-action">Revisit</span></a>
+<div class="beat-content"><p class="owner-decision"><img src="assets/icons/arrow-u-up-left.svg" width="16" height="16" alt="">Maya sent back the failed date expectation for correction.</p><div class="slack-message "><img class="slack-avatar bot" src="assets/icons/cloud.svg" width="36" height="36" alt=""><div><div class="message-meta"><b>AgentX</b><small>APP · Coding</small></div><p>I corrected the date boundary. <strong>Revision B</strong> excludes September 30 and retains the approved company-timezone rule.</p></div></div><div class="slack-message "><img class="slack-avatar bot" src="assets/icons/check.svg" width="36" height="36" alt=""><div><div class="message-meta"><b>Checks</b><small>Fresh source check run</small></div><p>Fresh checks on Revision B returned exactly <strong>a1 and a2</strong>. Company isolation and viewer-handler checks also passed.</p><div class="thread-result passed-result"><b>3 selected checks passed with mocks</b><span>Revision A’s failure stays in the run history.</span></div></div></div><div class="review-receipts"><p><img src="assets/icons/file-text.svg" width="16" height="16" alt=""><b>Code review</b><span>Passed · Revision B</span></p><p><img src="assets/icons/shield-check.svg" width="16" height="16" alt=""><b>Security review</b><span>Passed · Revision B</span></p><small>Separate read-only review sessions · illustrative outcomes</small></div><div class="inline-proof-slot" data-proof-slot="4"><article class="proof-panel" data-proof-panel="4" aria-label="The correction has fresh results."><div class="proof-kicker">Failure → correction → fresh run</div><h3>The correction has fresh results.</h3><div class="retained-run"><span>Run 1 · Revision A</span><b>Failed · retained</b><small>Unexpected a3 · September 30</small></div><div class="run-header"><b>Run 2 · Revision B</b><span class="status-passed">Passed with mocks</span></div><table class="orders-table"><thead><tr><th>Order</th><th>Date</th><th>Company</th></tr></thead><tbody><tr><td>a1</td><td>Oct 1</td><td>Alpha</td></tr><tr><td>a2</td><td>Oct 2</td><td>Alpha</td></tr></tbody></table><div class="mini-checks"><p>Date range <b>Only a1, a2</b></p><p>Company isolation <b>No Beta rows</b></p><p>Viewer handler <b>403</b></p></div><div class="coverage-label">Source checks · synthetic rows · mocked database</div><p class="proof-note">Browser interaction is not exercised.</p><button class="story-button " type="button" data-story-dialog="results-dialog">Inspect both runs</button></article></div></div></article><article class="thread-beat" id="chapter-pr" data-anchor="chapter-pr" data-thread-beat="5">
+<div class="beat-heading"><p class="chapter-kind">06 / Draft PR</p><h3>A change your team can actually review.</h3><p>The draft PR brings together the change, scoped results and review reports. Your team inspects the change and decides what gets merged.</p></div>
+<a class="beat-memory" href="#chapter-pr" data-go-chapter="5"><img src="assets/icons/check.svg" width="14" height="14" alt=""><span>Draft PR ready for human review</span><span class="memory-action">Revisit</span></a>
+<div class="beat-content"><div class="slack-message "><img class="slack-avatar bot" src="assets/icons/cloud.svg" width="36" height="36" alt=""><div><div class="message-meta"><b>AgentX</b><small>APP · Draft PR</small></div><p>The draft PR contains the export change, fresh results and both review reports for <strong>Revision B</strong>.</p><div class="message-actions"><button class="story-button sun" type="button" data-story-dialog="pr-dialog">Inspect example PR</button><button class="story-button " type="button" data-story-dialog="coverage-dialog">Check coverage</button></div></div></div><div class="slack-message "><img class="slack-avatar" src="assets/story/maya.png" width="36" height="36" alt=""><div><div class="message-meta"><b>Maya</b><small>Task owner</small></div><p>The date correction and check scope are easy to inspect. I’ll review the diff in GitHub before we merge.</p></div></div><p class="thread-secondary end-note">The same ticket, plan, decisions and check history stay with the task.</p><div class="inline-proof-slot" data-proof-slot="5"><article class="proof-panel" data-proof-panel="5" aria-label="Export filtered orders"><div class="proof-kicker">A concrete review packet</div><h3>Export filtered orders</h3><div class="pr-heading"><img src="assets/icons/git-pull-request.svg" width="24" height="24" alt=""><b>Draft PR</b><span>Revision B</span></div><p>Company-scoped CSV export with the corrected date boundary and viewer restriction.</p><div class="pr-verified"><p><img src="assets/icons/check.svg" width="15" height="15" alt="">3 selected checks · passed with mocks</p><p><img src="assets/icons/file-text.svg" width="15" height="15" alt="">Code review · passed for B</p><p><img src="assets/icons/shield-check.svg" width="15" height="15" alt="">Security review · passed for B</p></div><p class="output-caption">Expected CSV output · synthetic orders</p><table class="orders-table"><thead><tr><th>Order</th><th>Date</th><th>Company</th></tr></thead><tbody><tr><td>a1</td><td>Oct 1</td><td>Alpha</td></tr><tr><td>a2</td><td>Oct 2</td><td>Alpha</td></tr></tbody></table><button class="story-button sun" type="button" data-story-dialog="pr-dialog">Open example diff and results</button><p class="proof-note">Browser not exercised. Human review and merge in GitHub.</p></article></div></div></article></div><footer class="thread-footer"><span>Shared task context</span><span>Maya owns workflow decisions</span></footer></div></div><aside class="proof-deck" aria-label="Linked task artifacts"></aside></div><p class="scene-qualification">Illustrative task · fictional people and repository. Source/mock check scope. This is not a recorded Slack run. Default bot name: AgentX.</p></div></div><div class="story-markers" aria-hidden="true"><div class="story-marker" data-story-marker="0"></div><div class="story-marker" data-story-marker="1"></div><div class="story-marker" data-story-marker="2"></div><div class="story-marker" data-story-marker="3"></div><div class="story-marker" data-story-marker="4"></div><div class="story-marker" data-story-marker="5"></div></div></section>
+<section class="workspace-continuity shell" id="planning" aria-labelledby="continuity-heading">
+  <div class="continuity-panel">
+    <div class="continuity-copy">
+      <p class="eyebrow">A workspace beyond your laptop</p>
+      <h2 id="continuity-heading">Come back to<br>the same work.</h2>
+      <p>Pick up the same task in Slack when there’s more to do. Your cloud workspace retains the files and conversation while compute is idle.</p>
+      <a class="text-link" href="how-it-works/index.html#continue">How workspaces continue <img src="assets/icons/arrow-right.svg" width="20" height="20" alt=""></a>
+    </div>
+    <dl class="continuity-facts">
+      <div><dt><img src="assets/icons/file-text.svg" width="28" height="28" alt="">Files</dt><dd>Kept in the workspace</dd></div>
+      <div><dt><img src="assets/icons/slack-icon.svg" width="28" height="28" alt="">Conversation</dt><dd>Retained with the task</dd></div>
+      <div><dt><img src="assets/icons/clock.svg" width="28" height="28" alt="">Compute</dt><dd>Stops when idle</dd></div>
+    </dl>
+  </div>
 </section>
-<div class="ownership-rule shell">
-<span>Approve the plan.</span>
-<span>Inspect the evidence.</span>
-<span>Keep the final call.</span>
-</div>
-<section class="native-section shell" id="workflow">
-<div class="section-heading">
-<p class="eyebrow">The complete loop</p>
-<h2>From the request to the next revision.</h2>
-<p>See what happens before coding starts, what comes back for review, and how the work continues when your team asks for changes.</p>
-</div>
-<div class="journey-player native-player" data-journey>
-<div class="journey-toolbar">
-<p class="eyebrow">Illustrative workflow · documentation improvement</p>
-<button class="motion-control" type="button" data-play hidden>Play walkthrough</button>
-</div>
-<div class="journey-track" aria-label="Choose a workflow stage">
-<button class="journey-stop" type="button" data-step="0" aria-pressed="true" aria-controls="native-panel-0" disabled>
-<span>01</span>
-<img src="assets/icons/slack-icon.svg" width="22" height="22" alt="">
-<b>Request</b>
-</button>
-<button class="journey-stop" type="button" data-step="1" aria-pressed="false" aria-controls="native-panel-1" disabled>
-<span>02</span>
-<img src="assets/icons/file-text.svg" width="22" height="22" alt="">
-<b>Plan</b>
-</button>
-<button class="journey-stop" type="button" data-step="2" aria-pressed="false" aria-controls="native-panel-2" disabled>
-<span>03</span>
-<img src="assets/icons/aws.svg" width="22" height="22" alt="">
-<b>Code</b>
-</button>
-<button class="journey-stop" type="button" data-step="3" aria-pressed="false" aria-controls="native-panel-3" disabled>
-<span>04</span>
-<img src="assets/icons/file-text.svg" width="22" height="22" alt="">
-<b>Evidence</b>
-</button>
-<button class="journey-stop" type="button" data-step="4" aria-pressed="false" aria-controls="native-panel-4" disabled>
-<span>05</span>
-<img src="assets/icons/git-pull-request.svg" width="22" height="22" alt="">
-<b>PR</b>
-</button>
-<button class="journey-stop" type="button" data-step="5" aria-pressed="false" aria-controls="native-panel-5" disabled>
-<span>06</span>
-<img src="assets/icons/arrow-u-up-left.svg" width="22" height="22" alt="">
-<b>Feedback</b>
-</button>
-</div>
-<div class="journey-progress" aria-hidden="true">
-<div>
-</div>
-</div>
-<div class="journey-panels">
-<article class="journey-panel native-panel" id="native-panel-0" data-panel="0">
-<div class="native-panel-copy">
-<p class="eyebrow">01 / Request</p>
-<h3>Start with useful work.</h3>
-<p>A specific request gives the agent a useful boundary. Start in a project-bound Slack channel or hand it over from your coding tool.</p>
-<p class="native-principle">You start the task. Creating a GitHub issue does not start work.</p>
-</div>
-<div class="sample-message">
-<img src="assets/icons/slack-icon.svg" width="28" height="28" alt="Slack">
-<div>
-<span class="sample-label">Example request · docs project</span>
-<p>Make the Copy button ready for its next use. Reset its label after copying, announce success accessibly, and preserve manual copy if clipboard access fails.</p>
-</div>
-</div>
-</article>
-<article class="journey-panel native-panel" id="native-panel-1" data-panel="1">
-<div class="native-panel-copy">
-<p class="eyebrow">02 / Plan</p>
-<h3>Agree on the change before coding.</h3>
-<p>Quick gives you one implementation plan to approve. Read the scope and checks, request changes, or approve that version.</p>
-<p class="native-principle">Required project checks stay required. Optional checks come from your project configuration.</p>
-</div>
-<div class="sample-document">
-<header>
-<span>Implementation plan</span>
-<span>Example · version 1</span>
-</header>
-<ol>
-<li>Restore the Copy label after the confirmation.</li>
-<li>Announce success without moving keyboard focus.</li>
-<li>Preserve the manual-copy fallback.</li>
-</ol>
-<div class="sample-command">
-<span>Selected checks</span>
-<code>Success · reset · clipboard failure · keyboard access</code>
-</div>
-<p class="sample-decision">Your decision: approve the plan or request changes.</p>
-</div>
-</article>
-<article class="journey-panel native-panel" id="native-panel-2" data-panel="2">
-<div class="native-panel-copy">
-<p class="eyebrow">03 / Code</p>
-<h3>Let the agent do the implementation.</h3>
-<p>The remote coding agent reads the repository, edits files and runs commands in the prepared workspace in your AWS account.</p>
-<p class="native-principle">Your team configures the repository, environment, models and connections.</p>
-</div>
-<div class="sample-workspace">
-<img src="assets/icons/aws.svg" width="62" height="40" alt="AWS">
-<div>
-<span class="sample-label">Your AWS account</span>
-<h4>One workspace. The task’s context.</h4>
-<div class="sample-files">
-<code>docs.js</code>
-<code>copy-button checks</code>
-<code>project instructions</code>
-</div>
-<p>Follow-ups use the retained workspace. Your laptop can get on with other work.</p>
-</div>
-</div>
-</article>
-<article class="journey-panel native-panel" id="native-panel-3" data-panel="3">
-<div class="native-panel-copy">
-<p class="eyebrow">04 / Evidence</p>
-<h3>Inspect the evidence behind the result.</h3>
-<p>After checks pass, request the separate code and security AI reviews. Read their findings alongside the diff and named check output. Their code version matters.</p>
-<p class="native-principle">A review finding is an AI recommendation. A named test result is evidence of that test, not proof of correctness.</p>
-</div>
-<div class="sample-document">
-<header>
-<span>Review packet</span>
-<span>Example contents</span>
-</header>
-<div class="packet-row">
-<b>Code changes</b>
-<span>Diff and candidate reference</span>
-</div>
-<div class="packet-row">
-<b>Checks</b>
-<span>Commands, output, environment and gaps</span>
-</div>
-<div class="packet-row">
-<b>Code + security reviews</b>
-<span>Separate, read-only AI findings</span>
-</div>
-<p class="sample-decision">If the code changes, dependent evidence needs to be refreshed.</p>
-</div>
-</article>
-<article class="journey-panel native-panel" id="native-panel-4" data-panel="4">
-<div class="native-panel-copy">
-<p class="eyebrow">05 / PR</p>
-<h3>Bring the work into your team’s review.</h3>
-<p>When the native workflow’s required checks and reviews qualify the candidate, request draft PRs. GitHub remains the source for comments, CI and merge state.</p>
-<p class="native-principle">A task with multiple required PRs waits for all of them to be observed merged.</p>
-</div>
-<div class="sample-document">
-<header>
-<span>Draft pull request</span>
-<span>Example handoff</span>
-</header>
-<h4>Improve docs copy confirmation</h4>
-<div class="packet-row">
-<b>Changes + evidence</b>
-<span>Ready for your inspection</span>
-</div>
-<div class="packet-row">
-<b>Team review</b>
-<span>Comments and repository CI in GitHub</span>
-</div>
-<p class="sample-decision">You decide what gets merged.</p>
-</div>
-</article>
-<article class="journey-panel native-panel" id="native-panel-5" data-panel="5">
-<div class="native-panel-copy">
-<p class="eyebrow">06 / Feedback</p>
-<h3>Continue through review, with your approval.</h3>
-<p>Rovara Code gathers PR comments, groups related feedback and proposes fixes. Inspect the details, approve selected changes, or ask for a different approach.</p>
-<p class="native-principle">Feedback creates a proposal. It does not silently authorize another coding run.</p>
-</div>
-<div class="sample-document">
-<header>
-<span>PR feedback review</span>
-<span>Example proposal</span>
-</header>
-<blockquote>“Keep keyboard focus on the Copy button.”</blockquote>
-<p>
-<b>Proposed response</b>
-<br>Use a polite status announcement. Keep focus unchanged. Check keyboard and clipboard failure behavior.</p>
-<p class="sample-decision">Your decision → approved fixes → fresh checks and reviews.</p>
-</div>
-</article>
-</div>
-<p class="scenario-note">A constructed explanation of the native workflow, not a recorded run. The historical benchmark below has its own saved evidence.</p>
-</div>
+<section class="setup-section shell" id="connections" aria-labelledby="setup-heading">
+  <p class="eyebrow">Now bring your own task</p>
+  <h2 id="setup-heading">Three steps to your first thread.</h2>
+  <ol class="setup-steps">
+    <li><div class="setup-step-meta"><span>01</span><img src="assets/icons/cloud.svg" width="26" height="26" alt=""></div><h3>Launch your workspace.</h3><p>Install Rovara in your AWS account with the guided setup.</p></li>
+    <li><div class="setup-step-meta"><span>02</span><img src="assets/icons/github-icon.svg" width="26" height="26" alt=""></div><h3>Connect GitHub and Slack.</h3><p>Choose the repository and project channel where your team will work.</p></li>
+    <li><div class="setup-step-meta"><span>03</span><img src="assets/icons/slack-icon.svg" width="26" height="26" alt=""></div><h3>Bring the first ticket.</h3><p>Share a ticket or describe a change in Slack, then start the suggested workflow.</p></li>
+  </ol>
+  <a class="text-link setup-alternative" href="docs/coding-tools/index.html">Connect a coding tool through MCP <img src="assets/icons/arrow-right.svg" width="20" height="20" alt=""></a>
 </section>
-<section class="native-section shell" id="planning">
-<div class="section-heading">
-<p class="eyebrow">Choose the planning depth</p>
-<h2>A small fix or a larger feature.</h2>
-<p>Choose how much to agree on up front. Both paths retain the project’s required checks and separate reviews.</p>
-</div>
-<div class="mode-comparison">
-<article>
-<p class="mode-kicker">Quick <span>One approval</span>
-</p>
-<h3>Start with an implementation plan.</h3>
-<p>For a well-defined fix or change. Inspect the scope and check choices, approve the plan, and let Rovara Code implement it.</p>
-<ol class="approval-path">
-<li>Request</li>
-<li class="human-step">Approve plan</li>
-<li>Code + checks</li>
-</ol>
-<a href="docs/tasks/index.html">Follow a Quick task →</a>
-</article>
-<article>
-<p class="mode-kicker">Full <span>Three approval points</span>
-</p>
-<h3>Agree on the feature before building.</h3>
-<p>For work that needs definition. Review the requirements, then the design, then the coding plan. Ask for changes at each step.</p>
-<ol class="approval-path">
-<li class="human-step">Requirements</li>
-<li class="human-step">Design</li>
-<li class="human-step">Plan</li>
-</ol>
-<a href="docs/planning/index.html">Explore the Full workflow →</a>
-</article>
-</div>
+<section class="release-section shell" id="install" aria-labelledby="install-heading">
+  <div>
+    <p class="eyebrow">Self-hosted · Your AWS account</p>
+    <h2 id="install-heading">Bring your next ticket to Slack.</h2>
+    <p>Launch in AWS or use the guided installer. Your team starts the work from Slack.</p>
+  </div>
+  <div class="install-action"><a class="button" href="deployment/index.html">Install Rovara <img class="icon" src="assets/icons/arrow-right.svg" width="24" height="24" alt=""></a><a class="install-guide" href="docs/install/index.html">Read the setup guide</a></div>
+  <p class="install-requirements">You’ll need AWS, GitHub, Slack and model access. AWS and model usage have costs.</p>
 </section>
-<section class="native-section shell feedback-feature" id="feedback">
-<div>
-<p class="eyebrow">The PR is part of the work</p>
-<h2>Review feedback.<br>Choose what happens next.</h2>
-<p>Rovara Code gathers the comments on the task’s PRs and proposes a response. Open the detailed review, inspect the reasoning, and approve the fixes you want.</p>
-<p>Approved changes return to the workspace for implementation and fresh checks. Your team keeps the merge decision.</p>
-<a class="text-link" href="docs/feedback/index.html">See the feedback workflow →</a>
-</div>
-<div class="feedback-example">
-<header>
-<img src="assets/icons/git-pull-request.svg" width="24" height="24" alt="">
-<span>Illustrative feedback review</span>
-</header>
-<div class="feedback-comment">
-<span class="sample-label">Reviewer comment</span>
-<blockquote>Keep keyboard focus on the Copy button.</blockquote>
-</div>
-<div class="feedback-response">
-<span class="sample-label">Rovara Code recommendation</span>
-<p>Announce copy success with a status message, without moving focus. Add a keyboard check.</p>
-</div>
-<div class="feedback-authority">
-<b>You choose the response.</b>
-<span>Approve selected fixes · Request changes · Dismiss with a reason</span>
-</div>
-</div>
+<section class="recorded-proof shell" id="recorded-evidence" aria-labelledby="evidence-heading">
+  <div class="recorded-proof-copy">
+    <p class="eyebrow">From the recorded benchmark</p>
+    <h2 id="evidence-heading">One Django fix. 22 tests passed.</h2>
+    <p>Saved patch and grader output · 30 September 2026.<br>Historical benchmark evidence, separate from the illustrative Slack task.</p>
+  </div>
+  <a class="text-link" href="docs/benchmarks/index.html#recorded-run">Inspect patch and test output <img src="assets/icons/arrow-right.svg" width="20" height="20" alt=""></a>
 </section>
-<section class="native-section shell bigger-work">
-<div class="section-heading">
-<p class="eyebrow">When one change has several parts</p>
-<h2>See what is ready.<br>See what is waiting.</h2>
-<p>Tasks can depend on earlier work and span linked PRs. Inspect the blocker and next action; a partial merge does not finish the whole task.</p>
-</div>
-<div class="dependency-example" aria-label="Example dependency order">
-<div>
-<span>01</span>
-<b>Shared change</b>
-<small>First dependency</small>
-</div>
-<span class="dependency-arrow" aria-hidden="true">→</span>
-<div>
-<span>02</span>
-<b>Dependent change</b>
-<small>Waits for prerequisite work</small>
-</div>
-<span class="dependency-arrow" aria-hidden="true">→</span>
-<div>
-<span>03</span>
-<b>Required PRs</b>
-<small>Track the complete set</small>
-</div>
-</div>
-<a class="text-link" href="docs/coordination/index.html">Understand dependencies and linked PRs →</a>
-</section>      <section class="audience-section shell">
-        <article>
-          <p class="eyebrow">For engineering leaders</p>
-          <h2>Understand the work.<br />Keep control.</h2>
-          <p>
-            Own the environment in your AWS account. Make plan and feedback decisions visible. See the evidence and blockers before your team merges.
-          </p>
-          <a class="text-link" href="how-it-works/index.html#architecture"
-            >See what runs where
-            <img
-              class="icon"
-              src="assets/icons/arrow-right.svg"
-              width="24"
-              height="24"
-              alt=""
-              aria-hidden="true"
-          />
-</a>
-        </article>
-        <article>
-          <p class="eyebrow">For developers</p>
-          <h2>Inspect. Iterate.<br />Keep moving.</h2>
-          <p>
-            Delegate a task with an agreed plan. Inspect the diff, check output and review findings. Respond to PR feedback in the same workflow.
-          </p>
-          <a class="text-link" href="docs/tasks/index.html"
-            >Follow a task
-            <img
-              class="icon"
-              src="assets/icons/arrow-right.svg"
-              width="24"
-              height="24"
-              alt=""
-              aria-hidden="true"
-          />
-</a>
-        </article>
-      </section>
-<section class="native-section shell system-links">
-<div class="section-heading">
-<p class="eyebrow">Understand the system</p>
-<h2>Clear at every level.</h2>
-<p>Follow the work as a developer. Inspect ownership, boundaries and operating costs as a team leader.</p>
-</div>
-<div>
-<a href="how-it-works/index.html#architecture">
-<span>01 / Architecture</span>
-<b>What runs where</b>
-<p>Clients, control plane, workspace, checks and stored evidence.</p>
-</a>
-<a href="how-it-works/index.html#checks">
-<span>02 / Evidence</span>
-<b>Which code was checked</b>
-<p>Results belong to a candidate. Changes need fresh evidence.</p>
-</a>
-<a href="how-it-works/index.html#continue">
-<span>03 / Lifecycle</span>
-<b>What stays, what closes</b>
-<p>Workspaces, waiting states, task history and closeout.</p>
-</a>
-</div>
-</section>      <section
-        class="homepage-evidence shell"
-        id="recorded-evidence"
-        aria-labelledby="evidence-heading"
-      >
-        <div class="evidence-heading">
-          <p class="eyebrow">One recorded task · Django · 30 September 2026</p>
-          <h2 id="evidence-heading">Code to review. Evidence to inspect.</h2>
-          <p>
-            Django’s username validators accepted a trailing newline. The agent
-            changed two expressions. Here is the patch and the output behind the
-            saved result.
-          </p>
-        </div>
-        <div class="evidence-pair">
-          <article class="evidence-document">
-            <header>
-              <img
-                class="icon"
-                src="assets/icons/git-pull-request.svg"
-                width="24"
-                height="24"
-                alt=""
-                aria-hidden="true"
-              />
-              <h3>Code changes</h3>
-              <a href="#recorded-diff" data-evidence="recorded-diff"
-                >Inspect patch
-                <img
-                  class="icon"
-                  src="assets/icons/arrow-up-right.svg"
-                  width="24"
-                  height="24"
-                  alt=""
-                  aria-hidden="true"
-              />
-</a>
-            </header>
-            <div class="document-filename">
-              django/contrib/auth/validators.py
-            </div>
-            <div class="validator-block">
-              <p>ASCIIUsernameValidator</p>
-              <code
-                >
-<span class="removed">− regex = r&#x27;^[\w.@+-]+$&#x27;</span
-                >
-<span class="added"
-                  >+ regex = r&#x27;\A[\w.@+-]+\Z&#x27;</span
-                >
-</code
-              >
-            </div>
-            <div class="validator-block">
-              <p>UnicodeUsernameValidator</p>
-              <code
-                >
-<span class="removed">− regex = r&#x27;^[\w.@+-]+$&#x27;</span
-                >
-<span class="added"
-                  >+ regex = r&#x27;\A[\w.@+-]+\Z&#x27;</span
-                >
-</code
-              >
-            </div>
-            <div class="document-foot">
-              Two expressions changed. <span>Exact recorded patch</span>
-            </div>
-          </article>
-          <article class="evidence-document" id="recorded-output">
-            <header>
-              <img
-                class="icon"
-                src="assets/icons/terminal-window.svg"
-                width="24"
-                height="24"
-                alt=""
-                aria-hidden="true"
-              />
-              <h3>Test output</h3>
-              <a href="assets/evidence/django-11099/test-output.txt"
-                >Raw output
-                <img
-                  class="icon"
-                  src="assets/icons/arrow-up-right.svg"
-                  width="24"
-                  height="24"
-                  alt=""
-                  aria-hidden="true"
-              />
-</a>
-            </header>
-            <div class="document-filename">
-              Saved benchmark output · excerpt
-            </div>
-            <pre>
-<code>test_ascii_validator ... ok
-test_unicode_validator ... ok
-Ran 22 tests in 0.047s
-OK</code>
-</pre>
-            <div class="recorded-result">
-              <strong>22 tests passed</strong
-              >
-<span>3 bug checks · 19 regression checks</span>
-            </div>
-            <div class="document-foot">
-              One selected benchmark task.
-              <a href="assets/evidence/django-11099/harness-report.json"
-                >Grader report
-                <img
-                  class="icon"
-                  src="assets/icons/arrow-up-right.svg"
-                  width="24"
-                  height="24"
-                  alt=""
-                  aria-hidden="true"
-              />
-</a>
-            </div>
-          </article>
-        </div>
-        <div class="evidence-qualification">
-          <p>
-            Recorded artifacts, inspected rather than rerun. The Slack request
-            above illustrates the workflow; this is benchmark evidence, not a
-            recorded Slack-to-PR run.
-          </p>
-          <a href="docs/benchmarks/index.html#recorded-run"
-            >Inspect the method and full record
-            <img
-              class="icon"
-              src="assets/icons/arrow-right.svg"
-              width="24"
-              height="24"
-              alt=""
-              aria-hidden="true"
-          />
-</a>
-        </div>
-        <div class="patch-details">
-          <details id="recorded-diff">
-            <summary>Recorded Django validator patch</summary>
-            <div class="report-detail">
-              <p class="report-label">
-                Rovara Code benchmark patch · django__django-11099
-              </p>
-              <pre>
-<code>django/contrib/auth/validators.py
-
-ASCIIUsernameValidator and UnicodeUsernameValidator:
-- regex = r'^[\w.@+-]+$'
-+ regex = r'\A[\w.@+-]+\Z'</code>
-</pre>
-              <p>
-                Both validators now require the entire username to match. The
-                saved grader report marks this selected benchmark task resolved:
-                three bug checks and nineteen regression checks passed.
-              </p>
-              <div class="artifact-links">
-                <a href="assets/evidence/django-11099/patch.diff" download
-                  >Download the complete patch</a
-                >
-                <a href="docs/benchmarks/index.html#recorded-run"
-                  >Inspect the recorded evidence and method</a
-                >
-              </div>
-              <p class="source-note">
-                Historical benchmark evidence, not a live Slack-to-PR
-                demonstration or a full Django test-suite result. Reviewed
-                artifacts; not rerun during this website review.
-              </p>
-            </div>
-          </details>
-        </div>
-      </section>
-      <section class="overview-section shell">
-        <div>
-          <p class="eyebrow">Earlier workspace overview · 20 seconds</p>
-          <h2>A place for delegated work.<br />A result you can inspect.</h2>
-          <p>
-            Start where you work, give the task its own workspace, and bring the
-            result back for review.
-          </p>
-          <a class="text-link" href="how-it-works/index.html"
-            >Explore the complete system
-            <img
-              class="icon"
-              src="assets/icons/arrow-right.svg"
-              width="24"
-              height="24"
-              alt=""
-              aria-hidden="true"
-          />
-</a>
-        </div>
-        <figure class="overview-video">
-          <video
-            controls
-            playsinline
-            preload="none"
-            poster="assets/video/rovara-overview.jpg"
-            aria-label="Rovara Code 20-second product overview"
-          >
-            <source src="assets/video/rovara-overview.mp4" type="video/mp4" />
-            <track
-              kind="captions"
-              src="assets/video/rovara-overview.vtt"
-              srclang="en"
-              label="English"
-            />
-          </video>
-          <figcaption>
-            Earlier illustrative workspace overview, with a historical benchmark example. Plan approvals and PR feedback are explained in the walkthrough above.
-            <a href="assets/video/rovara-overview-transcript.txt"
-              >Read transcript</a
-            >
-          </figcaption>
-        </figure>
-      </section>
-      <section class="connection-section shell" id="connections">
-        <p class="eyebrow">Start where your team works</p>
-        <div class="connection-list">
-          <div>
-            <div class="logo-line">
-              <img
-                src="assets/icons/slack-icon.svg"
-                width="26"
-                height="26"
-                alt="Slack"
-              />
-              <h3>Slack</h3>
-            </div>
-            <p>
-              Request a task in a project channel. Plans, decision prompts and progress return to its thread.
-            </p>
-          </div>
-          <div>
-            <div class="logo-line">
-              <img
-                src="assets/icons/claude-icon.svg"
-                width="26"
-                height="26"
-                alt="Claude Code"
-              />
-<img
-                src="assets/icons/openai-icon.svg"
-                width="26"
-                height="26"
-                alt="Codex"
-              />
-<img
-                src="assets/icons/cursor.svg"
-                width="26"
-                height="26"
-                alt="Cursor"
-              />
-              <h3>Your coding tool</h3>
-            </div>
-            <p>
-              Hand off through MCP. Choose Quick or Full planning through the workflow MCP tools. The remote Rovara Code worker does the coding.
-            </p>
-          </div>
-          <div>
-            <div class="logo-line">
-              <img
-                class="icon"
-                src="assets/icons/cloud.svg"
-                width="24"
-                height="24"
-                alt=""
-                aria-hidden="true"
-              />
-              <h3>Your AWS account</h3>
-            </div>
-            <p>
-              Your infrastructure, configured model access and integrations. AWS
-              and model usage have costs.
-            </p>
-          </div>
-        </div>
-      </section>
-      <section class="release-section shell">
-        <div>
-          <p class="eyebrow">Self-hosted installation</p>
-          <h2>Put it to work in your AWS account.</h2>
-          <p>Launch in AWS, or start the guided installer from a terminal. Connect GitHub and Slack, then give it a task.</p>
-        </div>
-        <a class="button" href="deployment/index.html"
-          >Install Rovara
-          <img
-            class="icon"
-            src="assets/icons/arrow-right.svg"
-            width="24"
-            height="24"
-            alt=""
-            aria-hidden="true"
-        />
-</a>
-      </section>
-</main>    <dialog class="evidence-dialog" aria-labelledby="dialog-title">
+</main><dialog class="story-dialog" id="plan-dialog" aria-labelledby="plan-dialog-title"><header><h2 id="plan-dialog-title">ENG-142 · Plan and scenarios</h2><button class="quiet-button" type="button" data-close-story-dialog aria-label="Close plan">Close</button></header><div class="dialog-body"><p class="coverage-label">Plan v2 · proposed approach and check scope</p><p>Extend the orders service with company-timezone date boundaries, filter the current company before CSV generation, and reject viewers in the handler.</p><div class="plan-delta"><span>Change requested by Maya after Sam’s clarification</span><s>Plan v1: UTC boundaries</s><strong>Plan v2: company timezone, including the whole last day</strong></div><table><thead><tr><th>Scenario</th><th>Expected result</th><th>Scope</th></tr></thead><tbody><tr><td>Selected dates</td><td>Only a1 and a2 for October 1–2</td><td>Source function · synthetic rows</td></tr><tr><td>Company scope</td><td>No Beta row in Alpha’s CSV</td><td>Mocked database boundary</td></tr><tr><td>Viewer restriction</td><td>Direct handler returns 403</td><td>Synthetic role context</td></tr></tbody></table><p>Browser interaction is not exercised. A required native/browser check would remain unresolved without its qualified runtime.</p><form data-demo-comment><label for="demo-plan-comment">Add a comment to this example thread</label><textarea id="demo-plan-comment" name="comment" required maxlength="500" placeholder="Add context for the task’s next step."></textarea><div class="message-actions"><button class="story-button sun" type="submit">Add demo comment</button></div><p data-comment-receipt role="status"></p></form><p class="proof-note">Comments are input. The task owner approves the plan; comments do not grant approval.</p><p class="dialog-disclosure">Illustrative local interaction. No Slack message, agent execution, GitHub PR or deployment is performed.</p></div></dialog><dialog class="story-dialog" id="change-dialog" aria-labelledby="change-dialog-title"><header><h2 id="change-dialog-title">Revise the date rule</h2><button class="quiet-button" type="button" data-close-story-dialog aria-label="Close change request">Close</button></header><div class="dialog-body"><p>Try the date-rule revision shown in this story. Maya requests this change before approving the plan.</p><div class="revision-choice"><b>Before · Plan v1</b><p>Filter selected dates in UTC.</p></div><div class="revision-choice revised"><b>After · Plan v2</b><p>Use the company timezone and include the whole final day. Check the CSV rows against those expectations.</p></div><button class="story-button sun" type="button" data-apply-example-revision>Replay this revision</button><p class="proof-note">This control replays the illustrative revision. It does not submit a real change request.</p><p class="dialog-disclosure">Illustrative local interaction. No Slack message, agent execution, GitHub PR or deployment is performed.</p></div></dialog><dialog class="story-dialog" id="results-dialog" aria-labelledby="results-dialog-title"><header><h2 id="results-dialog-title">ENG-142 · Assertion and run history</h2><button class="quiet-button" type="button" data-close-story-dialog aria-label="Close results">Close</button></header><div class="dialog-body"><p>Expected order IDs: <b>a1, a2</b>. September’s a3 must be absent.</p><div class="run-header"><b>Run 1 · Revision A</b><span class="status-failed">Failed · retained</span></div><table class="orders-table"><thead><tr><th>Order</th><th>Date</th><th>Result</th></tr></thead><tbody><tr class="unexpected-row"><td>a3</td><td>Sep 30</td><td>Outside range</td></tr><tr><td>a1</td><td>Oct 1</td><td>Expected</td></tr><tr><td>a2</td><td>Oct 2</td><td>Expected</td></tr></tbody></table><p><b>Failed assertion:</b> returned IDs did not equal the approved expected IDs.</p><section data-later-result><div class="run-header"><b>Run 2 · Revision B</b><span class="status-passed">Passed with mocks</span></div><table class="orders-table"><thead><tr><th>Order</th><th>Date</th><th>Company</th></tr></thead><tbody><tr><td>a1</td><td>Oct 1</td><td>Alpha</td></tr><tr><td>a2</td><td>Oct 2</td><td>Alpha</td></tr></tbody></table><p>The date-boundary correction changed the candidate. Run 2 checks the new revision; Run 1 cannot qualify it.</p><div class="mini-checks"><p>Company isolation <b>No Beta rows</b></p><p>Viewer handler <b>403</b></p></div></section><div class="coverage-label">Source checks · synthetic rows · mocked database</div><p class="proof-note">Browser interaction is not exercised.</p><p class="proof-note">Source-check producer, synthetic data and mocked database boundary are part of this illustrative result. Revision labels are examples, not real commit IDs.</p><p class="dialog-disclosure">Illustrative local interaction. No Slack message, agent execution, GitHub PR or deployment is performed.</p></div></dialog><dialog class="story-dialog" id="coverage-dialog" aria-labelledby="coverage-dialog-title"><header><h2 id="coverage-dialog-title">ENG-142 · Check coverage</h2><button class="quiet-button" type="button" data-close-story-dialog aria-label="Close coverage">Close</button></header><div class="dialog-body"><table><thead><tr><th>Target</th><th>Example coverage</th></tr></thead><tbody><tr><td>Date / company export</td><td>Source function with synthetic rows and mocked database</td></tr><tr><td>Viewer access</td><td>Handler check with synthetic role context</td></tr><tr><td>Code and security review</td><td>Separate read-only review sessions for Revision B</td></tr><tr><td>Browser / device interaction</td><td>Not exercised</td></tr><tr><td>Live services / production data</td><td>Not exercised</td></tr></tbody></table><p>A mock-scoped plan can proceed with this disclosure. If a required check needs a qualified runtime, missing that runtime remains unresolved.</p><p class="dialog-disclosure">Illustrative local interaction. No Slack message, agent execution, GitHub PR or deployment is performed.</p></div></dialog><dialog class="story-dialog" id="pr-dialog" aria-labelledby="pr-dialog-title"><header><h2 id="pr-dialog-title">Draft PR · Export filtered orders</h2><button class="quiet-button" type="button" data-close-story-dialog aria-label="Close draft PR">Close</button></header><div class="dialog-body"><div class="pr-heading"><img src="assets/icons/git-pull-request.svg" width="24" height="24" alt=""><b>Draft · task/eng-142 → main</b><span>Example Revision B</span></div><p>Filter CSV export by the selected company-local dates and current company; reject viewers in the export handler.</p><pre class="example-diff"><code><span class="diff-file">src/orders/export.ts · illustrative excerpt</span>
+<span class="diff-add">+ if (actor.role === "viewer") return forbidden();</span>
+<span class="diff-remove">- const rows = await listOrders({ companyId });</span>
+<span class="diff-add">+ const range = companyDateRange(from, to, timezone);</span>
+<span class="diff-add">+ const rows = await listOrders({ companyId, range });</span>
+  return ordersToCsv(rows);</code></pre><p class="output-caption">Expected source-check CSV output · synthetic data</p><pre class="csv-output"><code>id,date,company
+a1,2026-10-01,Alpha
+a2,2026-10-02,Alpha</code></pre><div class="pr-verified"><p>Run 1 / Revision A: date check failed · retained</p><p>Run 2 / Revision B: 3 selected checks passed with mocks</p><p>Code review: passed for B · separate read-only session</p><p>Security review: passed for B · separate read-only session</p></div><div class="coverage-label">Source checks · synthetic rows · mocked database</div><p class="proof-note">Browser interaction is not exercised.</p><p>The diff, CSV and review statuses are illustrative, not recorded artifacts. The team reviews and merges in GitHub.</p><a href="docs/tasks/index.html">Read the actual PR workflow</a><p class="dialog-disclosure">Illustrative local interaction. No Slack message, agent execution, GitHub PR or deployment is performed.</p></div></dialog><dialog class="evidence-dialog" aria-labelledby="dialog-title">
       <div class="dialog-top">
         <h2 id="dialog-title">Example diff</h2>
         <button class="dialog-close" aria-label="Close evidence">
@@ -794,7 +133,7 @@ ASCIIUsernameValidator and UnicodeUsernameValidator:
     </dialog>
     <footer class="site-footer shell simplified-footer">
       <div>
-        <a class="wordmark" href="index.html">Rovara Code</a>
+        <a class="wordmark" href="index.html">Rovara</a>
         <p>Coding agents in your AWS account.</p>
       </div>
       <nav class="footer-links" aria-label="Footer navigation">

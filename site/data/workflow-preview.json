@@ -1,8 +1,8 @@
 {
-  "status": "merged into product mainline; not in a published release (latest v0.3.1)",
-  "reviewedAt": "2026-10-13",
-  "baseMainline": "b18fe4ebde93dc4c872e84ef65bc723367d79b2f",
-  "nativeWorkflowSource": "b18fe4ebde93dc4c872e84ef65bc723367d79b2f",
+  "status": "Native workflow is present in published v0.3.4; newer mainline changes and the scoped E2E assumption have separate qualifications.",
+  "reviewedAt": "2026-10-14",
+  "baseMainline": "2deee3d70d3aa4c410e1bee030110c9d01858ef5",
+  "nativeWorkflowSource": "2deee3d70d3aa4c410e1bee030110c9d01858ef5",
   "previousPreviewSource": "3455a367005972659875667b82d7b5d28a2da727",
   "nativeSourceFiles": [
     "packages/mcp/src/tools.ts",
@@ -23,10 +23,16 @@
     "docs/loop.md",
     "docs/day-two.md"
   ],
-  "designOnlyInInspectedSnapshot": [
-    "task dependencies (specs/059-task-dependencies, design draft)"
-  ],
-  "releaseRequirement": "Remove the 'On mainline, not yet released' qualification once a published release includes these capabilities, and match commands to it.",
+  "designOnlyInInspectedSnapshot": [],
+  "releaseRequirement": "Keep published native-workflow availability separate from mainline-only serial dependencies, deployment settings, runtime acceptance and the owner-assumed source/mock testing scope.",
   "recordedNativeDemo": false,
-  "nativeSourceQualification": "Inspected merged mainline source and product documentation; no live workflow run was recorded for this website update."
+  "nativeSourceQualification": "Inspected merged mainline source and product documentation; no live workflow run was recorded for this website update.",
+  "e2eAssumption": {
+    "status": "assumed implemented by owner instruction",
+    "chatTitle": "Review Rovara pre-PR E2E testing",
+    "scope": "Approved source-interface/portable checks, synthetic data and declared mock fallback. Browser/device/native runtimes require separate phase qualification.",
+    "runtimeQualification": "No live execution of the website example was observed."
+  },
+  "websiteStory": "ENG-142 export: request, plan/comment/approval, cloud build, source check failure, owner send-back and fresh retest, reviews and draft PR. Fictional people and results.",
+  "releasedNativeWorkflowSource": "a0984e3d26b15618505ac37a53dd55de594c38a4"
 }

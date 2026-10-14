@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="../../assets/site.css">
 <link rel="stylesheet" href="../../assets/refined.css">
 <link rel="stylesheet" href="../../assets/docs.css">
+<link rel="stylesheet" href="../../assets/scroll-story.css">
 <script src="../../assets/docs.js" defer>
 </script>
 </head>
@@ -101,19 +102,11 @@
 <h2>Published release and mainline<a class="doc-heading-link" href="#availability" aria-label="Link to section Published release and mainline">#</a>
 </h2>
 <p>
-<a href="https://github.com/PrepLabsAI/Rovara">PrepLabsAI/Rovara</a> is public. The latest published release is still npm <a href="https://www.npmjs.com/package/@preplabsai/rovara-code">@preplabsai/rovara-code</a> v0.3.1 (MIT) and the <a href="https://github.com/PrepLabsAI/Rovara/releases/tag/v0.3.1">v0.3.1 GitHub release</a>, rechecked on 13 October 2026. Earlier v0.3.0 artifacts retain their Apache 2.0 terms and grant.</p>
-<p>Product mainline has moved on since v0.3.1. Pages marked <strong>On mainline, not yet released</strong> describe:</p>
-<ul>
-<li>Quick and Full workflows started from Slack, with request routing and saved thread replies.</li>
-<li>Plan decisions and comments on the task page.</li>
-<li>Automatic checks, code and security reviews, and draft PRs; PR feedback proposals.</li>
-<li>Sign in with ChatGPT.</li>
-<li>Rovara loop on GitHub issues.</li>
-<li>Workflow and Task People MCP tools (People changes default to off).</li>
-</ul>
-<p>They need a deployment and CLI built from mainline, or the next release. Task dependencies remain a design draft. <a href="../install/index.html">Install using Launch in AWS or the terminal →</a>
+<a href="https://github.com/PrepLabsAI/Rovara">PrepLabsAI/Rovara</a> is public. npm lists <a href="https://www.npmjs.com/package/@preplabsai/rovara-code">@preplabsai/rovara-code</a> v0.3.4 (MIT), and GitHub marks <a href="https://github.com/PrepLabsAI/Rovara/releases/tag/v0.3.4">v0.3.4</a> Latest. Rechecked on 14 October 2026. Earlier v0.3.0 artifacts retain their Apache 2.0 terms and grant.</p>
+<p>The v0.3.4 tag includes Quick and Full workflows, Slack routing, plan decisions/comments, checks, code and security reviews, draft PRs, PR feedback, ChatGPT configuration and Rovara loop. Source presence does not establish a live installation or runtime acceptance.</p>
+<p>Current mainline contains an opt-in serial task-dependency implementation for 1–8 ordered required items in one repository and one final PR. Its flag is off by default; activation and runtime qualification remain separate.</p>
+<p>The homepage’s testing walkthrough is illustrative. It assumes the scoped pre-PR source/mock testing work is implemented. Native browser/device coverage requires separate runtime qualification, and no live run of that example was recorded. <a href="../install/index.html">Installation guide →</a>
 </p>
-<p>Publication is separate from a fresh installation acceptance run. This website update did not deploy a new AWS environment.</p>
 </section>
 <section id="names">
 <h2>Product name and existing commands<a class="doc-heading-link" href="#names" aria-label="Link to section Product name and existing commands">#</a>
@@ -137,15 +130,15 @@
 <section id="documentation">
 <h2>How these docs are maintained<a class="doc-heading-link" href="#documentation" aria-label="Link to section How these docs are maintained">#</a>
 </h2>
-<p>Workflow, Slack, task page, ChatGPT, Rovara loop, configuration and MCP references were checked against product mainline <a href="https://github.com/PrepLabsAI/Rovara/tree/b18fe4ebde93dc4c872e84ef65bc723367d79b2f">
-<code>b18fe4ebde93dc4c872e84ef65bc723367d79b2f</code>
-</a> on 13 October 2026. The MCP reference matches that commit’s tool definitions. See the <a href="../../data/claims.json">source claim record</a> and the <a href="../../data/workflow-preview.json">workflow source record</a>.</p>
-<p>Installation commands follow the public README and the v0.3.1 package and release. npm v0.3.1 declares MIT; v0.3.0 remains the earlier Apache 2.0 release. See the <a href="../../data/installation.json">installation source record</a>.</p>
+<p>Workflow, Slack, task page, ChatGPT, Rovara loop, configuration and MCP references were checked against product mainline <a href="https://github.com/PrepLabsAI/Rovara/tree/2deee3d70d3aa4c410e1bee030110c9d01858ef5">
+<code>2deee3d70d3aa4c410e1bee030110c9d01858ef5</code>
+</a> on 14 October 2026. The MCP reference matches that commit’s tool definitions. See the <a href="../../data/claims.json">source claim record</a> and the <a href="../../data/workflow-preview.json">workflow source record</a>.</p>
+<p>Installation commands follow the public README and the v0.3.4 package and release. npm v0.3.4 declares MIT; v0.3.0 remains the earlier Apache 2.0 release. See the <a href="../../data/installation.json">installation source record</a>.</p>
 <p>Earlier preview pages were checked against native-workflow branch <code>3455a367005972659875667b82d7b5d28a2da727</code>, since merged. Historical benchmarks retain their own dates and candidates. A website build does not prove a live installation.</p>
 </section>
 </article>
 <div class="docs-maintenance">
-<span>Docs updated 13 October 2026</span>
+<span>Docs updated 14 October 2026</span>
 <a href="index.html#documentation">How these docs are maintained</a>
 <a href="https://github.com/rovara-dev/rovara-dev.github.io/issues/new">Report a docs issue</a>
 </div>

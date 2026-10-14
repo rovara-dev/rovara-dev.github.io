@@ -1,6 +1,6 @@
 # Rovara Code agent guide
 
-Public source: https://github.com/PrepLabsAI/Rovara. Install with Launch in AWS or npx @preplabsai/rovara-code init --env <name>; see docs/install. Node 22.19 or newer is required for the CLI (Node 22 LTS recommended). The package supplies rovara and agentx aliases. Pages marked 'On mainline, not yet released' describe product mainline b18fe4ebde93dc4c872e84ef65bc723367d79b2f and are not in published v0.3.1; they need a deployment and CLI built from mainline or the next release. Workflow source record: b18fe4ebde93dc4c872e84ef65bc723367d79b2f. Task dependencies remain a design draft; see docs/release for qualification.
+Public source: https://github.com/PrepLabsAI/Rovara. Install with Launch in AWS or npx @preplabsai/rovara-code init --env <name>; see docs/install. Node 22.19 or newer is required for the CLI (Node 22 LTS recommended). The package supplies rovara and agentx aliases. Published v0.3.4 includes the native workflow. These docs follow product mainline 2deee3d70d3aa4c410e1bee030110c9d01858ef5, which includes later changes; deployment configuration and feature flags still apply. Source presence is separate from runtime acceptance. Workflow source record: 2deee3d70d3aa4c410e1bee030110c9d01858ef5. Mainline contains opt-in serial task dependencies; the flag is off by default and runtime activation/qualification remains separate. See docs/release for qualification.
 
 # Rovara Code documentation
 
@@ -48,7 +48,7 @@ Check node --version , then use an AWS admin profile authenticated for the targe
 
 ## 3. Give it a first task
 
-In the channel bound during setup, select the installed bot through Slack’s mention picker. Its default name still uses AgentX . In the published v0.3.1 release, a mention goes to the chat agent: @AgentX inspect the project and implement the navigation fix. Run the relevant tests. @AgentX create a pull request for the personal-website repository titled "Improve navigation". On current mainline (the next release), a plain mention is routed first. A question is answered in the thread. A change gets a card suggesting Quick or Full , and nothing changes code until you press Start . Start with chat: to reach the chat agent as before: @AgentX Add password reset to the account page @AgentX chat: inspect the project and implement the navigation fix. Run the relevant tests. Replace the task and repository with your project. Inspect the changes and evidence before merging. Your team decides what gets merged. Follow the Quick tutorial → Upgrading an existing install? To save thread replies that do not mention AgentX, the Slack app needs the channels:history and groups:history scopes and the message.channels and message.groups events. Update the app from the manifest agentx init generates, then reinstall it to the workspace. Prefer an IDE? Connect Claude Code, Codex or Cursor →
+In the project channel, select the installed bot through Slack’s mention picker. Its default name still uses AgentX . @AgentX Add CSV export to the orders page. Export only selected dates and our company’s orders; viewers must be blocked. A plain mention is routed first: a question is answered, while a change gets a card suggesting Quick or Full . The requester presses Start , then reviews the proposed plan before code changes. Use chat: to ask the chat agent directly. Inspect the changes and check evidence before merging. Your team decides what gets merged. Follow the Quick tutorial → Upgrading an existing install? To save thread replies that do not mention AgentX, the Slack app needs the channels:history and groups:history scopes and the message.channels and message.groups events. Update the app from the manifest agentx init generates, then reinstall it to the workspace. Prefer an IDE? Connect Claude Code, Codex or Cursor →
 
 ## Resume or diagnose setup
 
@@ -104,7 +104,7 @@ Approve one plan, let Rovara Code code, check and review the change, then review
 
 ## Before you start
 
-On mainline, not yet released This describes product mainline as of 13 October 2026. The latest published release, v0.3.1, does not include it. Use a deployment and CLI built from mainline, or the next release. Release status → You need access to a registered project and its Slack channel, or a coding-tool connection . Starting tasks from Slack needs shared tasks turned on for the Slack service; if AgentX asks an admin to turn them on, see Starting tasks from Slack . Use Slack’s mention picker to select the app installed in your channel. Its default name still uses AgentX . Quick is the simplest planning path Use it for a well-defined fix. For ambiguous or larger work, choose Full .
+Published native workflow · current source reference Rovara v0.3.4 includes the native workflow. This page follows the inspected mainline source, which may include later changes. Deployment settings and feature flags still apply. Release and coverage details → You need access to a registered project and its Slack channel, or a coding-tool connection . Starting tasks from Slack needs shared tasks turned on for the Slack service; if AgentX asks an admin to turn them on, see Starting tasks from Slack . Use Slack’s mention picker to select the app installed in your channel. Its default name still uses AgentX . Quick is the simplest planning path Use it for a well-defined fix. For ambiguous or larger work, choose Full .
 
 ## 1. Request a bounded change
 
@@ -140,7 +140,7 @@ Use Full to agree on requirements, design and the coding plan before implementat
 
 ## Before you start
 
-On mainline, not yet released This describes product mainline as of 13 October 2026. The latest published release, v0.3.1, does not include it. Use a deployment and CLI built from mainline, or the next release. Release status → You need access to a registered project and its Slack channel, or a coding-tool connection. Choose Full when behavior, interfaces or implementation choices need discussion. Full changes planning depth; it does not relax project-required checks or reviews.
+Published native workflow · current source reference Rovara v0.3.4 includes the native workflow. This page follows the inspected mainline source, which may include later changes. Deployment settings and feature flags still apply. Release and coverage details → You need access to a registered project and its Slack channel, or a coding-tool connection. Choose Full when behavior, interfaces or implementation choices need discussion. Full changes planning depth; it does not relax project-required checks or reviews.
 
 ## 1. Choose Full at task start
 
@@ -172,7 +172,7 @@ Answer the plan’s decisions, comment with your team, and approve or request ch
 
 ## Open the task page
 
-On mainline, not yet released This describes product mainline as of 13 October 2026. The latest published release, v0.3.1, does not include it. Use a deployment and CLI built from mainline, or the next release. Release status → Every approval card links the task page ( Open review ). Sign in if asked. The page’s first line says what you can do: You’re the task owner. Answer the plan’s decisions, comment, and press Approve or Request changes . You can read and comment on this task. You are in the task’s channel and can use its project. Comment, reply and press Suggest this on a decision option. Only owners decide. You don’t have access to this task. Also what a link to a task that does not exist says.
+Published native workflow · current source reference Rovara v0.3.4 includes the native workflow. This page follows the inspected mainline source, which may include later changes. Deployment settings and feature flags still apply. Release and coverage details → Every approval card links the task page ( Open review ). Sign in if asked. The page’s first line says what you can do: You’re the task owner. Answer the plan’s decisions, comment, and press Approve or Request changes . You can read and comment on this task. You are in the task’s channel and can use its project. Comment, reply and press Suggest this on a decision option. Only owners decide. You don’t have access to this task. Also what a link to a task that does not exist says.
 
 ## Answer the plan’s decisions
 
@@ -220,11 +220,11 @@ Run the command for your client, as yourself (without sudo ): Claude Code claude
 
 ## 3. Start a task
 
-After connecting, ask your client to list your Rovara projects and start a task in the chosen project, for example “Hand Rovara the navigation fix in <project-name> and run the relevant tests.” This direct-task path uses agentx_start_task and has no plan approvals. It is available in v0.3.1. Published coding-tool guide →
+After connecting, ask your client to list your Rovara projects and start a task in the chosen project, for example “Hand Rovara the navigation fix in <project-name> and run the relevant tests.” This direct-task path uses agentx_start_task and has no plan approvals. It is available in v0.3.4. Published coding-tool guide →
 
 ## Start a Quick or Full workflow
 
-On mainline, not yet released This describes product mainline as of 13 October 2026. The latest published release, v0.3.1, does not include it. Use a deployment and CLI built from mainline, or the next release. Release status → Ask your client to find your projects and start a workflow. workflow_path is required: quick asks once for a coding plan; full asks for requirements, design and the coding plan. List my Rovara Code projects. Start a Quick workflow in <project-name> to improve the docs Copy button. Reset its label after copying, announce success accessibly, and preserve manual copy on clipboard failure. Show me the plan before implementing. The client uses agentx_start_workflow . Include the context the remote task needs; it does not receive your local conversation.
+Published native workflow · current source reference Rovara v0.3.4 includes the native workflow. This page follows the inspected mainline source, which may include later changes. Deployment settings and feature flags still apply. Release and coverage details → Ask your client to find your projects and start a workflow. workflow_path is required: quick asks once for a coding plan; full asks for requirements, design and the coding plan. List my Rovara Code projects. Start a Quick workflow in <project-name> to improve the docs Copy button. Reset its label after copying, announce success accessibly, and preserve manual copy on clipboard failure. Show me the plan before implementing. The client uses agentx_start_workflow . Include the context the remote task needs; it does not receive your local conversation.
 
 ## Read and decide on the plan
 
@@ -284,7 +284,7 @@ Inspect Rovara Code’s recommendations and approve the changes you want before 
 
 ## Before you start
 
-On mainline, not yet released This describes product mainline as of 13 October 2026. The latest published release, v0.3.1, does not include it. Use a deployment and CLI built from mainline, or the next release. Release status → You need a workflow task whose draft PR AgentX opened, and you must be its owner to decide. Reviewers leave their comments in GitHub as usual.
+Published native workflow · current source reference Rovara v0.3.4 includes the native workflow. This page follows the inspected mainline source, which may include later changes. Deployment settings and feature flags still apply. Release and coverage details → You need a workflow task whose draft PR AgentX opened, and you must be its owner to decide. Reviewers leave their comments in GitHub as usual.
 
 ## 1. Read the feedback notice
 
@@ -314,9 +314,9 @@ Use GitHub’s existing review and merge controls. Rovara Code observes linked P
 
 Understand what the task is waiting for, which PRs still need your team’s decision, and what is not built yet.
 
-## Task dependencies are not built yet
+## Opt-in serial task dependencies
 
-Splitting one task into dependent items, with a visible order and blockers, is a design draft ( spec 059 ), not current behavior. Today, Full’s requirements → design → coding plan order is the sequencing a workflow task has. For a change across several repositories, Rovara loop runs one loop per pull request on your computer.
+Mainline supports an opt-in serial plan of 1–8 ordered required items in one repository, with one final PR ( spec 059 ). The feature flag is off by default. The whole plan is approved up front; failure pauses for an explicit owner retry. This does not introduce an arbitrary parallel dependency graph. For a change across several repositories, Rovara loop runs one loop per pull request on your computer.
 
 ## When work is blocked
 
@@ -344,7 +344,7 @@ Run Rovara’s workflow on your own computer: your GitHub issues drive your own 
 
 ## What Rovara loop is
 
-rovara loop turns collaborators’ comments on your GitHub issues into work for your own Claude Code or Codex, and drives that work through plan approval, checks, reviews and a pull request. It needs no Rovara install and no AWS account: only the Rovara CLI, the GitHub CLI ( gh , signed in), tmux , git , and Claude Code or Codex. On mainline, not yet released This describes product mainline as of 13 October 2026. The latest published release, v0.3.1, does not include it. Use a deployment and CLI built from mainline, or the next release. Release status → Available today: the Do, Quick, Full, Review and Contribute loops. Webhooks, Slack approvals and Jira come later. The idea is inspired by the-loop by Rohith Ramakrishnan; Rovara loop is Rovara’s own implementation.
+rovara loop turns collaborators’ comments on your GitHub issues into work for your own Claude Code or Codex, and drives that work through plan approval, checks, reviews and a pull request. It needs no Rovara install and no AWS account: only the Rovara CLI, the GitHub CLI ( gh , signed in), tmux , git , and Claude Code or Codex. Published native workflow · current source reference Rovara v0.3.4 includes the native workflow. This page follows the inspected mainline source, which may include later changes. Deployment settings and feature flags still apply. Release and coverage details → Available today: the Do, Quick, Full, Review and Contribute loops. Webhooks, Slack approvals and Jira come later. The idea is inspired by the-loop by Rohith Ramakrishnan; Rovara loop is Rovara’s own implementation.
 
 ## Set up a repository
 
@@ -428,7 +428,7 @@ Project readiness checks always run in Quick and Full and cannot be turned off. 
 
 ## Starting tasks from Slack
 
-On mainline, not yet released This describes product mainline as of 13 October 2026. The latest published release, v0.3.1, does not include it. Use a deployment and CLI built from mainline, or the next release. Release status → developerTasks.enabled controls whether developers may start tasks on the project from an AI tool or a Slack workflow. Starting from Slack also needs shared tasks ( SHARED_TASKS ) on for the Slack service; without them, AgentX answers every start asking an admin to turn them on. A plain top-level mention is sorted by the classifier model chosen at agentx init . It sees a fixed instruction and the message text only, never repository content, and waits at most 4 seconds. There is no separate routing model setting. Prefixes ( quick: , full: , workflow: , chat: ) skip the model. To save thread replies that do not mention AgentX, the app needs the channels:history and groups:history scopes and the message.channels and message.groups events. Existing installs must update the app from the generated manifest and reinstall it. AgentX ignores, and does not store, channel messages outside task threads.
+Published native workflow · current source reference Rovara v0.3.4 includes the native workflow. This page follows the inspected mainline source, which may include later changes. Deployment settings and feature flags still apply. Release and coverage details → developerTasks.enabled controls whether developers may start tasks on the project from an AI tool or a Slack workflow. Starting from Slack also needs shared tasks ( SHARED_TASKS ) on for the Slack service; without them, AgentX answers every start asking an admin to turn them on. A plain top-level mention is sorted by the classifier model chosen at agentx init . It sees a fixed instruction and the message text only, never repository content, and waits at most 4 seconds. There is no separate routing model setting. Prefixes ( quick: , full: , workflow: , chat: ) skip the model. To save thread replies that do not mention AgentX, the app needs the channels:history and groups:history scopes and the message.channels and message.groups events. Existing installs must update the app from the generated manifest and reinstall it. AgentX ignores, and does not store, channel messages outside task threads.
 
 ## Repositories AgentX can publish
 
@@ -448,7 +448,7 @@ Let each developer run their own tasks on their own ChatGPT Plus or Pro plan.
 
 ## Who can use it
 
-On mainline, not yet released This describes product mainline as of 13 October 2026. The latest published release, v0.3.1, does not include it. Use a deployment and CLI built from mainline, or the next release. Release status → A developer connects their own ChatGPT plan, and the coding tasks they start run on it instead of the installation’s model. People who have not connected a plan keep using the installation’s model. A ChatGPT Plus or Pro plan, under OpenAI’s eligibility rules . Rovara checks the plan when you connect. One person’s own plan: only their tasks use it, including tasks they share. One plan never serves a team. An installation where an admin turned it on. It is off by default.
+Published native workflow · current source reference Rovara v0.3.4 includes the native workflow. This page follows the inspected mainline source, which may include later changes. Deployment settings and feature flags still apply. Release and coverage details → A developer connects their own ChatGPT plan, and the coding tasks they start run on it instead of the installation’s model. People who have not connected a plan keep using the installation’s model. A ChatGPT Plus or Pro plan, under OpenAI’s eligibility rules . Rovara checks the plan when you connect. One person’s own plan: only their tasks use it, including tasks they share. One plan never serves a team. An installation where an admin turned it on. It is off by default.
 
 ## Turn it on (admins)
 
@@ -506,9 +506,9 @@ Start with the coding-tool connection guide . Tool names keep the agentx_ prefix
 
 Tool Use agentx_whoami Check your environment and sign-in Returns developer identity, environment and API versions. agentx_list_projects Find projects you can use Returns authorized projects and their task/sharing policies. agentx_start_task Delegate a task Give the exact project name and complete instructions. Returns a task ID; wait_seconds is optional. agentx_get_task Inspect status and results Returns progress, changed files, artifacts and PR links when available. agentx_wait_for_task Wait for work to end Waits 1–600 seconds. A timeout does not stop the task. agentx_list_tasks Find your existing tasks Lists tasks; use the returned IDs to inspect or continue them. agentx_continue_task Send a follow-up Requires the task ID and complete new instructions. Reuses the workspace and branch after the current run ends. agentx_cancel_task Stop current work Cancels the task; cancelling a wait alone does not do this. agentx_close_task Release the workspace Checks for unpublished work; inspect the result if closure refuses. agentx_share_task Share into the project’s Slack channel View lets others watch; continue permits follow-ups when project policy allows. agentx_open_pull_request Request a PR Requires task ID and title. Draft defaults to true; inspect the task later for the PR URL.
 
-## Workflow tools (mainline)
+## Workflow tools
 
-Mainline adds these tools for Quick/Full workflow tasks. They are not in v0.3.1. Use the tools your deployed server advertises. Tool Use agentx_start_workflow Start a workflow with project, complete instructions and a required workflow_path ( quick or full ). Returns the task and workflow state. agentx_decide_workflow Decide on the current document with task_id, expected_revision, artifact_digest, decision, reason and a retry-safe request_id. agentx_review_workflow_candidate Reviews start on their own after checks pass. Use this to retry a blocked review, with the exact expected_revision and candidate_digest; refused if the code or checks changed. agentx_retry_workflow Restart blocked read-only planning or blocked coding, or rerun checks for a blocked VERIFY stage. Rerunning checks needs expected_revision. agentx_send_workflow_back Send a blocked change back to coding with the failed checks and findings the change introduced, plus your instructions. Owner only. agentx_resolve_review_findings Answer every blocking finding: accept with a reason (listed in the draft PR) or fix with optional instructions. At most 20 per call. Owner only. agentx_retry_workflow_publish Retry opening the draft PR for the code whose checks and reviews passed. Owner only. agentx_get_pr_feedback Read AgentX’s proposal for PR comments: each finding’s ID, priority, recommendation, proposed change or question, and the comments it answers. Owner only. agentx_decide_pr_feedback Decide that proposal: APPROVE (optionally naming finding_ids), REQUEST_CHANGES, DISMISS or RETRY_REVIEW. Copy the digests from agentx_get_pr_feedback . Owner only. agentx_keep_pull_request After an approved feedback fix changed no code, keep the PR as it is and wait for the merge again. Owner only.
+These tools support Quick/Full workflow tasks and are included in v0.3.4. Use the tools your deployed server advertises. Tool Use agentx_start_workflow Start a workflow with project, complete instructions and a required workflow_path ( quick or full ). Returns the task and workflow state. agentx_decide_workflow Decide on the current document with task_id, expected_revision, artifact_digest, decision, reason and a retry-safe request_id. agentx_review_workflow_candidate Reviews start on their own after checks pass. Use this to retry a blocked review, with the exact expected_revision and candidate_digest; refused if the code or checks changed. agentx_retry_workflow Restart blocked read-only planning or blocked coding, or rerun checks for a blocked VERIFY stage. Rerunning checks needs expected_revision. agentx_send_workflow_back Send a blocked change back to coding with the failed checks and findings the change introduced, plus your instructions. Owner only. agentx_resolve_review_findings Answer every blocking finding: accept with a reason (listed in the draft PR) or fix with optional instructions. At most 20 per call. Owner only. agentx_retry_workflow_publish Retry opening the draft PR for the code whose checks and reviews passed. Owner only. agentx_get_pr_feedback Read AgentX’s proposal for PR comments: each finding’s ID, priority, recommendation, proposed change or question, and the comments it answers. Owner only. agentx_decide_pr_feedback Decide that proposal: APPROVE (optionally naming finding_ids), REQUEST_CHANGES, DISMISS or RETRY_REVIEW. Copy the digests from agentx_get_pr_feedback . Owner only. agentx_keep_pull_request After an approved feedback fix changed no code, keep the PR as it is and wait for the merge again. Owner only.
 
 ## Task People tools (mainline)
 

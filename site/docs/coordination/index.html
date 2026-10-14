@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="../../assets/site.css">
 <link rel="stylesheet" href="../../assets/refined.css">
 <link rel="stylesheet" href="../../assets/docs.css">
+<link rel="stylesheet" href="../../assets/scroll-story.css">
 <script src="../../assets/docs.js" defer>
 </script>
 </head>
@@ -89,7 +90,7 @@
 <details class="docs-mobile-toc">
 <summary>On this page</summary>
 <nav aria-label="Page sections">
-<a href="#dependencies">Task dependencies are not built yet</a>
+<a href="#dependencies">Opt-in serial task dependencies</a>
 <a href="#blocked">When work is blocked</a>
 <a href="#linked-prs">Track the complete PR set</a>
 <a href="#merges">Understand partial merges</a>
@@ -99,9 +100,9 @@
 </details>
 <article class="docs-article">
 <section id="dependencies">
-<h2>Task dependencies are not built yet<a class="doc-heading-link" href="#dependencies" aria-label="Link to section Task dependencies are not built yet">#</a>
+<h2>Opt-in serial task dependencies<a class="doc-heading-link" href="#dependencies" aria-label="Link to section Opt-in serial task dependencies">#</a>
 </h2>
-<p>Splitting one task into dependent items, with a visible order and blockers, is a design draft (<a href="https://github.com/PrepLabsAI/Rovara/tree/mainline/specs/059-task-dependencies">spec 059</a>), not current behavior. Today, Full’s requirements → design → coding plan order is the sequencing a workflow task has.</p>
+<p>Mainline supports an opt-in serial plan of 1–8 ordered required items in one repository, with one final PR (<a href="https://github.com/PrepLabsAI/Rovara/tree/mainline/specs/059-task-dependencies">spec 059</a>). The feature flag is off by default. The whole plan is approved up front; failure pauses for an explicit owner retry. This does not introduce an arbitrary parallel dependency graph.</p>
 <p>For a change across several repositories, <a href="../loop/index.html#pull-requests">Rovara loop</a> runs one loop per pull request on your computer.</p>
 </section>
 <section id="blocked">
@@ -133,7 +134,7 @@
 </section>
 </article>
 <div class="docs-maintenance">
-<span>Docs updated 13 October 2026</span>
+<span>Docs updated 14 October 2026</span>
 <a href="../release/index.html#documentation">How these docs are maintained</a>
 <a href="https://github.com/rovara-dev/rovara-dev.github.io/issues/new">Report a docs issue</a>
 </div>
@@ -152,7 +153,7 @@
 <aside class="docs-toc">
 <nav aria-label="On this page">
 <p>On this page</p>
-<a href="#dependencies">Task dependencies are not built yet</a>
+<a href="#dependencies">Opt-in serial task dependencies</a>
 <a href="#blocked">When work is blocked</a>
 <a href="#linked-prs">Track the complete PR set</a>
 <a href="#merges">Understand partial merges</a>

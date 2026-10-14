@@ -68,12 +68,16 @@ for (const file of walk(root).filter((p) => p.endsWith(".html"))) {
 }
 const home = get("index.html");
 for (const phrase of [
-  "Give it a task.",
-  "Get the work back.",
-  "You decide what gets merged.",
-  "Code to review.",
-  "Evidence to inspect.",
-  "Illustrative native workflow preview",
+  "Give your agents a ticket.",
+  "Work with them in Slack.",
+  "Your team inspects the change and decides what gets merged.",
+  "Come back to",
+  "the same work.",
+  "Historical benchmark evidence, separate from the illustrative Slack task.",
+  "Illustrative task",
+  "Browser interaction is not exercised.",
+  "data-scroll-story",
+  "data-motion-toggle",
 ]) {
   if (!home.includes(phrase))
     failures.push(`Approved homepage phrase missing: ${phrase}`);
@@ -137,39 +141,18 @@ if (
   )
 )
   failures.push("Recorded benchmark raw output count mismatch");
-// The homepage excerpt must preserve the actual patch, not generated sample code.
-const escapeHtml = (s) =>
-  s
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#x27;");
-const patchText = get(`${recordRoot}/patch.diff`);
-for (const [sign, className] of [
-  ["-", "removed"],
-  ["+", "added"],
-]) {
-  const lines = patchText
-    .split("\n")
-    .filter((line) => line.startsWith(`${sign}    regex`));
-  for (const line of new Set(lines)) {
-    const text = `${sign === "+" ? "+" : "−"} ${escapeHtml(line.slice(1).trim())}`;
-    const excerpts = [
-      ...home.matchAll(
-        new RegExp(
-          `<span\\s+class="${className}"[^>]*>([\\s\\S]*?)<\\/span\\s*>`,
-          "g",
-        ),
-      ),
-    ].map((match) => match[1].trim());
-    const count = excerpts.filter((excerpt) => excerpt === text).length;
-    if (count !== lines.length)
-      failures.push(
-        `Homepage ${className} regex excerpt does not match both recorded validators`,
-      );
-  }
+// The homepage links to the historical record. Keep that destination's
+// count and artifact links tied to the saved output, without a duplicate diff.
+const benchmarks = get("docs/benchmarks/index.html");
+const totalRecordedTests = record.failToPass.total + record.passToPass.total;
+if (!benchmarks.includes(`Ran ${totalRecordedTests} tests`))
+  failures.push("Benchmark documentation count differs from saved raw output");
+for (const name of ["patch.diff", "test-output.txt", "harness-report.json", "record.json"]) {
+  if (!benchmarks.includes(`../../${recordRoot}/${name}`))
+    failures.push(`Benchmark documentation missing recorded artifact: ${name}`);
 }
+if (!home.includes('href="docs/benchmarks/index.html#recorded-run"'))
+  failures.push("Homepage must link to the qualified historical record");
 if (/all checks passed|pytest|\+12|−4/.test(home.toLowerCase()))
   failures.push("Homepage contains unsupported generated evidence");
 const totalTests = record.failToPass.passed + record.passToPass.passed;
@@ -204,7 +187,6 @@ for (const run of receipts.runs) {
 }
 if (resolved !== 40 || batch?.resolved !== resolved || batch?.finished_slots !== 50)
   failures.push("Selected batch summary differs from saved grader outcomes");
-const benchmarks = get("docs/benchmarks/index.html");
 if (!benchmarks.includes("40") || !benchmarks.includes("50") || !benchmarks.includes("selected"))
   failures.push("Benchmark documentation is missing selected-batch context");
 if (failures.length) {

@@ -1,11 +1,11 @@
 {
   "repository": "PrepLabsAI/Rovara",
-  "sourceCommit": "1a1c4a555fc672b4558341005b99ee84dedcde41",
-  "checkedAt": "2026-10-06",
+  "sourceCommit": "a0984e3d26b15618505ac37a53dd55de594c38a4",
+  "checkedAt": "2026-10-14",
   "npmPackage": "@preplabsai/rovara-code",
-  "npmVersion": "0.3.1",
-  "releaseTag": "v0.3.1",
-  "releaseCommit": "1a1c4a555fc672b4558341005b99ee84dedcde41",
+  "npmVersion": "0.3.4",
+  "releaseTag": "v0.3.4",
+  "releaseCommit": "a0984e3d26b15618505ac37a53dd55de594c38a4",
   "nodeMinimum": "22.19.0",
   "recommendedNode": "Node 22 LTS",
   "region": "us-east-1",
@@ -13,16 +13,17 @@
   "readme": "https://github.com/PrepLabsAI/Rovara#quickstart",
   "installationGuide": "https://github.com/PrepLabsAI/Rovara/blob/mainline/docs/install.md",
   "sourceFiles": {
-    "README.md": "36f323140f63619ed03b3cd668f8498f50301e51023396fcd6f83cac8b89e0c9",
+    "README.md": "e951b1ff7cf3fbef00b37baa1a62c59de65c3fecec1620271c6fb930e62fdede",
     "docs/install.md": "11ee8755f65b1e1b0b211722f8ec6334aec89178001d0d62ae4be3fdcf9c4fa4",
     "docs/mcp-install.md": "20da93272230a80201b0ea145578d19b84d360faf11a4bc50894b804d1e94cc6",
-    "docs/day-two.md": "2a38002cebea0a01da09a94e604d382c1c72c8d62e9fd1fcbe4c41943fafc8c0",
+    "docs/day-two.md": "3b0cc4a2b5cd51be81284564b59813b73caddb150b90e99703595c4151b85621",
     "docs/teardown.md": "2f29f19e4397e51b84c5c44754666e630c637c217bdb87ac88b6309e1d802397",
     "LICENSE": "a896d42dcee674ae2790af91e090a7578bbc1766d61b819449a09597d62c8b67",
     "LICENSE-APACHE": "c6034e3540236d24415832d93ac4dee6c543f0c3d8956a332d02ef6e880011ec",
     "RELICENSED.md": "81b656e4b305246b4bdfeea013d20fbf429b512c846ac49a9ede7c3e68f07ca7"
   },
-  "qualification": "The v0.3.1 source, GitHub release bundle and npm package were published with MIT as the current license for PrepLabsAI-owned code; the npm registry reports MIT metadata. The previously released v0.3.0 GitHub/npm artifacts remain Apache 2.0 releases, and PrepLabsAI also grants MIT rights to its owned code in earlier versions. No fresh AWS installation was performed by this website update.",
-  "latestReleaseRecheckedAt": "2026-10-13",
-  "latestReleaseNote": "npm and GitHub still list v0.3.1 as the latest release on 13 October 2026; mainline b18fe4eb is ahead of it."
+  "qualification": "npm metadata and the public GitHub v0.3.4 release/tag were checked. Native workflow source references also match this release tag. Serial task dependencies use newer mainline source. The scoped pre-PR E2E work remains a separately labelled owner-requested assumption. No fresh AWS installation or live product task was performed.",
+  "latestReleaseRecheckedAt": "2026-10-14",
+  "latestReleaseNote": "npm lists 0.3.4 and GitHub marks v0.3.4 Latest, rechecked 14 October 2026. Product mainline 2deee3d7 is ahead of release commit a0984e3d.",
+  "npmIntegrity": "sha512-VAAXkKJu2XfnVu0BijHn6uTw9w1XRg99VyGb0m+TOW6YTaxiUX7a27BreP79GjESzkL3supefpuUGj7hgHfldA=="
 }

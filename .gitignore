@@ -3,3 +3,6 @@ Thumbs.db
 dist/
 .superpowers/
 qa-captures/
+
+# Local browser captures and audit reports; do not publish.
+design-evidence/
