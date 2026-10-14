@@ -38,6 +38,9 @@ if (sourceRef !== commit)
   );
 const readSource = (path) =>
   git("show", `${commit}:${path}`).replace(/\s+/g, " ");
+const installation = JSON.parse(readFileSync(resolve("site/data/installation.json"), "utf8"));
+if (ledger.source.releaseCommit !== installation.releaseCommit || ledger.source.releaseTag !== installation.releaseTag)
+  failures.push("published-release source differs between claim and installation records");
 for (const claim of ledger.claims) {
   for (const path of claim.websiteEvidence ?? []) {
     try { readFileSync(resolve("site", path)); }
@@ -47,6 +50,8 @@ for (const claim of ledger.claims) {
     try {
       if (!readSource(item.file).includes(item.contains))
         failures.push(`${claim.id}: wording no longer exists in ${item.file}`);
+      if (claim.releasedSourceReference && !git("show", `${ledger.source.releaseCommit}:${item.file}`).replace(/\s+/g, " ").includes(item.contains))
+        failures.push(`${claim.id}: published-release qualification is not supported by the pinned release source`);
     } catch {
       failures.push(`${claim.id}: cannot read ${item.file} at pinned source`);
     }

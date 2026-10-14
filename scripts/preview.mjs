@@ -18,6 +18,7 @@ const mime = {
   ".txt": "text/plain; charset=utf-8",
   ".mp4": "video/mp4",
   ".jpg": "image/jpeg",
+  ".png": "image/png",
   ".vtt": "text/vtt; charset=utf-8",
 };
 const server = createServer(async (req, res) => {

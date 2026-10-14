@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="../../assets/site.css">
 <link rel="stylesheet" href="../../assets/refined.css">
 <link rel="stylesheet" href="../../assets/docs.css">
+<link rel="stylesheet" href="../../assets/scroll-story.css">
 <script src="../../assets/docs.js" defer>
 </script>
 </head>
@@ -167,18 +168,11 @@ npx @preplabsai/rovara-code init --env &lt;name&gt;</code>
 <section id="first-task">
 <h2>3. Give it a first task<a class="doc-heading-link" href="#first-task" aria-label="Link to section 3. Give it a first task">#</a>
 </h2>
-<p>In the channel bound during setup, select the installed bot through Slack’s mention picker. Its default name still uses <code>AgentX</code>.</p>
-<p>In the published v0.3.1 release, a mention goes to the chat agent:</p>
+<p>In the project channel, select the installed bot through Slack’s mention picker. Its default name still uses <code>AgentX</code>.</p>
 <pre>
-<code>@AgentX inspect the project and implement the navigation fix. Run the relevant tests.
-@AgentX create a pull request for the personal-website repository titled &quot;Improve navigation&quot;.</code>
+<code>@AgentX Add CSV export to the orders page. Export only selected dates and our company’s orders; viewers must be blocked.</code>
 </pre>
-<p>On current mainline (the next release), a plain mention is routed first. A question is answered in the thread. A change gets a card suggesting <strong>Quick</strong> or <strong>Full</strong>, and nothing changes code until you press <strong>Start</strong>. Start with <code>chat:</code> to reach the chat agent as before:</p>
-<pre>
-<code>@AgentX Add password reset to the account page
-@AgentX chat: inspect the project and implement the navigation fix. Run the relevant tests.</code>
-</pre>
-<p>Replace the task and repository with your project. Inspect the changes and evidence before merging. Your team decides what gets merged. <a href="../tasks/index.html">Follow the Quick tutorial →</a>
+<p>A plain mention is routed first: a question is answered, while a change gets a card suggesting <strong>Quick</strong> or <strong>Full</strong>. The requester presses <strong>Start</strong>, then reviews the proposed plan before code changes. Use <code>chat:</code> to ask the chat agent directly. Inspect the changes and check evidence before merging. Your team decides what gets merged. <a href="../tasks/index.html">Follow the Quick tutorial →</a>
 </p>
 <div class="doc-callout">
 <strong>Upgrading an existing install?</strong>
@@ -227,7 +221,7 @@ rovara --help</code>
 </section>
 </article>
 <div class="docs-maintenance">
-<span>Docs updated 13 October 2026</span>
+<span>Docs updated 14 October 2026</span>
 <a href="../release/index.html#documentation">How these docs are maintained</a>
 <a href="https://github.com/rovara-dev/rovara-dev.github.io/issues/new">Report a docs issue</a>
 </div>

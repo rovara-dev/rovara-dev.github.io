@@ -167,7 +167,7 @@
       dialog.showModal();
       document.body.classList.add("modal-open");
       dialog.querySelector(".dialog-close").focus();
-      if (!motionPreference.matches && window.Motion?.animate)
+      if (!motionPreference.matches && !document.documentElement.classList.contains("motion-reduced") && window.Motion?.animate)
         Motion.animate(
           dialog,
           { opacity: [0, 1], y: [8, 0] },
