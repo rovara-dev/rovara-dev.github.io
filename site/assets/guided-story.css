@@ -14,9 +14,9 @@
 .journey-guide-track { position:absolute; right:9px; width:1px; background:#d8d4e7; }
 .journey-guide-fill { position:absolute; top:0; left:0; width:1px; height:calc(var(--path-position,0) * 100%); background:#8277aa; }
 .journey-guide-dot { position:absolute; width:13px; height:13px; border-radius:50%; top:calc(var(--path-position,0) * 100%); left:-6px; transform:translateY(-50%); background:var(--sun); border:2px solid #81764b; box-shadow:0 0 0 5px var(--paper); }
-.journey-guide-label { margin:18px 0 0; color:var(--journey-muted); font-size:12px; line-height:1.7; }
+.journey-guide-label { margin:26px 0 0; max-width:136px; color:var(--journey-muted); font:italic 14px/1.55 Georgia,'Times New Roman',serif; transform:rotate(-2deg); transform-origin:left top; }
 .journey-enhanced .journey-guide::after { content:""; position:absolute; right:9px; top:var(--guide-tail-start); height:var(--guide-tail-height); width:1px; background:#d8d4e7; }
-.journey-connector { display:none; position:absolute; pointer-events:none; z-index:0; border:solid #c8c2dc; border-width:0 0 1px 1px; border-radius:0 0 0 12px; }
+.journey-connector { display:none; position:absolute; pointer-events:none; z-index:2; border:solid #b3a5c9; border-width:0 0 1px 1px; border-radius:0 0 0 12px; }
 .journey-connector.route-up { border-width:1px 0 0 1px; border-radius:12px 0 0 0; }
 .journey-frame.slack-window { display:block; border-radius:12px; box-shadow:0 14px 38px #2421480c; }
 .journey-frame .slack-header { min-height:48px; padding:12px 26px; background:#352044; color:#fff; border:0; font-size:15px; }
@@ -109,9 +109,10 @@
 .journey-enhanced .journey-log { position:relative; will-change:transform; padding:28px 36px; }
 .journey-enhanced .journey-beat { margin-bottom:64px; }
 .journey-enhanced .journey-markers { display:block; margin-top:calc(-1 * var(--journey-layout-height)); }
-.journey-enhanced .journey-marker { height:max(480px,64vh); }
-.journey-enhanced .journey-marker:nth-child(3),.journey-enhanced .journey-marker:nth-child(9) { height:max(590px,88vh); }
-.journey-enhanced .journey-marker:last-child { height:calc(var(--journey-layout-height) + 64vh); }
+.journey-enhanced .journey-marker { height:max(420px,52vh); }
+.journey-enhanced .journey-marker[data-reading=short] { height:max(260px,32vh); }
+.journey-enhanced .journey-marker[data-reading=long] { height:max(560px,74vh); }
+.journey-enhanced .journey-marker:last-child { height:calc(var(--journey-layout-height) + 40vh); }
 .journey-enhanced .journey-connector { display:block; }
 .journey-enhanced .journey-artifact { padding:20px 24px; }
 .journey-enhanced .journey-artifact header { margin-bottom:12px; }
@@ -125,8 +126,6 @@
 .journey-enhanced .journey-active .journey-artifact[data-guide-focus] { outline:none; border-color:#bfb3d2; border-left-width:2px; border-radius:9px; }
 .journey-enhanced .journey-active .journey-approval[data-guide-focus] { outline:none; border-color:#a8c5b0; border-left-width:2px; border-radius:9px; }
 .journey-enhanced .journey-active .unexpected-row[data-guide-focus] { outline-color:#d79aa5; outline-offset:0; }
-.journey-enhanced .journey-log.is-arriving { animation:journey-arrive 240ms ease-out; }
-@keyframes journey-arrive { from { opacity:.82; } to { opacity:1; } }
 .journey-ready:not(.journey-enhanced) .journey-guide { padding:0 0 20px; }
 .journey-ready:not(.journey-enhanced) .journey-guide-track,.journey-ready:not(.journey-enhanced) .journey-guide-label { display:none; }
 .task-journey:not(.journey-enhanced) .journey-layout { display:block; }
@@ -144,7 +143,7 @@
 .journey-install h2 { color:#f4f3fb; max-width:800px; margin:10px 0 18px; }
 .journey-install-copy>p:last-child { max-width:650px; color:#d0cde5; font-size:16px; line-height:1.7; }
 .journey-install .eyebrow { color:#c6c2dc; }
-.install-guide-rail { position:absolute; top:-65px; right:9px; height:calc(var(--install-target-y,500px) + 65px); width:1px; background:#d8d4e7; }
+.install-guide-rail { position:absolute; z-index:2; pointer-events:none; top:-65px; right:9px; height:calc(var(--install-target-y,500px) + 65px); width:1px; background:#d8d4e7; }
 .install-guide-rail::before { content:""; position:absolute; left:0; bottom:0; width:calc(var(--install-target-x,70px)); height:1px; background:#d8d4e7; }
 .install-guide-rail::after { content:""; position:absolute; bottom:0; left:-6px; width:13px; height:13px; border:2px solid #81764b; border-radius:50%; background:var(--sun); transform:translateY(50%); }
 .journey-setup { list-style:none; padding:0; margin:34px 0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:28px; }
@@ -166,6 +165,48 @@
 .install-home .terminal-route summary { cursor:pointer; font-weight:500; min-height:44px; display:list-item; padding:10px 0; color:#62566f; }
 .install-home .terminal-route article { border:0; padding:18px 0 0; }
 .install-home .installation-details { max-width:1000px; }
+.repo-link { display:inline-flex; align-items:center; gap:8px; }
+.repo-link img { flex-shrink:0; }
+.scroll-home .repo-link img { filter:brightness(0) invert(1); }
+.scroll-home .site-header .primary-nav.is-open { background:#20265f; border-color:#515580; }
+.workflow-overview { display:grid; grid-template-columns:260px minmax(0,1fr); gap:56px; padding:80px 0 28px; }
+.workflow-overview-intro .eyebrow,.workflow-questions .eyebrow { color:#71647d; margin:0 0 14px; }
+.workflow-overview-intro h2 { font-size:38px; margin:0 0 22px; }
+.workflow-overview-intro>p:not(.eyebrow),.workflow-questions>div>p:not(.eyebrow) { font-size:15px; line-height:1.7; color:#625771; }
+.workflow-overview-intro .journey-inline-link { margin-top:12px; }
+.workflow-phases { list-style:none; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:32px 36px; padding:0; margin:0; }
+.workflow-phases li { padding-top:20px; border-top:1px solid #dcd6e8; }
+.workflow-phase-label { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; color:#71647d; font-size:11px; }
+.workflow-phase-label img { opacity:.85; }
+.scroll-home .workflow-phases h3 { font-size:22px; line-height:1.25; letter-spacing:-.035em; margin:0 0 12px; }
+.workflow-phases p { font-size:14px; line-height:1.7; color:#625771; margin:0 0 15px; }
+.workflow-output { display:flex; flex-wrap:wrap; align-items:center; gap:5px 9px; font-size:11px; line-height:1.6; color:#71647d; }
+.workflow-output b { color:#3e3656; font-weight:500; }
+.workflow-questions { display:grid; grid-template-columns:260px minmax(0,1fr); gap:56px; margin-top:72px; padding-bottom:72px; }
+.workflow-questions h2 { font-size:34px; margin:0 0 18px; }
+.workflow-answers details { border-top:1px solid #dcd6e8; padding:15px 0; }
+.workflow-answers details:last-child { border-bottom:1px solid #dcd6e8; }
+.workflow-answers summary { cursor:pointer; min-height:44px; font-size:16px; font-weight:500; color:#302743; line-height:1.5; padding:10px 0; }
+.workflow-answers p { margin:12px 0; font-size:14px; line-height:1.75; color:#625771; max-width:70ch; }
+.workflow-answers a { display:inline-block; font-size:12px; color:#464383; margin:0 18px 10px 0; text-underline-offset:4px; }
+@media (max-width:1000px) {
+ .workflow-overview,.workflow-questions { display:block; }
+ .workflow-overview-intro { max-width:650px; margin-bottom:36px; }
+ .workflow-overview-intro h2 { font-size:34px; }
+ .workflow-overview-intro h2 br { display:none; }
+ .workflow-questions>div:first-child { margin-bottom:24px; }
+ .workflow-phases { gap:28px 32px; }
+}
+@media (max-width:599px) {
+ .workflow-overview { padding-top:44px; padding-bottom:12px; }
+ .workflow-phases { grid-template-columns:1fr; gap:24px; }
+ .workflow-phase-label { margin-bottom:10px; }
+ .scroll-home .workflow-phases h3 { font-size:20px; margin-bottom:10px; }
+ .workflow-phases p { font-size:14px; margin-bottom:12px; }
+ .workflow-questions { margin-top:48px; padding-bottom:40px; }
+ .workflow-questions h2 { font-size:29px; }
+ .workflow-answers summary { font-size:15px; }
+}
 @media (min-width:1001px) and (min-height:680px) and (max-height:820px) {
  .journey-enhanced .journey-caption { margin-bottom:14px; }
  .journey-enhanced .journey-caption .eyebrow { margin-bottom:8px; }
@@ -232,9 +273,10 @@
  .journey-ticket { padding:13px 16px; }
  .journey-ticket .task-state { display:none; }
  .journey-log { padding:26px 16px; }
- .journey-beat { margin-bottom:44px; padding-bottom:32px; border-bottom:1px solid #eae5f0; }
+ .journey-beat { margin-bottom:30px; padding-bottom:24px; border-bottom:1px solid #eae5f0; }
  .journey-beat:last-child { border-bottom:0; padding-bottom:0; }
- .journey-beat-heading h3 { font-size:24px; margin-bottom:24px; }
+ .journey-beat-heading .eyebrow { font-size:10px; margin-bottom:5px; }
+ .journey-beat-heading h3 { font-size:17px; letter-spacing:-.02em; line-height:1.35; margin-bottom:18px; }
  .journey-message { gap:10px; grid-template-columns:30px minmax(0,1fr); }
  .journey-message .slack-avatar { width:30px; height:30px; }
  .journey-message .message-meta { flex-wrap:wrap; }
@@ -276,5 +318,3 @@
  .journey-install-requirements { font-size:11px; }
  .install-home .installation-options>.aws-install-route { padding:24px; }
 }
-@media (prefers-reduced-motion:reduce) { .journey-log.is-arriving { animation:none!important; } }
-.motion-reduced .journey-log.is-arriving { animation:none!important; }

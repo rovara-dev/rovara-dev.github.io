@@ -1,8 +1,137 @@
-# Rovara guided task story — design QA
+# Rovara seamless conversation refinement — design QA
 
 final result: passed
 
-## Latest revision — 14 October 2026
+## Current revision — 14 October 2026
+
+Owner request: make the existing “One task. A working conversation.” sequence more seamless, and treat “One task. All the way through.” as an annotation rather than a section. Scope is a local presentation/interaction refinement on the existing workflow-clarity candidate. Product behavior, claims, approvals and installation authority are unchanged.
+
+### Visual truth and comparison
+
+Source: the owner's supplied screenshots, plus the same current preview captured before this refinement in `design-evidence/seamless-motion-2026-10-14/before-fix-scene.jpg`. Implementation: `after-fix-scene.jpg` in the same folder. The two full-frame Fix scenes were opened together in one comparison input at matching 1280×720 CSS/image pixels, 1× density. No density normalization, screenshot editing or substitute illustration was used. The navigation, margin annotation, connector and message text are readable at this native size, so a separate cropped comparison was unnecessary.
+
+### Findings, corrections and evidence
+
+1. [P2] Chapter movement snapped a whole message rather than following scroll. Baseline `baseline-boundary.json` records a 459px log jump over 1.5px of native scroll at Test → Fix, with a separate timed fade. Added a pure position resolver with a short handoff around measured boundaries and stable reading intervals. Actual message offsets interpolate; reverse scrolling resolves the same position. Removed the timer/fade. `after-boundary.json` records 5.59px of log movement across the same 1.5px boundary, with log opacity always 1. This establishes continuity, not a universal frame-rate/performance claim.
+2. [P2] The supporting phrase looked like another navigation/section label. It now has `role="note"` and a quiet 14px italic Georgia/serif treatment with a slight margin-note angle. It remains secondary to the chapter labels and task frame; copy is unchanged. The matched Fix comparison and final Plan/PR/return scenes show its distinct hierarchy.
+3. [P2] Review found that smooth chapter clicks painted the destination before the native scroll moved, then returned to the origin. The independent reviewer's exact-function harness reproduced that discontinuity. Enhanced smooth navigation now leaves rendering to actual scroll updates; instant/reduced-motion navigation still selects immediately. The reviewer reran the harness and confirmed the correction. Parent browser QA confirmed a distant Plan → PR click reaches the correct PR, hash and inspector; it did not capture the original pre-frame flash.
+
+### Five fidelity surfaces
+
+- Fonts/typography: original self-hosted Inter retained for the page, captions, navigation and product UI. Only the supporting note uses a small italic serif to make its annotation role visually distinct. Existing 17px phone stage captions remain.
+- Spacing/layout: the same Slack frame, artifact proportions and chapter rail remain. Reading intervals stay stable; handoffs use existing measured marker space. Adjacent outgoing/incoming messages briefly coexist during the glide, with one semantic/interactive active beat. All settled artifacts fit the tested frames. The note's 26px margin keeps it separate from navigation without creating another section.
+- Colors/tokens: original indigo/lavender/yellow retained. The point stays beside the selected chapter, including every Plan substep. The connector follows the current object and quiets at the handoff's midpoint instead of visibly switching routes. Full conversation opacity stays constant.
+- Images/assets: existing portraits and licensed icons retained, without new/generated imagery or handcrafted asset replacements. No benchmark evidence bytes changed.
+- Copy/content: no product promises, workflow examples, disclosure text, source claims, CTA destinations or task identifiers changed in this refinement.
+
+### Verification
+
+- All 12 tests pass. Five new motion tests were observed failing before implementation; they cover continuity, steady reading intervals, deterministic reversal, short-beat arrivals and distant/final/empty cases. Existing chapter-alignment tests remain green.
+- `responsive-scenes-final.json` records all 30 settled scenes across 1280×720, 832×867 and 1440×900: enhanced layout, full beat fit, exactly one focus, chapter-aligned guide, and hidden/inert/aria-hidden future content.
+- `handoff-boundaries.json` records all nine chapter boundaries: one focus in view, one interactive beat, incoming content inert and hidden from assistive technology until selected. Partial content during motion is intentional; full visibility is checked at reading holds.
+- `reverse-glide.json` records identical transforms at repeated actual scroll positions in both directions. There is no independent time-based playback or opacity fade.
+- Manual and system reduced motion preserve the selected Fix phase while settling its content; system preference disables the manual override. Full-thread mode exposes all ten beats. See `motion-and-transcript.json`.
+- At 390×844, all ten beats remain one readable native thread, the page has no horizontal overflow, and the compact 17px captions remain. `phone-plan.jpg` was opened and inspected. The margin note is hidden in the compact reading fallback, as before.
+- Script-disabled mode exposes all ten beats and hides nonfunctional inspectors. Emulation was restored. PR inspection, Escape/focus restoration, direct approval anchor and distant chapter navigation were checked. Browser warning/error logs are empty. Temporary viewport override was reset.
+- Fresh `npm run check`, `npm run build`, both module syntax checks, `git diff --check` and all 16 pinned-source claim checks pass. Current remote product mainline remains `2deee3d70d3aa4c410e1bee030110c9d01858ef5`. Changed CSS and both module cache versions are updated together.
+- Independent review and correction re-review report no remaining Critical, Important or Minor issue. No actionable P0/P1/P2 issue remains in this refinement.
+
+Implementation checklist complete: continuous scroll-driven handoff, stable reading holds and one active focus, corrected smooth chapter navigation, distinct margin annotation, responsive/reduced/script-free fallbacks, source review and fresh checks. Customer comprehension, full assistive-technology certification and physical-device performance remain unmeasured.
+
+Postflight: executed against `MSDLC-OBJ-001@0.4`; digest `707543b940253c8e068da55af87b81b4c57dd8d0e82f83436be13f5391cdf0c2` freshly rechecked and matched; alignment pass; result verified local frontend; no objective proposal, authority expansion, assumption change, scope delta or contradiction; objective change attempted false. No publication, AWS installation or product-runtime acceptance is implied.
+
+## Prior QA records (superseded by the current refinement)
+
+# Earlier informative workflow QA
+
+Historical result: passed
+
+## Current revision — 14 October 2026
+
+Owner-approved changes: all four annotated guide/pacing/return/mobile fixes, a task-based headline, AWS installation as the primary CTA, a top GitHub source link, removal of opaque example labels and the homepage benchmark teaser, and more informative workflow explanation after reviewing Vorflux. This candidate is on `codex/rovara-workflow-clarity`, based on website `origin/main` `0f355657c7c7ece9ac81afaeaa59a0189636aa3c`.
+
+### Source truth and comparison evidence
+
+The source is the previous published page at https://rovara-dev.github.io/ and the owner's requested changes, including the benchmark-removal screenshot. Intentional information and pacing changes preserve the selected Inter/indigo/lavender/yellow visual direction; this is not a pixel-identical clone.
+
+Evidence folder: `design-evidence/informative-workflow-2026-10-14/`.
+
+- Desktop entry: `hero-before.jpg` and `hero-after-final.jpg` opened together in the same comparison input, both 1280×720 CSS/image pixels at 1× density. The original dual action becomes one dominant AWS installation action, and the GitHub logo/source link fits the header.
+- Desktop approval: `rovara-before-approval.jpg` and `rovara-after-approval-initial.jpg` opened together at matching 1280×720, 1× density. The point now aligns with Plan, and the line reaches the approval focus. Final geometry receipts verify all ten scenes after the copy cleanup.
+- Phone Plan: `mobile-before-plan.jpg` and `mobile-after-plan.jpg` opened together at matching 390×844 CSS/image pixels, 1× density, same Plan/team-input anchor. Captions reduce from 24px to 17px; the same conversation and revised plan become visible in less space. No density normalization was required.
+- Focused details were already readable in these full native-resolution comparisons: navigation, selected rail point, connector termination, thread text, plan assertions and CTA. Additional full scenes were opened for PR, retained workspace, setup, installation destination and FAQ. No crop or screenshot substitute was needed.
+
+### Findings, fixes and post-fix evidence
+
+1. [P2] Plan approval selected Plan while the guide moved toward Cloud work. Baseline geometry recorded position 0.333333 versus selected station 0.111111. The resolver now derives position from seven chapter groups. All three Plan beats resolve to 1/6. Tests cover Plan substeps, correction/retest, clamping and reverse jumps.
+2. [P2] The story connector disappeared at the frame boundary, about 81px before the highlighted item. Its endpoint now accounts for the highlighted item's outline, and its layer remains visible in the frame's whitespace. All ten scenes at 1280×720 and 832×867 show 0px endpoint gap against the focus boundary. The setup connector also reaches its actual installation action.
+3. [P2] Quiet request/approval beats took as much scrolling as substantial artifacts. They now use `max(260px,32vh)`, regular beats `max(420px,52vh)`, and plan/failure/PR beats `max(560px,74vh)`. Final return retains its frame plus a shorter 40vh reading hold. This is a measured layout change, not a customer conversion claim.
+4. [P2] The return lacked a concrete purpose. Maya returns to review the draft PR; the same `task/export-orders` branch, files, approved Plan v2 and conversation remain visible. `desktop-return-final.jpg` and `rovara-medium-return.jpg` show the corrected scene.
+5. [P2] Large phone stage titles segmented the continuous thread. The matched mobile comparison shows smaller 17px captions and reduced beat spacing, with all ten beats retained.
+6. [P2] Opening the phone menu revealed an inherited higher-specificity paper-background rule, leaving white links effectively invisible. Added a scoped dark-background override. `mobile-320-menu-final.jpg` shows readable workflow/docs/source links and the install action, including the actual GitHub logo.
+7. [P2] Hiding the overview's line break joined “requestto” on phones. Preserved whitespace in the heading. Fresh DOM text and responsive capture confirm “From a Slack request to a reviewed PR.”
+8. [P3, resolved] Independent review identified residual fictional `task/eng-142` branch labels. All four now use descriptive `task/export-orders`, retaining continuity. The installation introduction also says first task.
+
+### Five fidelity surfaces
+
+- Fonts/typography: self-hosted Inter and original hierarchy retained. New overview headings use 38px desktop/34px intermediate, phase titles 22px/20px phone, and body 14–15px. Thread body remains 14–15px; phone stage captions are 17px with 10px kickers. Text wraps naturally at 320px; no truncation of core controls.
+- Spacing/layout: an editorial overview precedes the example, followed directly by retained workspace and setup. Desktop two-column phase lists become single-column on phones. Existing card proportions, radii and section rhythm remain. The final FAQ answers practical questions without inserting an unrelated proof module.
+- Colors/tokens: original indigo, lavender-white and pale yellow preserved. AWS installation is the only hero action. Current focus is singular. Failure/pass retain words, and mock qualification stays visible. The phone menu now has the intended dark surface and readable light links.
+- Image quality/assets: existing fictional Maya/Sam portraits and licensed brand/UI icons reused, including the real GitHub icon. No new raster imagery, hand-drawn logo or screenshot substitute. The existing journey diagram's review timing label changed editorially; its geometry and benchmark artifact bytes are untouched.
+- Copy/content: the headline uses task, the example explains CSV export directly, and workflow sections explain actors, approvals, outputs, testing scope and follow-ups. No automatic issue intake, guaranteed E2E coverage, real customer run, autonomous merge, free hosting or shipped/deployed product result was added.
+
+### Browser verification
+
+Local preview: http://127.0.0.1:63914/.
+
+- All ten enhanced scenes at 1280×720 and 832×867 fit the viewport with exactly one focal element, matching chapter/point and 0px connector gap. Receipts: `desktop-receipts.json`, `medium-receipts.json`. Updated final Plan, PR and return captures were inspected.
+- At 390×844 and 320×844, all ten beats are visible in one native thread and document width equals viewport width. `mobile-after-plan.jpg`, `mobile-return.jpg`, `mobile-320-hero.jpg`, `mobile-320-install.jpg` and `mobile-320-menu-final.jpg` cover the changed surfaces. The longer AWS button wraps inside its own box at 320px.
+- Plan inspectors distinguish proposed from approved. Failed-result inspection hides the future passing run; retest exposes both runs. PR inspector uses the same descriptive branch. Escape restores focus to each visible trigger. `interaction-receipts.json` records these states.
+- Manual and system reduced motion preserved the current PR phase and 5/6 guide position. System preference disables the manual override. Full-thread mode exposes all ten beats and can return to the guided sequence.
+- Script-disabled mode exposes all ten beats, six overview steps and five native FAQ disclosures while hiding nonfunctional inspectors. A Playwright click failed because the browser script-emulation setting blocks its action helper; native input successfully expanded the Quick/Full answer. This was a tool limitation, not accepted as a product failure. `no-js-workflow-answer.jpg` shows the native result. Script and media emulation were restored.
+- Native FAQ answers expand/collapse, and the testing answer retains source/mock and qualified-runtime boundaries. The top GitHub link resolves to the independently checked public Rovara repository.
+- The closing AWS CTA reaches `deployment/index.html`, whose source navigation and setup introduction were inspected. AWS launch/install was not executed. `install-destination-final.jpg` records the destination.
+- Warning/error browser logs are empty. Temporary viewport override was cleared. These are selected browser checks, not a full assistive-technology audit or physical-device certification.
+
+### Informational review
+
+The fresh Vorflux review and Rovara mapping are in `design-evidence/informative-workflow-2026-10-14/vorflux-and-rovara-review.md`. The new six-step overview and five practical answers respond to product questions the single example could not carry. Competitor marketing claims were not promoted into verified product facts or copied into Rovara.
+
+The historical Django teaser is removed from the homepage because it interrupted the task story. The historical record, raw artifacts and integrity checks remain unchanged. The example still discloses fictional people/repository and synthetic/mock checking.
+
+### Automated and independent verification
+
+Fresh `npm run check`: seven tests pass, 19 documentation pages/161 searchable sections reconcile, 22 routes/anchors/assets pass, and historical benchmark hashes/counts remain correct. `npm run build`, both module syntax checks and `git diff --check` pass. `check:claims` passes all 16 claims and 25 MCP tools against current mainline `2deee3d70d3aa4c410e1bee030110c9d01858ef5`, freshly checked remotely.
+
+Independent whole-diff review and correction re-review report no remaining Critical, Important or Minor actionable issue. Browser evidence is the parent's observation; independent source review is not represented as an independent browser audit.
+
+No actionable P0/P1/P2 finding remains in this revision's scope. Implementation checklist complete: requested copy/CTA changes, chapter-aligned guide, artifact connector, differentiated pacing, purposeful return, compact phone captions, informational overview/FAQ, responsive and fallback verification. Remaining uncertainty is customer comprehension/conversion and live product-runtime behavior, not a known frontend blocker.
+
+```yaml
+executed_against: MSDLC-OBJ-001@0.4
+objective_digest: sha256:707543b940253c8e068da55af87b81b4c57dd8d0e82f83436be13f5391cdf0c2
+alignment: pass
+result_status: verified
+evidence_added: [native browser screenshots and geometry, source review, current source claim checks]
+decision_proposals: []
+assumption_changes: []
+scope_delta: none
+contradictions: []
+objective_change_attempted: false
+objective_digest_match: true
+```
+
+Status is verified local frontend presentation. It does not establish a new product runtime, AWS installation, live Slack-to-PR run, customer result or publication of this candidate.
+
+## Historical QA records (superseded)
+
+The records below describe earlier candidates and publication checks; their copy, controls and pacing are historical.
+
+# Earlier guided task story QA
+
+Historical result: passed
+
+## Earlier revision — 14 October 2026
 
 User-approved scope: preserve the indigo/lavender/yellow visual direction and accurate claims, follow ENG-142 through one conversation, and give the viewer one focal point at a time. Implementation QA covers `codex/rovara-guided-task-story`, based on `1b1a49295de8633c16a7e5d67b62c2eed983a5cc`. The owner subsequently authorized push and deployment on 14 October 2026; publication evidence is recorded separately from these local implementation checks.
 

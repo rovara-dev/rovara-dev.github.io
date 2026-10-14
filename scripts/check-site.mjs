@@ -44,7 +44,8 @@ for (const file of walk(root).filter((p) => p.endsWith(".html"))) {
   const html = readFileSync(file, "utf8");
   for (const [, attr, value] of html.matchAll(/\b(href|src)="([^"]+)"/g)) {
     if (/^(https?:|mailto:|tel:|data:)/.test(value)) continue;
-    const [path, hash] = value.split("#");
+    const [localUrl, hash] = value.split("#");
+    const path = localUrl.split("?")[0];
     let target = path.startsWith("/")
       ? resolve(root, `.${path}`)
       : resolve(dirname(file), path || ".");
@@ -68,12 +69,11 @@ for (const file of walk(root).filter((p) => p.endsWith(".html"))) {
 }
 const home = get("index.html");
 for (const phrase of [
-  "Give your agents a ticket.",
+  "Give your agents a task.",
   "Work with them in Slack.",
   "Your team inspects the change and decides what gets merged.",
   "Come back to",
   "the same work.",
-  "Historical benchmark evidence, separate from the illustrative Slack task.",
   "Illustrative task",
   "Browser interaction is not exercised.",
   "data-scroll-story",
@@ -141,8 +141,8 @@ if (
   )
 )
   failures.push("Recorded benchmark raw output count mismatch");
-// The homepage links to the historical record. Keep that destination's
-// count and artifact links tied to the saved output, without a duplicate diff.
+// The historical record stays in documentation. Keep its count and artifact
+// links tied to the saved output, independently of the marketing homepage.
 const benchmarks = get("docs/benchmarks/index.html");
 const totalRecordedTests = record.failToPass.total + record.passToPass.total;
 if (!benchmarks.includes(`Ran ${totalRecordedTests} tests`))
@@ -151,13 +151,8 @@ for (const name of ["patch.diff", "test-output.txt", "harness-report.json", "rec
   if (!benchmarks.includes(`../../${recordRoot}/${name}`))
     failures.push(`Benchmark documentation missing recorded artifact: ${name}`);
 }
-if (!home.includes('href="docs/benchmarks/index.html#recorded-run"'))
-  failures.push("Homepage must link to the qualified historical record");
 if (/all checks passed|pytest|\+12|−4/.test(home.toLowerCase()))
   failures.push("Homepage contains unsupported generated evidence");
-const totalTests = record.failToPass.passed + record.passToPass.passed;
-if (!home.includes(`${totalTests} tests passed`))
-  failures.push("Homepage count differs from the recorded report");
 // Qualify the selected batch from grader artifacts, never the agent's claim.
 const batchRoot = "assets/evidence/evaluation-batches";
 const receipts = JSON.parse(get(`${batchRoot}/pro-50-receipts.json`));

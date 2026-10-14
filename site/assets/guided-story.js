@@ -1,10 +1,12 @@
-import { resolveJourney, resolveGuidePosition } from './journey-state.js';
+import { resolveJourney, resolveGuidePosition, resolveJourneyMotion } from './journey-state.js?v=scroll-motion-1';
 
 const story = document.querySelector('[data-scroll-story]');
 if (story) {
   const beats = [...story.querySelectorAll('[data-journey-beat]')];
   const markers = [...story.querySelectorAll('[data-journey-marker]')];
   const links = [...story.querySelectorAll('[data-journey-link]')];
+  const groups = beats.map(beat => Number(beat.dataset.group));
+  links.forEach(link => link.style.setProperty('--station',String(Number(link.dataset.group) / Math.max(...groups))));
   const anchors = beats.map(beat => beat.id);
   const layout = story.querySelector('.journey-layout');
   const viewport = story.querySelector('.journey-viewport');
@@ -23,16 +25,15 @@ if (story) {
   const wide = matchMedia('(min-width:760px) and (min-height:680px)');
   let enhanced = false;
   let current = 0;
-  let progress = 0;
   let fullThread = false;
   let userReduced = false;
   let overflowFallback = false;
   let starts = [];
+  let offsets = [];
   let end = 0;
   let frame = 0;
   let size = [innerWidth,innerHeight];
   let measuring = false;
-  let animationTimer;
 
   const isReduced = () => userReduced || reduced.matches;
   const currentLink = () => links.find(link => link.dataset.group === beats[current].dataset.group) ?? links[0];
@@ -44,13 +45,12 @@ if (story) {
     motion.setAttribute('aria-pressed',String(off));
     motion.textContent = reduced.matches ? 'Reduced motion · system' : off ? 'Enable motion' : 'Reduce motion';
     motion.disabled = reduced.matches;
-    if (off) log.classList.remove('is-arriving');
     positionGuide();
+    schedule();
     // Preferences change movement, never the visible plan version or result.
   }
 
-  function render(index, animate = false) {
-    const previous = current;
+  function render(index) {
     const focused = document.activeElement;
     const losingFocus = enhanced && beats.some((beat,i) => i !== index && beat.contains(focused));
     current = index;
@@ -71,20 +71,21 @@ if (story) {
     taskState.textContent = beats[index].dataset.taskState;
     story.dataset.step = String(index);
     if (enhanced) {
-      // Retain the actual messages; earlier content moves above this window.
-      const lead = index ? 28 : 0;
-      const padding = parseFloat(getComputedStyle(log).paddingTop);
-      const offset = Math.max(0,beats[index].offsetTop - padding - lead);
-      log.style.transform = `translateY(${-offset}px)`;
-      if (animate && previous !== index && !isReduced()) {
-        clearTimeout(animationTimer);
-        log.classList.remove('is-arriving');
-        void log.offsetWidth;
-        log.classList.add('is-arriving');
-        animationTimer = setTimeout(() => log.classList.remove('is-arriving'),260);
-      }
-      positionGuide();
+      paint();
     } else log.style.removeProperty('transform');
+  }
+
+  function paint(motion = {from:current,to:current,mix:0}) {
+    if (!enhanced) return;
+    // Reveal only the adjacent incoming beat during its handoff. It remains
+    // inert and hidden from assistive technology until selected by render().
+    beats.forEach((beat,i) => { beat.hidden = i > motion.to; });
+    const offset = offsets[motion.from] + (offsets[motion.to]-offsets[motion.from]) * motion.mix;
+    log.style.transform = `translateY(${-offset}px)`;
+    // Quiet the connector during the transfer so it never points at two
+    // objects or changes route in full view. The chapter point stays aligned.
+    connector.style.opacity = String(motion.from === motion.to ? 1 : Math.abs(2*motion.mix-1));
+    positionGuide();
   }
 
   function positionGuide() {
@@ -93,19 +94,22 @@ if (story) {
     const navBounds = nav.getBoundingClientRect();
     const layoutBounds = layout.getBoundingClientRect();
     const frameBounds = story.querySelector('.journey-frame').getBoundingClientRect();
-    const focusBounds = beats[current].querySelector('[data-guide-focus]').getBoundingClientRect();
+    const focus = beats[current].querySelector('[data-guide-focus]');
+    const focusBounds = focus.getBoundingClientRect();
+    const focusStyle = getComputedStyle(focus);
+    const outlineInset = focusStyle.outlineStyle === 'none' ? 0 : parseFloat(focusStyle.outlineOffset) + parseFloat(focusStyle.outlineWidth) / 2;
     const railHeight = navBounds.height - 44;
     const railTop = navBounds.top - guideBounds.top + 22;
     track.style.top = `${railTop}px`;
     track.style.height = `${railHeight}px`;
     guide.style.setProperty('--guide-tail-start',`${railTop+railHeight}px`);
     guide.style.setProperty('--guide-tail-height',`${Math.max(0,layout.offsetHeight-railTop-railHeight+28)}px`);
-    const position = isReduced() ? current / (beats.length - 1) : resolveGuidePosition(current,progress,beats.length);
+    const position = resolveGuidePosition(current,groups);
     guide.style.setProperty('--path-position',String(position));
     const dotY = guideBounds.top - layoutBounds.top + railTop + position * railHeight;
     const targetY = Math.max(frameBounds.top + 118,Math.min(frameBounds.bottom - 52,focusBounds.top + Math.min(28,focusBounds.height / 2))) - layoutBounds.top;
     const dotX = guideBounds.right - layoutBounds.left - 9;
-    const targetX = frameBounds.left - layoutBounds.left;
+    const targetX = focusBounds.left - outlineInset - layoutBounds.left;
     connector.style.left = `${dotX}px`;
     connector.style.top = `${Math.min(dotY,targetY)}px`;
     connector.style.width = `${Math.max(0,targetX-dotX)}px`;
@@ -157,6 +161,8 @@ if (story) {
       caption.setAttribute('aria-hidden','true');
       beats.forEach((beat,i) => { markers[i].removeAttribute('id'); beat.id = anchors[i]; });
     }
+    const padding = parseFloat(getComputedStyle(log).paddingTop);
+    offsets = enhanced ? beats.map((beat,i) => Math.max(0,beat.offsetTop-padding-(i ? 28 : 0))) : [];
     transcript.hidden = !wide.matches || overflowFallback;
     render(current);
     story.style.setProperty('--journey-layout-height',`${layout.offsetHeight}px`);
@@ -179,24 +185,28 @@ if (story) {
     if (!starts.length || document.querySelector('.story-dialog[open]')) return;
     const cursor = scrollY + (enhanced ? 100 : 180);
     if (cursor < starts[0] - innerHeight || cursor > end + 80) return;
-    const resolved = resolveJourney(cursor,starts,end);
-    progress = resolved.progress;
+    const resolved = enhanced && !isReduced() ? resolveJourneyMotion(cursor,starts,end) : resolveJourney(cursor,starts,end);
     if (resolved.index !== current) {
-      render(resolved.index,true);
+      render(resolved.index);
       const leadRoom = parseFloat(getComputedStyle(log).paddingTop) + 28;
       if (enhanced && Math.ceil(beats[current].getBoundingClientRect().height) + leadRoom + 8 > viewport.offsetHeight) measure({preserve:true});
     }
-    if (enhanced) positionGuide();
+    if (enhanced) paint(isReduced() ? undefined : resolved);
   }
 
   function goTo(index,smooth = true) {
-    progress = 0;
-    render(index);
+    // During a smooth chapter jump, scroll position owns the visible state.
+    // Painting the destination first would flash it before the glide starts.
+    if (!(enhanced && smooth && !isReduced())) render(index);
     story.style.setProperty('--journey-layout-height',`${layout.offsetHeight}px`);
     const node = enhanced ? markers[index] : beats[index];
     const inset = enhanced ? parseFloat(getComputedStyle(layout).top) || 24 : 100;
-    window.scrollTo({top:scrollY + node.getBoundingClientRect().top - inset,behavior:smooth && !isReduced() ? 'smooth' : 'instant'});
+    const top = enhanced && index > 0
+      ? resolveJourneyMotion(starts[index],starts,end).settleAt - 100
+      : scrollY + node.getBoundingClientRect().top - inset;
+    window.scrollTo({top,behavior:smooth && !isReduced() ? 'smooth' : 'instant'});
     history.replaceState(null,'',`#${anchors[index]}`);
+    schedule();
   }
 
   story.addEventListener('click',event => {
