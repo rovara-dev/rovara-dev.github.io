@@ -107,7 +107,11 @@
     const last = (linear ? beats : markers).at(-1);
     storyEnd = positions.at(-1) + last.offsetHeight;
     if ((changed || viewportChanged) && inView) goTo(previous, false);
-    if (changed && focusInPanel && focused.getClientRects().length) {
+    if (changed && focused?.matches('[data-reveal-plan]') && !focused.getClientRects().length) {
+      const target = beats[1].querySelector('[data-go-chapter="2"]');
+      target.focus({ preventScroll:true });
+      target.scrollIntoView({ block:'nearest', behavior:'instant' });
+    } else if (changed && focusInPanel && focused.getClientRects().length) {
       focused.focus({ preventScroll:true });
       const bounds = focused.getBoundingClientRect();
       if (bounds.top < 0 || bounds.bottom > innerHeight) focused.scrollIntoView({ block:'nearest', behavior:'instant' });
@@ -142,11 +146,25 @@
   }
   function schedule() { if (!frame) frame = requestAnimationFrame(update); }
   function setPlanReplay(mode) {
+    // Linear layouts show the complete revision, with the final plan artifact.
+    if (linear) mode = 'reset';
+    const focused = document.activeElement;
+    const focusWillHide = mode === 'before'
+      ? beats[1].querySelector('.revision-reply').contains(focused) || (panels[1].contains(focused) && focused?.matches('[data-story-dialog="plan-dialog"]'))
+      : focused?.matches('[data-reveal-plan]');
+    // Keep focus on a visible node while the counterpart changes display.
+    if (focusWillHide) links[1].focus({ preventScroll:true });
     if (mode === 'reset') delete story.dataset.planReplay;
     else story.dataset.planReplay = mode;
-    panels[1].querySelector('h3').textContent = mode === 'before' ? 'Plan v1 · proposed' : 'Plan v2 · proposed';
+    const title = mode === 'before' ? 'Plan v1 · proposed' : 'Plan v2 · proposed';
+    panels[1].querySelector('h3').textContent = title;
+    panels[1].setAttribute('aria-label', title);
     panels[1].querySelector('.plan-delta span').textContent = mode === 'before' ? 'Date rule · awaiting revision' : 'Sam’s clarification';
     story.classList.toggle('revision-replayed', mode === 'after');
+    if (focusWillHide) {
+      const target = beats[1].querySelector(mode === 'before' ? '[data-reveal-plan]' : '[data-go-chapter="2"]');
+      target.focus({ preventScroll:true });
+    }
   }
   function goTo(index, smooth = true) {
     const target = linear ? beats[index] : markers[index];

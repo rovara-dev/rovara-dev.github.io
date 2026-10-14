@@ -90,3 +90,11 @@ Fresh browser review captured the hero, every Slack chapter, workspace, setup an
 Site/route consistency, all 16 source claims pinned at freshly rechecked remote mainline 2deee3d70d3aa4c410e1bee030110c9d01858ef5, benchmark hashes/counts, static build, JS syntax and whitespace pass. No remaining actionable P0/P1/P2 or deferred P3 finding within this page-polish scope. Complete numbered review with fresh screenshots: `design-evidence/whole-page-polish-2026-10-14/review.md`.
 
 Limits: local frontend and selected access paths only; no AWS launch/install, live Slack/agent task, browser/device product E2E, publication, customer conversion validation or full assistive-technology audit.
+
+## Publication review correction
+
+Independent whole-branch release review of candidate 27432ff found no Critical issue, one Important/P2 focus edge and one Minor/P3 accessible-label mismatch. Parent reproduced the focus loss: native reverse scrolling from Plan v2 to v1 after View plan/Escape blurred the focused control to the page body.
+
+`setPlanReplay` now parks focus on the visible Plan navigation link before changing display, then moves it to the visible counterpart: See revised Plan v2 for v1, Approve example plan for v2. It covers both thread actions and the artifact inspector. The artifact aria-label changes with the heading. Linear layouts show the full revision with the v2 artifact; a focused v1 reveal action transfers to a visible approval action on mobile reflow.
+
+Fresh browser checks confirmed both native scroll directions with motion enabled; View plan focus returned to a visible See revised Plan v2 on reverse and Approve example plan on forward. Artifact-inspector reverse scrolling was also checked with reduced motion, and 390×844 reflow preserved visible approval focus at y773.85–817.85. Linear revision replay retained the v2 heading/label and full transcript. Evidence: local `design-evidence/publication-2026-10-14/plan-focus-v1.png` and `plan-focus-mobile.png`. These captures are excluded from Git. Follow-up independent source review is required before merge; deployment is still pending.

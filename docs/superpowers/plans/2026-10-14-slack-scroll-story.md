@@ -224,3 +224,5 @@ stop_conditions: [unresolved important review finding, target mismatch, failed r
 ```
 
 Local browser screenshots and detailed audit captures remain preserved locally and are excluded from Git. Current README/design/product/asset notes distinguish the selected 14 October story from historical directions and release snapshots.
+
+Release review found a within-Plan focus transition missed by earlier phase-level checks. Parent reproduced it, corrected both native reveal directions and artifact focus, synchronized the accessible title, and verified visible focus during phone reflow. The linear transcript keeps the final v2 artifact when replaying the revision. This is a bounded accessibility correction within the publication scope; no product claim or authority changed. The updated candidate must pass fresh checks, follow-up review and GitHub CI before main integration.
