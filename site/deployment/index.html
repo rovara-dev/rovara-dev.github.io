@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="../assets/explanations.css" />
     <link rel="stylesheet" href="../assets/refined.css" />
 <link rel="stylesheet" href="../assets/installation.css" />
-  <link rel="stylesheet" href="../assets/scroll-story.css"><link rel="stylesheet" href="../assets/guided-story.css">
+  <link rel="stylesheet" href="../assets/scroll-story.css"><link rel="stylesheet" href="../assets/guided-story.css?v=seamless-story-1">
 </head>
   <body class="install-home">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -53,7 +53,7 @@
           aria-hidden="true"
         />
       </button>
-      <nav class="primary-nav" id="primary-nav" aria-label="Main navigation">
+      <nav class="primary-nav" id="primary-nav" aria-label="Main navigation"><a class="repo-link" href="https://github.com/PrepLabsAI/Rovara" aria-label="Rovara source on GitHub"><img src="../assets/icons/github-icon.svg" width="20" height="20" alt="">GitHub</a>
         <a href="../index.html#product">Product</a
         ><a href="../how-it-works/index.html">How it works</a
         ><a href="../docs/index.html">Docs</a
@@ -73,7 +73,7 @@
       </nav>
     </header>
     <main id="main">
-<div class="compact-intro shell"><p class="eyebrow">Self-hosted. In your AWS account.</p><h1>Install Rovara.</h1><p class="intro-text">Launch a workspace in your AWS account, connect GitHub and Slack, then bring your team’s first ticket. The guided setup takes you through each connection.</p></div>
+<div class="compact-intro shell"><p class="eyebrow">Self-hosted. In your AWS account.</p><h1>Install Rovara.</h1><p class="intro-text">Launch a workspace in your AWS account, connect GitHub and Slack, then bring your team’s first task. The guided setup takes you through each connection.</p></div>
 <section class="shell installation-options" aria-label="Installation options">
 <article class="aws-install-route"><p class="eyebrow">Recommended · No local setup</p><h2>Launch in AWS</h2><p>Enter your email, GitHub owner and install name. Follow the setup page through the build and your first Slack reply.</p><a class="button primary" href="https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https%3A%2F%2Frovara-installer-us-east-1.s3.us-east-1.amazonaws.com%2Flatest%2Finstaller.template.json&amp;stackName=agentx-installer">Launch in AWS ↗</a><p>US East (N. Virginia) · AWS admin access required.</p><a href="../docs/install/index.html#aws">Read the AWS setup steps →</a></article>
 <details class="terminal-route"><summary>Prefer to set up from your terminal?</summary><article><p class="eyebrow">For your terminal</p><h2>Use the npm CLI</h2><p>Node.js 22.19 or newer (Node 22 LTS recommended), with an authenticated AWS admin profile.</p><pre><code>export AWS_PROFILE=&lt;an admin profile for the target account&gt;
