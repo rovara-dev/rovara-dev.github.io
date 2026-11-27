@@ -1,0 +1,50 @@
+# Rovara
+
+> Rovara Code is an open-source coding agent you install in your own AWS account. People ask it for work in Slack, or from Claude Code, Codex or Cursor. It agrees a plan, works on the project's repositories in an isolated EC2 workspace, runs checks and reviews, and opens a draft pull request; your team merges. The npm package `@preplabsai/rovara-code` installs the `rovara` command and its alias `agentx` (the same program; the docs write `agentx`), which installs and runs an environment: projects, Slack channels, connectors, settings and upgrades.
+
+Notes for agents driving the CLI:
+
+- Always pass `--env <name>`. Without it, the CLI uses the environment named `production`.
+- Pass `--json` to get `{"ok":true,"data":...}` or `{"ok":false,"error":{"code","message"}}` on stdout. Progress goes to stderr. Exit codes are in the CLI reference.
+- Commands that change projects, channels and connectors need an admin sign-in, which a person completes once in a browser: `agentx --env <name> login --admin`.
+- With no terminal, some yes/no questions are currently answered yes on their own (https://github.com/PrepLabsAI/Rovara/issues/1595). Answer them with flags; the CLI reference lists which.
+- Pass secrets as `--<name>-file <path>` or `--<name>-env <NAME>`, never as values on the command line.
+- The guides under "Install and run an environment" follow the product's mainline branch on GitHub. The rovara.dev pages follow the release named on each page. Match what you read to the installed release (`agentx --version`).
+- Pages marked "maintainers" describe the Rovara maintainers' own deployment. Skip them for an environment installed with `agentx init`.
+
+## Start here
+
+- [CLI reference](https://raw.githubusercontent.com/PrepLabsAI/Rovara/mainline/docs/cli-reference.md): `--env`, credentials, JSON output, exit codes, behaviour without a terminal, recipes, and the commands with their flags
+- [Agent guide](https://rovara.dev/agent-guide.md): every rovara.dev documentation page in one Markdown file
+- [Install overview](https://raw.githubusercontent.com/PrepLabsAI/Rovara/mainline/docs/getting-started.md): `agentx init`, the commands after the install, and developer sign-in on one page
+
+## Install and run an environment
+
+- [Installing Rovara](https://raw.githubusercontent.com/PrepLabsAI/Rovara/mainline/docs/install.md): the Launch in AWS button, installing from a terminal, unattended `--yes` installs
+- [Other ways to install](https://raw.githubusercontent.com/PrepLabsAI/Rovara/mainline/docs/install-advanced.md): CDK, a platform team's export, a source checkout
+- [Running Rovara](https://raw.githubusercontent.com/PrepLabsAI/Rovara/mainline/docs/day-two.md): the operator role, `doctor`, `upgrade`, `config`, projects, channels and connectors
+- [Project configuration](https://raw.githubusercontent.com/PrepLabsAI/Rovara/mainline/docs/project-configuration.md): every field of a project file, setup and readiness commands, and how checks work
+- [Working in Slack](https://raw.githubusercontent.com/PrepLabsAI/Rovara/mainline/docs/slack.md): threads, confirmations, connector credentials, diagnostics
+- [Companies and projects](https://raw.githubusercontent.com/PrepLabsAI/Rovara/mainline/docs/company-and-projects.md): creating projects and linking channels through company sign-in instead of the CLI
+- Connectors: [Linear](https://raw.githubusercontent.com/PrepLabsAI/Rovara/mainline/docs/connectors/linear.md), [Jira](https://raw.githubusercontent.com/PrepLabsAI/Rovara/mainline/docs/connectors/jira.md), [Asana](https://raw.githubusercontent.com/PrepLabsAI/Rovara/mainline/docs/connectors/asana.md), [any MCP server](https://raw.githubusercontent.com/PrepLabsAI/Rovara/mainline/docs/connectors/custom-mcp.md)
+- [Model providers](https://raw.githubusercontent.com/PrepLabsAI/Rovara/mainline/docs/model-providers.md) and [OpenRouter](https://raw.githubusercontent.com/PrepLabsAI/Rovara/mainline/docs/openrouter.md)
+- [Removing an environment](https://raw.githubusercontent.com/PrepLabsAI/Rovara/mainline/docs/teardown.md)
+
+## Work with Rovara
+
+- [Your first Quick task](https://rovara.dev/docs/tasks/): one plan approval, a concrete change, evidence and a draft PR
+- [Plan a larger feature](https://rovara.dev/docs/planning/): requirements, design and coding-plan approvals
+- [Decide on the task page](https://rovara.dev/docs/task-page/): answering the plan's decisions and commenting
+- [Connect your coding tool](https://rovara.dev/docs/coding-tools/) and the [MCP tool reference](https://rovara.dev/docs/mcp/): Claude Code, Codex and Cursor through MCP
+- [Respond to PR feedback](https://rovara.dev/docs/feedback/)
+- [Rovara loop on GitHub issues](https://rovara.dev/docs/loop/)
+- [Troubleshooting](https://rovara.dev/docs/troubleshooting/)
+
+## Optional
+
+- [How Rovara works](https://raw.githubusercontent.com/PrepLabsAI/Rovara/mainline/docs/how-it-works.md) and [System architecture](https://rovara.dev/docs/architecture/)
+- [Administration client](https://raw.githubusercontent.com/PrepLabsAI/Rovara/mainline/docs/administration.md): project files, `admin project register` and `admin slack bind` for installs not made with `agentx init`
+- [Channel adapters](https://raw.githubusercontent.com/PrepLabsAI/Rovara/mainline/docs/channel-adapters.md): WhatsApp and other channels
+- [Releases](https://raw.githubusercontent.com/PrepLabsAI/Rovara/mainline/docs/releases.md) and [npm package](https://raw.githubusercontent.com/PrepLabsAI/Rovara/mainline/docs/npm-package.md)
+- [Maintainers' production release](https://raw.githubusercontent.com/PrepLabsAI/Rovara/mainline/docs/maintainers-release.md): maintainers only
+- [Source code](https://github.com/PrepLabsAI/Rovara)
