@@ -6,11 +6,26 @@ Notes for agents driving the CLI:
 
 - Always pass `--env <name>`. Without it, the CLI uses the environment named `production`.
 - Pass `--json` to get `{"ok":true,"data":...}` or `{"ok":false,"error":{"code","message"}}` on stdout. Progress goes to stderr. Exit codes are in the CLI reference.
-- Commands that change projects, channels and connectors need an admin sign-in, which a person completes once in a browser: `agentx --env <name> login --admin`.
+- To use an existing install from a computer that has not used it before, go in this order. If you run `login --admin` first, it fails with "no settings for environment".
+  1. Get AWS CLI credentials for the AWS account the install is in.
+  2. `agentx env list --region <region>` lists the installs in that region.
+  3. `agentx --env <name> env use --region <region>` saves the install's settings on this computer.
+  4. `agentx --env <name> login --admin` starts the admin sign-in, which a person completes once in a browser. Commands that change projects, channels and connectors need it.
+  5. `agentx --env <name> doctor` checks that everything works.
+  An install made with the Launch in AWS button is named `prod` in `us-east-1`, unless the person changed them. See [Use an existing install from another computer](https://github.com/PrepLabsAI/Rovara/blob/mainline/docs/cli-reference.md#use-an-existing-install-from-another-computer).
 - With no terminal, some yes/no questions are currently answered yes on their own (https://github.com/PrepLabsAI/Rovara/issues/1595). Answer them with flags; the CLI reference lists which.
 - Pass secrets as `--<name>-file <path>` or `--<name>-env <NAME>`, never as values on the command line.
 - The guides under "Install and run an environment" follow the product's mainline branch on GitHub. The rovara.dev pages follow the release named on each page. Match what you read to the installed release (`agentx --version`).
 - Pages marked "maintainers" describe the Rovara maintainers' own deployment. Skip them for an environment installed with `agentx init`.
+
+Steps that need a person. Hand these back to the person; don't retry them:
+
+- The admin sign-in in a browser (`login --admin`).
+- Giving Rovara's GitHub App access to a repository. `project add` only sees repositories the App can see.
+- Inviting the bot to a private Slack channel, and mentioning it there for the channel check.
+- Signing in to connectors that use OAuth.
+
+See [Steps that need a person](https://github.com/PrepLabsAI/Rovara/blob/mainline/docs/cli-reference.md#steps-that-need-a-person) in the CLI reference.
 
 ## Start here
 
